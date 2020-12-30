@@ -1,0 +1,33 @@
+*{
+     margin : 0 ;
+     padding: 0 ;
+}
+.app{
+     display : flex ;
+     flex-direction: column ;
+     margin : auto ;
+     
+}
+.app_header{
+     flex : 1 ;
+}
+.app_footer{
+     flex : 1 ;
+}
+
+.main{
+     display: flex; 
+     align-items: flex-start;
+     justify-content: space-between;
+     flex : 2  ;
+     width : 90% ;
+     margin : auto ;
+}
+.main_sidebar{
+     width : 15%
+     
+}
+.main_content{
+
+     width : 85%
+}
