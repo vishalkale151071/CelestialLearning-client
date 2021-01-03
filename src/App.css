@@ -17,11 +17,9 @@
 
 .main{
      display: flex; 
-     align-items: flex-start;
-     justify-content: space-between;
-     flex : 2  ;
-     width : 90% ;
-     margin : auto ;
+     justify-content: space-around; 
+    
+     
 }
 .main_sidebar{
      width : 15%

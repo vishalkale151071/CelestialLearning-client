@@ -19,6 +19,7 @@ function UserVerify({match , history }) {
           history.push("/user/login")
      }
      }, [verify,history])
+     
      const submitHandler = (e) => {
      e.preventDefault()
      dispatch(verifyUser(token))
