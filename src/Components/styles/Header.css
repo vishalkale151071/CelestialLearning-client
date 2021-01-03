@@ -1,13 +1,10 @@
-.header{
-     background-color:  grey ;
-     display: flex;
-     justify-content: space-around;
-     align-items: center;
-         
+.nav{
+     background-color: skyblue;
 }
-.header_input > input{
-     width : 1000px;
-     height : 40px ;
-     font-size: larger;
-     
+.right{
+     margin-left: 10px;
+     margin-right : 10px ;
+}
+.border-0{
+     width : 500px;
 }

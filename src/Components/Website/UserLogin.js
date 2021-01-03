@@ -24,7 +24,7 @@ function UserLogin({history}) {
      const submitHandler = (e) => {
      e.preventDefault()
      dispatch(login(email, password))
-     }
+     }    
      return (
 
           <form onSubmit = {submitHandler}>
