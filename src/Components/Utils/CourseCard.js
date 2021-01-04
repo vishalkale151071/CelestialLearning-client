@@ -9,7 +9,7 @@ import {
   Button
 } from "shards-react";
 
-export default function BasicCardExample() {
+export default function CourseCard() {
   return (
     <Card style={{ maxWidth: "300px" }}>
       <CardHeader>Card header</CardHeader>

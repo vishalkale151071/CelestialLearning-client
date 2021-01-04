@@ -15,7 +15,7 @@ import {
 } from '../constants/userConstants'
 
 
-export const login = (email, password) => async (dispatch) => {
+const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
@@ -107,3 +107,5 @@ export const verifyUser = (token) => async (dispatch) => {
     })
   }
 }
+
+export default login;
