@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { verifyUser } from '../../actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
 
-function UserVerify({ match, history }) {
+function SubscriberVerify({ match, history }) {
     const dispatch = useDispatch();
 
     const userVerify = useSelector(state => state.userVerify);
@@ -27,4 +27,4 @@ function UserVerify({ match, history }) {
     );
 }
 
-export default UserVerify;
+export default SubscriberVerify;

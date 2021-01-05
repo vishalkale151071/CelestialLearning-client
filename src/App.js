@@ -1,13 +1,13 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import SubscriberLogin from './Components/Subscriber/subscriberLogin';
-import SubscriberSignUp from './Components/Subscriber/subscriberSignup';
-import SubscriberVerify from './Components/Subscriber/subscriberVerify';
-import SubscriberProfile from "./Components/Subscriber/subscriberProfile"
-import SubscriberDashboard from "./Components/Subscriber/subscriberDashboard"
-import SubscriberSettings from "./Components/Subscriber/subscriberSettings"
-import AuthorLogin from './Components/Author/authorLogin';
-import AuthorSignup from './Components/Author/authorSignup';
+import SubscriberLogin from './Components/Subscriber/SubscriberLogin';
+import SubscriberSignUp from './Components/Subscriber/SubscriberSignup';
+import SubscriberVerify from './Components/Subscriber/SubscriberVerify';
+import SubscriberProfile from "./Components/Subscriber/SubscriberProfile"
+import SubscriberDashboard from "./Components/Subscriber/SubscriberDashboard"
+import SubscriberSettings from "./Components/Subscriber/SubscriberSettings"
+import AuthorLogin from './Components/Author/AuthorLogin';
+import AuthorSignup from './Components/Author/AuthorSignup';
 import Home from './Components/Utils/Home';
 
 function App() {

@@ -8,7 +8,7 @@ import '../styles/UserSignUp.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 
-function UserSignUp({ history }) {
+function SubscriberSignUp({ history }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -106,4 +106,4 @@ function UserSignUp({ history }) {
     );
 }
 
-export default UserSignUp;
+export default SubscriberSignUp;
