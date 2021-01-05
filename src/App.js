@@ -4,7 +4,7 @@ import SubscriberLogin from './Components/Subscriber/subscriberLogin';
 import SubscriberSignUp from './Components/Subscriber/subscriberSignup';
 import SubscriberVerify from './Components/Subscriber/subscriberVerify';
 import SubscriberProfile from "./Components/Subscriber/subscriberProfile"
-import SubscriberDashboard from "./Components/Subscriber/subscriberDashborad"
+import SubscriberDashboard from "./Components/Subscriber/subscriberDashboard"
 import SubscriberSettings from "./Components/Subscriber/subscriberSettings"
 import AuthorLogin from './Components/Author/authorLogin';
 import AuthorSignup from './Components/Author/authorSignup';

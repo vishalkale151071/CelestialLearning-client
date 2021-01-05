@@ -1,7 +1,7 @@
 import React from 'react'
 import Header_auth from "../Utils/Header_auth"
 
-export default function subscriberDashborad() {
+export default function subscriberDashboard() {
     return (
         <div>
             <Header_auth />
