@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Form, FormInput, FormGroup } from 'shards-react';
-import { register } from '../../actions/userActions';
+import { register } from '../../actions/authorActions';
 import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
 import '../styles/UserSignUp.css';
+import Swal from "sweetalert2"
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 
-function AuthorSignup({ history }) {
+ function AuthorSignup({ history }) {
+
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,17 +21,29 @@ function AuthorSignup({ history }) {
 
     const dispatch = useDispatch();
 
-    const userRegister = useSelector(state => state.userRegister);
-    const { loading, error } = userRegister;
+    const authorRegister = useSelector(state => state.authorRegister);
+    const { loading, error ,success , message } = authorRegister;
 
-    const userLogin = useSelector(state => state.userLogin);
-    const { userInfo } = userLogin;
+
 
     useEffect(() => {
-        if (userInfo) {
-            history.push('/');
-        }
-    }, [history, userInfo]);
+          if(error){     
+               Swal.fire({
+                    icon : 'error' ,
+                    text : `${error}`
+               })
+          }
+          if(success){
+               Swal.fire({
+                    icon : 'success' ,
+                    text : `${message}`
+               }).then(res => {
+                    history.push('/author/login')
+               })
+          }
+        
+    }, [history, error , success ]);
+
 
     const submitHandler = e => {
         e.preventDefault();
@@ -36,12 +52,8 @@ function AuthorSignup({ history }) {
         } else {
             dispatch(register(name, email, password, confirmPassword));
             console.log(`Activation Link Sent to ${email}`);
-            setName('');
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
-        }
     };
+}
 
     return (
         <div className="signup">
@@ -106,6 +118,8 @@ function AuthorSignup({ history }) {
             </Card>
         </div>
     );
+
 }
 
-export default AuthorSignup;
+export default AuthorSignup
+
