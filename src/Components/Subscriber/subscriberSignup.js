@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { register } from '../../actions/userActions';
-import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
+import { Card,  CardTitle,  CardBody, CardFooter, Button } from 'shards-react';
 import '../styles/UserSignUp.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';

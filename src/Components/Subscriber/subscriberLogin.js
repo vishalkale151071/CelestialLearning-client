@@ -28,6 +28,11 @@ function UserLogin({ history }) {
         setEmail('');
         setPassword('');
     };
+
+    const profile = () => {
+        history.push("/subscriber/profile")
+    }
+
     return (
         <div className="loginclass">
             <Card className="login" theme="info" style={{ maxWidth: '450px' }}>
@@ -58,7 +63,7 @@ function UserLogin({ history }) {
                                 }}
                             />
                         </FormGroup>
-                        <Button className="button1" theme="success">Login</Button>
+                        <Button className="button1" theme="success" >Login</Button>
                     </Form>
                 </CardBody>
                 <CardFooter>
