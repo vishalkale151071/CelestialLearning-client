@@ -1,23 +1,27 @@
 import React, { useEffect } from 'react';
-import { verifyUser } from '../../actions/userActions';
+import {verifyAuthor} from "../../actions/authorActions"
 import { useDispatch, useSelector } from 'react-redux';
+
 
 function AuthorVerify({ match, history }) {
     const dispatch = useDispatch();
 
-    const userVerify = useSelector(state => state.userVerify);
-    const { loading, error, verify } = userVerify;
+    const authorVerify = useSelector(state => state.authorVerify);
+    const { loading, error, verify } = authorVerify;
+
 
     let token = match.params.token;
 
     useEffect(() => {
         if (verify) {
-            history.push('/user/login');
+            history.push('/author/login');
         }
     }, [verify, history]);
+
     const submitHandler = e => {
         e.preventDefault();
-        dispatch(verifyUser(token));
+        dispatch(verifyAuthor(token));
+
     };
 
     return (

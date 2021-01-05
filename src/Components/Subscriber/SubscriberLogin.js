@@ -1,37 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import login from "../../actions/userActions"
+
+
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
 import "../styles/UserLogin.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
+import login from "../../actions/subscriberActions"
+import Swal from 'sweetalert2'
 
-function SubscriberLogin({ history }) {
-    const [email, setEmail] = useState('');
+
+function SubscriberLogin({history}) {
+     const [email, setEmail] = useState('');
+
     const [password, setPassword] = useState('');
 
     const dispatch = useDispatch();
 
-    const userLogin = useSelector(state => state.userLogin);
-    const { loading, error, userInfo } = userLogin;
+    const subscriberLogin = useSelector(state => state.subscriberLogin);
+    const { loading, error, subscriberInfo } = subscriberLogin;
 
     useEffect(() => {
-        if (userInfo) {
-            history.push('/');
+        if (subscriberInfo) {
+            console.log("Loged In")
+            history.push('/')
         }
-    }, [history, userInfo]);
+        if(error){
+             Swal.fire({
+                  icon : 'error' ,
+                  text : `${error}`
+             })
+        }
+    }, [ subscriberInfo , error]);   
+
 
     const submitHandler = e => {
         e.preventDefault();
         dispatch(login(email, password));
-        setEmail('');
-        setPassword('');
+       
     };
-
-    const profile = () => {
-        history.push("/subscriber/profile")
-    }
 
     return (
         <div className="loginclass">
@@ -78,4 +86,6 @@ function SubscriberLogin({ history }) {
     );
 }
 
-export default SubscriberLogin;
+export default SubscriberLogin
+
+

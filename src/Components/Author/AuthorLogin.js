@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import login from "../../actions/userActions"
+import login from "../../actions/authorActions"
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
 import "../styles/UserLogin.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
+import Swal from 'sweetalert2'
 
 function AuthorLogin({ history }) {
     const [email, setEmail] = useState('');
@@ -13,20 +14,26 @@ function AuthorLogin({ history }) {
 
     const dispatch = useDispatch();
 
-    const userLogin = useSelector(state => state.userLogin);
-    const { loading, error, userInfo } = userLogin;
+    const authorLogin = useSelector(state => state.authorLogin);
+    const { loading, error, authorInfo } = authorLogin;
 
     useEffect(() => {
-        if (userInfo) {
+        if (authorInfo) {
             history.push('/');
         }
-    }, [history, userInfo]);
+        if(error){
+             Swal.fire({
+                  icon : 'error' ,
+                  text : `${error}`
+             })
+        }
+    }, [history, authorInfo]);
+
 
     const submitHandler = e => {
         e.preventDefault();
         dispatch(login(email, password));
-        setEmail('');
-        setPassword('');
+        
     };
     return (
         <div className="loginclass">
