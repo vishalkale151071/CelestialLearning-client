@@ -7,7 +7,7 @@ import "../styles/UserLogin.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 
-function UserLogin({ history }) {
+function SubscriberLogin({ history }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -78,4 +78,4 @@ function UserLogin({ history }) {
     );
 }
 
-export default UserLogin;
+export default SubscriberLogin;

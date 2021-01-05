@@ -4,7 +4,7 @@ import {Tabs,Tab } from "react-bootstrap"
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Button } from 'shards-react';
 
-export default function subscriberSettings() {
+export default function SubscriberSettings() {
     return (
         <div>
             <Header_auth />
