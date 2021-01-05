@@ -7,6 +7,8 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SearchIcon from '@material-ui/icons/Search';
 import logo from '../assets/logo2.svg';
 import { Button } from 'shards-react';
+import { BsPersonSquare } from 'react-icons/bs';
+import { Dropdown } from 'react-bootstrap';
 
 import {
     Navbar,
@@ -22,7 +24,10 @@ import {
     Collapse
 } from 'shards-react';
 
-export const Header = () => {
+
+export const Header_auth = () => {
+
+    
     const history = useHistory();
 
     function loginHandleClick() {
@@ -30,9 +35,6 @@ export const Header = () => {
     }
     const signupHandleClick = () => {
         history.push('/subscriber/signup');
-    };
-    const dashboard = () => {
-        history.push('/subscriber/dashboard');
     };
     return (
         <Navbar className="nav" expand="md">
@@ -63,16 +65,17 @@ export const Header = () => {
                     <ShoppingCartIcon fontSize="large" />
                 </div>
                 <div className="right">
-                    <Button outline theme="danger" onClick={dashboard}>
-                        Dashboard
-                    </Button>
-                    <Button outline theme="danger" onClick={loginHandleClick}>
-                        LogIn
-                    </Button>
+                <Dropdown>
+                <Dropdown.Toggle variant="inf" id="dropdown-basic">
+                    <BsPersonSquare size="30" />
+                </Dropdown.Toggle>
 
-                    <Button outline theme="danger" onClick={signupHandleClick}>
-                        SignUp
-                    </Button>
+                <Dropdown.Menu>
+                    <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
+                    <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
+                    <Dropdown.Item href="/">Log Out</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
                 </div>
                 <div className="right"></div>
             </Collapse>
@@ -80,4 +83,4 @@ export const Header = () => {
     );
 };
 
-export default Header;
+export default Header_auth;

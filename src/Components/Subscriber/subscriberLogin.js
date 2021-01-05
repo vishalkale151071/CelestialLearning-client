@@ -28,6 +28,11 @@ function UserLogin({ history }) {
         setEmail('');
         setPassword('');
     };
+
+    const profile = () => {
+        history.push("/subscriber/profile")
+    }
+
     return (
         <div className="loginclass">
             <Card className="login" theme="info" style={{ maxWidth: '450px' }}>
