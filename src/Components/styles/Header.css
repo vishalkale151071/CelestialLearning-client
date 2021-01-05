@@ -1,9 +1,9 @@
 .nav{
      background-color: skyblue;
 }
-.right{
-     margin-left: 10px;
-     margin-right : 10px ;
+button{
+     margin-left: 5px;
+     margin-right :5px ;
 }
 .border-0{
      width : 500px;

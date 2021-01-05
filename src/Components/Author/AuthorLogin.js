@@ -29,6 +29,7 @@ function AuthorLogin({ history }) {
         }
     }, [history, authorInfo]);
 
+
     const submitHandler = e => {
         e.preventDefault();
         dispatch(login(email, password));

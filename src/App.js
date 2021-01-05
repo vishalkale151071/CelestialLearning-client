@@ -1,15 +1,15 @@
-import Header from './Components/Utils/Header';
-import CourseCard from './Components/Utils/CourseCard';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SubscriberLogin from './Components/Subscriber/SubscriberLogin';
-import SubscriberSignup from './Components/Subscriber/SubscriberSignup';
-import SubscriberVerify from './Components/Subscriber/SubscriberVerify';
 
-import Home from "./Components/Utils/Home"
+import SubscriberSignUp from './Components/Subscriber/SubscriberSignup';
+import SubscriberVerify from './Components/Subscriber/SubscriberVerify';
+import SubscriberProfile from "./Components/Subscriber/SubscriberProfile"
+import SubscriberDashboard from "./Components/Subscriber/SubscriberDashboard"
+import SubscriberSettings from "./Components/Subscriber/SubscriberSettings"
 import AuthorLogin from './Components/Author/AuthorLogin';
 import AuthorSignup from './Components/Author/AuthorSignup';
-import AuthorVerify from './Components/Author/AuthorVerify';
+import Home from './Components/Utils/Home';
 
 function App() {
     return (
@@ -26,8 +26,8 @@ function App() {
                         <Route path="/author/signup" exact component={AuthorSignup} />
                         <Route path="/author/verify/:token" exact component={AuthorVerify} />
 
+
                     </Switch>
-                    
                 </Router>
             </Router>
         </div>

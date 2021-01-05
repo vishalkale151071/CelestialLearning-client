@@ -41,4 +41,3 @@ function SubscriberVerify({match}) {
 }
 
 export default SubscriberVerify
-

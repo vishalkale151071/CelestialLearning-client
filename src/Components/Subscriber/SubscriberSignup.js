@@ -4,6 +4,7 @@ import { Form, FormInput, FormGroup } from 'shards-react';
 //import { register } from '../../actions/userActions';
 import {register} from '../../actions/subscriberActions'
 import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
+
 import '../styles/UserSignUp.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function SubscriberSignup() {
      const [name, setName] = useState('');
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -48,6 +50,7 @@ function SubscriberSignup() {
     }, [error ,success ]);
 
 
+
     const submitHandler = e => {
         e.preventDefault();
         if (password !== confirmPassword) {
@@ -56,6 +59,7 @@ function SubscriberSignup() {
             // console.log("matched")
             dispatch(register(name, email, password, confirmPassword));
             console.log(`Activation Link Sent to ${email}`);
+
         }
     };
 
@@ -125,3 +129,4 @@ function SubscriberSignup() {
 }
 
 export default SubscriberSignup
+

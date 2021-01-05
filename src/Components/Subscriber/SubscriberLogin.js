@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
 import "../styles/UserLogin.css"
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2'
 
 function SubscriberLogin({history}) {
      const [email, setEmail] = useState('');
+
     const [password, setPassword] = useState('');
 
     const dispatch = useDispatch();
@@ -32,11 +34,13 @@ function SubscriberLogin({history}) {
         }
     }, [ subscriberInfo , error]);   
 
+
     const submitHandler = e => {
         e.preventDefault();
         dispatch(login(email, password));
        
     };
+
     return (
         <div className="loginclass">
             <Card className="login" theme="info" style={{ maxWidth: '450px' }}>
@@ -83,4 +87,5 @@ function SubscriberLogin({history}) {
 }
 
 export default SubscriberLogin
+
 

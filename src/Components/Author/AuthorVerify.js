@@ -9,6 +9,7 @@ function AuthorVerify({ match, history }) {
     const authorVerify = useSelector(state => state.authorVerify);
     const { loading, error, verify } = authorVerify;
 
+
     let token = match.params.token;
 
     useEffect(() => {
@@ -20,6 +21,7 @@ function AuthorVerify({ match, history }) {
     const submitHandler = e => {
         e.preventDefault();
         dispatch(verifyAuthor(token));
+
     };
 
     return (

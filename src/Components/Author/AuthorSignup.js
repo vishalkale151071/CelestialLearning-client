@@ -7,10 +7,12 @@ import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } fr
 import '../styles/UserSignUp.css';
 import Swal from "sweetalert2"
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 
  function AuthorSignup({ history }) {
+
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -42,6 +44,7 @@ import 'shards-ui/dist/css/shards.min.css';
         
     }, [history, error , success ]);
 
+
     const submitHandler = e => {
         e.preventDefault();
         if (password !== confirmPassword) {
@@ -51,6 +54,7 @@ import 'shards-ui/dist/css/shards.min.css';
             console.log(`Activation Link Sent to ${email}`);
     };
 }
+
     return (
         <div className="signup">
             <Card className="sign" theme="info" style={{ maxWidth: '450px' }}>
@@ -115,7 +119,7 @@ import 'shards-ui/dist/css/shards.min.css';
         </div>
     );
 
-
 }
 
 export default AuthorSignup
+
