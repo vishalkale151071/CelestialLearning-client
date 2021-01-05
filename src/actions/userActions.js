@@ -58,15 +58,15 @@ export const logout = () => (dispatch) => {
   
 }
 
-export const register = (name, email, password) => async (dispatch) => {
+export const register = (username, email, password , confirm_password) => async (dispatch) => {
   try {
     dispatch({
       type: USER_REGISTER_REQUEST,
     })
 
     await axios.post(
-      '/api/users/signup',
-      { name, email, password },
+      '/subscriber/register',
+      { username, email, password , confirm_password },
     )
     
   } catch (error) {
@@ -79,6 +79,7 @@ export const register = (name, email, password) => async (dispatch) => {
     })
   }
 }
+
 export const verifyUser = (token) => async (dispatch) => {
   try {
     dispatch({
@@ -86,7 +87,7 @@ export const verifyUser = (token) => async (dispatch) => {
     })
 
     await axios.post(
-      '/api/users/verify',
+      '/subscriber/verify',
       { token },
     )
 

@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Form, FormInput, FormGroup } from 'shards-react';
-import { register } from '../../actions/userActions';
+import { register } from '../../actions/authorActions';
 import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
 import '../styles/UserSignUp.css';
+import Swal from "sweetalert2"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 
-function UserSignUp({ history }) {
+ function AuthorSignup({ history }) {
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,17 +19,28 @@ function UserSignUp({ history }) {
 
     const dispatch = useDispatch();
 
-    const userRegister = useSelector(state => state.userRegister);
-    const { loading, error } = userRegister;
+    const authorRegister = useSelector(state => state.authorRegister);
+    const { loading, error ,success , message } = authorRegister;
 
-    const userLogin = useSelector(state => state.userLogin);
-    const { userInfo } = userLogin;
+
 
     useEffect(() => {
-        if (userInfo) {
-            history.push('/');
-        }
-    }, [history, userInfo]);
+          if(error){     
+               Swal.fire({
+                    icon : 'error' ,
+                    text : `${error}`
+               })
+          }
+          if(success){
+               Swal.fire({
+                    icon : 'success' ,
+                    text : `${message}`
+               }).then(res => {
+                    history.push('/author/login')
+               })
+          }
+        
+    }, [history, error , success ]);
 
     const submitHandler = e => {
         e.preventDefault();
@@ -36,19 +49,14 @@ function UserSignUp({ history }) {
         } else {
             dispatch(register(name, email, password, confirmPassword));
             console.log(`Activation Link Sent to ${email}`);
-            setName('');
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
-        }
     };
-
+}
     return (
         <div className="signup">
             <Card className="sign" theme="info" style={{ maxWidth: '450px' }}>
                 {/* <CardImg src="https://place-hold.it/300x200" /> */}
                 <CardBody>
-                    <CardTitle className="tex">Subscriber Signup</CardTitle>
+                    <CardTitle className="tex">Author Signup</CardTitle>
 
                     <Form onSubmit={submitHandler}>
                         <FormGroup>
@@ -99,12 +107,15 @@ function UserSignUp({ history }) {
                     </Form>
                 </CardBody>
                 <CardFooter>
-                    <a href="/author/signup">Are you an Author?</a><br />
-                    <a href="/subscriber/login">Existing User?</a>
+                    <a href="/subscriber/signup">Are you a Subscriber?</a><br />
+
+                    <a href="/author/login">Existing User?</a>
                 </CardFooter>
             </Card>
         </div>
     );
+
+
 }
 
-export default UserSignUp;
+export default AuthorSignup

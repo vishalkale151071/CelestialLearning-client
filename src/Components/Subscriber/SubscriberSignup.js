@@ -1,54 +1,71 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+
 import { Form, FormInput, FormGroup } from 'shards-react';
-import { register } from '../../actions/userActions';
+//import { register } from '../../actions/userActions';
+import {register} from '../../actions/subscriberActions'
 import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
 import '../styles/UserSignUp.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
+import Swal from "sweetalert2"
+import { useDispatch, useSelector } from 'react-redux';
 
-function UserSignUp({ history }) {
-    const [name, setName] = useState('');
+
+
+
+function SubscriberSignup() {
+     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const dispatch = useDispatch();
 
-    const userRegister = useSelector(state => state.userRegister);
-    const { loading, error } = userRegister;
+    const subscriberRegister = useSelector(state => state.subscriberRegister);
+    const { loading, error ,success , message } = subscriberRegister;
 
-    const userLogin = useSelector(state => state.userLogin);
-    const { userInfo } = userLogin;
+//     const userLogin = useSelector(state => state.userLogin);
+//     const { userInfo } = userLogin;
 
     useEffect(() => {
-        if (userInfo) {
-            history.push('/');
-        }
-    }, [history, userInfo]);
+     
+
+          if(error){
+               Swal.fire({
+                    icon : 'error' ,
+                    text : `${error}`    
+               })
+               console.log("Error : " , error)
+          }
+
+          if(success){
+               Swal.fire({
+                    icon : 'success' ,
+                    text : `${message}`
+               })
+          }
+    }, [error ,success ]);
+
 
     const submitHandler = e => {
         e.preventDefault();
         if (password !== confirmPassword) {
             console.log('Passwords do not match');
         } else {
+            // console.log("matched")
             dispatch(register(name, email, password, confirmPassword));
             console.log(`Activation Link Sent to ${email}`);
-            setName('');
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
         }
     };
 
     return (
         <div className="signup">
+
             <Card className="sign" theme="info" style={{ maxWidth: '450px' }}>
                 {/* <CardImg src="https://place-hold.it/300x200" /> */}
                 <CardBody>
-                    <CardTitle className="tex">Author Signup</CardTitle>
+                    <CardTitle className="tex">Subscriber Signup</CardTitle>
 
                     <Form onSubmit={submitHandler}>
                         <FormGroup>
@@ -99,13 +116,12 @@ function UserSignUp({ history }) {
                     </Form>
                 </CardBody>
                 <CardFooter>
-                    <a href="/subscriber/signup">Are you a Subscriber?</a><br />
-
-                    <a href="/author/login">Existing User?</a>
+                    <a href="/author/signup">Are you an Author?</a><br />
+                    <a href="/subscriber/login">Existing User?</a>
                 </CardFooter>
             </Card>
         </div>
     );
 }
 
-export default UserSignUp;
+export default SubscriberSignup

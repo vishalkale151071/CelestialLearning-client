@@ -1,32 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import login from "../../actions/userActions"
+import login from "../../actions/authorActions"
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
 import "../styles/UserLogin.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
+import Swal from 'sweetalert2'
 
-function UserLogin({ history }) {
+function AuthorLogin({ history }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const dispatch = useDispatch();
 
-    const userLogin = useSelector(state => state.userLogin);
-    const { loading, error, userInfo } = userLogin;
+    const authorLogin = useSelector(state => state.authorLogin);
+    const { loading, error, authorInfo } = authorLogin;
 
     useEffect(() => {
-        if (userInfo) {
+        if (authorInfo) {
             history.push('/');
         }
-    }, [history, userInfo]);
+        if(error){
+             Swal.fire({
+                  icon : 'error' ,
+                  text : `${error}`
+             })
+        }
+    }, [history, authorInfo]);
 
     const submitHandler = e => {
         e.preventDefault();
         dispatch(login(email, password));
-        setEmail('');
-        setPassword('');
+        
     };
     return (
         <div className="loginclass">
@@ -34,7 +40,7 @@ function UserLogin({ history }) {
                 <CardHeader></CardHeader>
                 {/* <CardImg src="https://place-hold.it/300x200" /> */}
                 <CardBody>
-                    <CardTitle className="tex">Subscriber Login</CardTitle>
+                    <CardTitle className="tex">Author Login</CardTitle>
                     <Form onSubmit={submitHandler}>
                         <FormGroup>
                             <label htmlFor="email">Email</label>
@@ -62,9 +68,9 @@ function UserLogin({ history }) {
                     </Form>
                 </CardBody>
                 <CardFooter>
-                    <a href="/subscriber/signup/">Not registered?</a>
+                    <a href="/author/signup/">Not registered?</a>
                     <br />
-                    <a href="/author/login">Are you an Author?</a>
+                    <a href="/subscriber/login">Are you a Subscriber?</a>
                     <br />
                     <a href="/path_to_page">Having problems logging in?</a>
                 </CardFooter>
@@ -73,4 +79,4 @@ function UserLogin({ history }) {
     );
 }
 
-export default UserLogin;
+export default AuthorLogin;
