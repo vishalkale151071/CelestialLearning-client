@@ -1,13 +1,13 @@
 import React from 'react'
-import SubscriberHeader from "./SubscriberHeader"
+import AuthorHeader from "./AuthorHeader"
 import {Tabs,Tab } from "react-bootstrap"
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Button } from 'shards-react';
 
-export default function SubscriberSettings() {
+export default function AuthorSettings() {
     return (
         <div>
-            <SubscriberHeader />
+            <AuthorHeader />
             <div className="profiletab">
                 <Tabs  id="settingtab">
                     <Tab eventKey="personal" title="Email">

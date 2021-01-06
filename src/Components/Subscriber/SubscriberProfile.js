@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header_auth from '../Utils/Header_auth';
+import SubscriberHeader from './SubscriberHeader';
 import logo from '../assets/logo.png';
 import '../styles/UserProfile.css';
 import { Form, FormInput, FormGroup } from 'shards-react';
@@ -22,7 +22,7 @@ export default function SubscriberProfile() {
 
     return (
         <div>
-            <Header_auth />
+            <SubscriberHeader />
             <div className="profiletab">
                 <Tabs  id="profileTab">
                     <Tab eventKey="personal" title="Personal Details">
