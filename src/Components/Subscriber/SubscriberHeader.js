@@ -9,7 +9,6 @@ import logo from '../assets/logo2.svg';
 import { Button } from 'shards-react';
 import { BsPersonSquare } from 'react-icons/bs';
 import { Dropdown } from 'react-bootstrap';
-
 import {
     Navbar,
     NavbarToggler,
@@ -24,18 +23,7 @@ import {
     Collapse
 } from 'shards-react';
 
-
 export const Header_auth = () => {
-
-    
-    const history = useHistory();
-
-    function loginHandleClick() {
-        history.push('/subscriber/login');
-    }
-    const signupHandleClick = () => {
-        history.push('/subscriber/signup');
-    };
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
@@ -49,7 +37,6 @@ export const Header_auth = () => {
                         <NavLink>Categories</NavLink>
                     </NavItem>
                 </Nav>
-
                 <Nav navbar className="ml-auto">
                     <InputGroup size="sm" seamless>
                         <InputGroupAddon type="prepend">
@@ -61,21 +48,21 @@ export const Header_auth = () => {
                     </InputGroup>
                 </Nav>
 
-                <div className="right">
+                <div className="carticon">
                     <ShoppingCartIcon fontSize="large" />
                 </div>
                 <div className="right">
-                <Dropdown>
-                <Dropdown.Toggle variant="inf" id="dropdown-basic">
-                    <BsPersonSquare size="30" />
-                </Dropdown.Toggle>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="inf" id="dropdown-basic">
+                            <BsPersonSquare size="30" />
+                        </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                    <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
-                    <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
-                    <Dropdown.Item href="/">Log Out</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
+                            <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
+                            <Dropdown.Item href="/">Log Out</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </div>
                 <div className="right"></div>
             </Collapse>

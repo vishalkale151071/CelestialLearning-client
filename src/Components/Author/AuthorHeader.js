@@ -7,7 +7,8 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SearchIcon from '@material-ui/icons/Search';
 import logo from '../assets/logo2.svg';
 import { Button } from 'shards-react';
-
+import { BsPersonSquare } from 'react-icons/bs';
+import { Dropdown } from 'react-bootstrap';
 import {
     Navbar,
     NavbarToggler,
@@ -22,23 +23,7 @@ import {
     Collapse
 } from 'shards-react';
 
-export var type = "";
-
-export const Header = () => {
-    const history = useHistory();
-
-    function loginHandleClick() {
-        history.push('/subscriber/login');
-    }
-    const signupHandleClick = () => {
-        history.push('/subscriber/signup');
-    };
-    const subDashboard = () => {
-        history.push('/subscriber/dashboard');
-    };
-    const autDashboard = () => {
-        history.push('/author/dashboard');
-    };
+export const Header_auth = () => {
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
@@ -52,7 +37,6 @@ export const Header = () => {
                         <NavLink>Categories</NavLink>
                     </NavItem>
                 </Nav>
-
                 <Nav navbar className="ml-auto">
                     <InputGroup size="sm" seamless>
                         <InputGroupAddon type="prepend">
@@ -68,18 +52,17 @@ export const Header = () => {
                     <ShoppingCartIcon fontSize="large" />
                 </div>
                 <div className="right">
-                    <Button outline theme="danger" onClick={subDashboard}>
-                        Subscriber Dashboard
-                    </Button>
-                    <Button outline theme="danger" onClick={autDashboard}>
-                        Author Dashboard
-                    </Button>
-                    <Button outline theme="danger" onClick={loginHandleClick}>
-                        LogIn
-                    </Button>
-                    <Button outline theme="danger" onClick={signupHandleClick}>
-                        SignUp
-                    </Button>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="inf" id="dropdown-basic">
+                            <BsPersonSquare size="30" />
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="/author/profile">Profile</Dropdown.Item>
+                            <Dropdown.Item href="/author/settings">Account Settings</Dropdown.Item>
+                            <Dropdown.Item href="/">Log Out</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </div>
                 <div className="right"></div>
             </Collapse>
@@ -87,4 +70,4 @@ export const Header = () => {
     );
 };
 
-export default Header;
+export default Header_auth;
