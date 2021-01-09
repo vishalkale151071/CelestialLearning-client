@@ -18,13 +18,25 @@ import AuthorSettings from './Components/Author/AuthorSettings';
 import AuthorForgetPassword from './Components/Author/AuthorForgetPassword';
 
 import Home from './Components/Utils/Home';
+import { useEffect } from 'react';
 
 function App() {
+
+    const isSubscriber = localStorage.getItem('isSubscriber')
+  //  const history1 = useHistory()
+
+    // useEffect(() => {
+    //     if(isSubscriber){
+    //         history.push('/subscriber/dashboard')
+    //     }
+    // } , [])
     return (
         <div className="app">
             <Router>
                 <Router>
                     <Switch>
+
+
                         <Route path="/" exact component={Home} />
 
                         <Route path="/subscriber/login" exact component={SubscriberLogin} />

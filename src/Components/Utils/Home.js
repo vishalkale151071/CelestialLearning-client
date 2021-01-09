@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Header } from './Header';
 import CourseCard from './CourseCard';
 import HomeCarousel from './HomeCarousel';
 import Footer1 from './Footer';
 
 export default function Home() {
-    return (
+import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
+import { CookiesProvider } from 'react-cookie';
+export default function Home({ history }) {
+    
+    
+        return (
         <div className="home">
             <div className="header">
                 <Header />

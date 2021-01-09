@@ -1,5 +1,5 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+
 import '../styles/Header.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
@@ -22,9 +22,11 @@ import {
     FormInput,
     Collapse
 } from 'shards-react';
-import CategoriesDropdown from '../Utils/CategoriesDropdown';
 
-export const Header_auth = () => {
+// import { useDispatch } from 'react-redux';
+// import { logout } from '../../actions/subscriberActions';
+
+ export const Header_auth = () => {
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
@@ -61,12 +63,15 @@ export const Header_auth = () => {
                         <BsPersonSquare size="30" />
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
-                        <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
-                        <Dropdown.Item href="/">Log Out</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
+                            <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
+                            <Button >Logout</Button>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
+                <div className="right"></div>
             </Collapse>
             </div>
 

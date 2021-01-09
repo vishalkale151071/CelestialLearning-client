@@ -43,6 +43,13 @@ export const register = (username, email, password , confirm_password) => async 
      }
    }
 
+   export const logout = () => (dispatch) => {
+     localStorage.removeItem('isSubscriber')
+     dispatch({
+       type : SUBSCRIBER_LOGOUT  
+     })
+   }
+
    export const verifySubscriber = (token) => async (dispatch) => {
      try {
        dispatch({
@@ -51,7 +58,12 @@ export const register = (username, email, password , confirm_password) => async 
    
        await axios.post(
          '/subscriber/verify',
-         { token },
+         {} ,
+         {
+           headers : {
+             'Authorization' : `Bearer ${token}`
+           }
+         }
        )
        dispatch({
          type:SUBSCRIBER_VERIFY_SUCCESS,
@@ -87,13 +99,15 @@ export const register = (username, email, password , confirm_password) => async 
          { email, password },
          config
        )
+
+       console.log("Call here")
    
        dispatch({
          type: SUBSCRIBER_LOGIN_SUCCESS,
          payload: data,
        })
    
-       localStorage.setItem('subscriberInfo', JSON.stringify(data))
+       //localStorage.setItem('isSubscriber', true )
      } catch (error) {
        dispatch({
          type: SUBSCRIBER_LOGIN_FAIL,
