@@ -29,12 +29,6 @@ import {
    } from '../constants/userConstants'
 
 
-
-
-
-
-
-
    export const subscriberRegisterReducer = (state = {}, action) => {
      switch (action.type) {
        case SUBSCRIBER_REGISTER_REQUEST:

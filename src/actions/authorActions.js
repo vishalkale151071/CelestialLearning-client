@@ -44,20 +44,42 @@ export const register = (username, email, password , confirm_password) => async 
      }
    }
 
+   export const logout = () => (dispatch) => {
+     localStorage.removeItem('isAuthor')
+     dispatch({
+       type : AUTHOR_LOGOUT
+     })
+   }
+
    export const verifyAuthor = (token) => async (dispatch) => {
      try {
        dispatch({
          type:AUTHOR_VERIFY_REQUEST,
        })
    
+
+       const config = {
+         headers : {
+          'Content-Type': 'application/json',
+           'Authorization' : `Bearer ${token}`
+         }
+       }
+
        await axios.post(
          '/author/verify',
-         { token },
+         {token} ,
+         {
+          headers : {
+           'Content-Type': 'application/json',
+            'Authorization' : `Bearer ${token}`
+          }
+        }
+ 
        )
        dispatch({
          type:AUTHOR_VERIFY_SUCCESS,
        })
-       
+  
        
      } catch (error) {
        dispatch({
@@ -79,6 +101,7 @@ export const register = (username, email, password , confirm_password) => async 
    
        const config = {
          headers: {
+
            'Content-Type': 'application/json',
          },
        }
@@ -94,7 +117,7 @@ export const register = (username, email, password , confirm_password) => async 
          payload: data,
        })
    
-       localStorage.setItem('authorInfo', JSON.stringify(data))
+     //  localStorage.setItem('isAuthor', true)
      } catch (error) {
        dispatch({
          type: AUTHOR_LOGIN_FAIL,

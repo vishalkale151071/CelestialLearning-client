@@ -24,7 +24,7 @@ function SubscriberLogin({history}) {
     useEffect(() => {
         if (subscriberInfo) {
             console.log("Loged In")
-            history.push('/')
+            history.push('/subscriber/dashboard')
         }
         if(error){
              Swal.fire({
@@ -32,7 +32,7 @@ function SubscriberLogin({history}) {
                   text : `${error}`
              })
         }
-    }, [ subscriberInfo , error]);   
+    }, [subscriberInfo , error]);   
 
 
     const submitHandler = e => {
