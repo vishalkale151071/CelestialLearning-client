@@ -1,24 +1,31 @@
 import React, { useEffect } from 'react';
 import { Header } from './Header';
 import CourseCard from './CourseCard';
+import HomeCarousel from './HomeCarousel';
+import Footer1 from './Footer';
+
+export default function Home() {
 import { useCookies } from 'react-cookie';
 import Cookies from 'js-cookie';
 import { CookiesProvider } from 'react-cookie';
 export default function Home({ history }) {
     
     
-    
-    return (
+        return (
         <div className="home">
-            <Header />
+            <div className="header">
+                <Header />
+            </div>
+            <HomeCarousel />
+
             <div className="main">
-                        
-                        <CourseCard />
-                        <CourseCard />
-                        <CourseCard />
-                        <CourseCard />
-                        <CourseCard />
-                    </div>
+                <CourseCard />
+                <CourseCard />
+                <CourseCard />
+                <CourseCard />
+                <CourseCard />
+            </div>
+            <Footer1 />
         </div>
     );
 }

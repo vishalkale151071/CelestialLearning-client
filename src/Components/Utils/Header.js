@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SearchIcon from '@material-ui/icons/Search';
-import logo from '../assets/logo2.svg';
+import logo from '../assets/CL.png';
 import { Button } from 'shards-react';
 
 import {
@@ -21,6 +21,7 @@ import {
     FormInput,
     Collapse
 } from 'shards-react';
+import CategoriesDropdown from './CategoriesDropdown';
 
 export var type = "";
 
@@ -42,19 +43,19 @@ export const Header = () => {
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
-                <img src={logo} />
+                <img src={logo} width='90' heigh='90' />
             </NavbarBrand>
             <NavbarToggler />
 
             <Collapse navbar>
                 <Nav navbar>
                     <NavItem>
-                        <NavLink>Categories</NavLink>
+                        <NavLink><CategoriesDropdown /></NavLink>
                     </NavItem>
                 </Nav>
 
-                <Nav navbar className="ml-auto">
-                    <InputGroup size="sm" seamless>
+                <Nav navbar >
+                    <InputGroup size="sm" seamless >
                         <InputGroupAddon type="prepend">
                             <InputGroupText>
                                 <SearchIcon />
@@ -64,10 +65,10 @@ export const Header = () => {
                     </InputGroup>
                 </Nav>
 
-                <div className="carticon">
-                    <ShoppingCartIcon fontSize="large" />
-                </div>
-                <div className="right">
+                
+                
+            </Collapse>
+            <div className="right">
                     <Button outline theme="danger" onClick={subDashboard}>
                         Subscriber Dashboard
                     </Button>
@@ -81,8 +82,6 @@ export const Header = () => {
                         SignUp
                     </Button>
                 </div>
-                <div className="right"></div>
-            </Collapse>
         </Navbar>
     );
 };

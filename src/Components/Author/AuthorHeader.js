@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SearchIcon from '@material-ui/icons/Search';
-import logo from '../assets/logo2.svg';
+import logo from '../assets/CL.png';
 import { Button } from 'shards-react';
 import { BsPersonSquare } from 'react-icons/bs';
 import { Dropdown } from 'react-bootstrap';
@@ -27,7 +27,7 @@ export const Header_auth = () => {
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
-                <img src={logo} />
+                <img src={logo}  width='90' heigh='90' />
             </NavbarBrand>
             <NavbarToggler />
 
@@ -37,7 +37,7 @@ export const Header_auth = () => {
                         <NavLink>Categories</NavLink>
                     </NavItem>
                 </Nav>
-                <Nav navbar className="ml-auto">
+                <Nav navbar>
                     <InputGroup size="sm" seamless>
                         <InputGroupAddon type="prepend">
                             <InputGroupText>
@@ -47,25 +47,20 @@ export const Header_auth = () => {
                         <FormInput className="border-0" placeholder="Search..." />
                     </InputGroup>
                 </Nav>
-
-                <div className="carticon">
-                    <ShoppingCartIcon fontSize="large" />
-                </div>
-                <div className="right">
-                    <Dropdown>
-                        <Dropdown.Toggle variant="inf" id="dropdown-basic">
-                            <BsPersonSquare size="30" />
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="/author/profile">Profile</Dropdown.Item>
-                            <Dropdown.Item href="/author/settings">Account Settings</Dropdown.Item>
-                            <Dropdown.Item href="/">Log Out</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </div>
-                <div className="right"></div>
             </Collapse>
+            <div className="right">
+                <Dropdown>
+                    <Dropdown.Toggle variant="inf" id="dropdown-basic">
+                        <BsPersonSquare size="30" />
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item href="/author/profile">Profile</Dropdown.Item>
+                        <Dropdown.Item href="/author/settings">Account Settings</Dropdown.Item>
+                        <Dropdown.Item href="/">Log Out</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
         </Navbar>
     );
 };

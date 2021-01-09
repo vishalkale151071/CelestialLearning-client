@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SearchIcon from '@material-ui/icons/Search';
-import logo from '../assets/logo2.svg';
+import logo from '../assets/CL.png';
 import { Button } from 'shards-react';
 import { BsPersonSquare } from 'react-icons/bs';
 import { Dropdown } from 'react-bootstrap';
@@ -22,26 +22,27 @@ import {
     FormInput,
     Collapse
 } from 'shards-react';
+
 // import { useDispatch } from 'react-redux';
 // import { logout } from '../../actions/subscriberActions';
 
  export const Header_auth = () => {
-
-   
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
-                <img src={logo} />
+                <img src={logo}  width='90' heigh='90' />
             </NavbarBrand>
             <NavbarToggler />
 
             <Collapse navbar>
                 <Nav navbar>
                     <NavItem>
-                        <NavLink>Categories</NavLink>
+                        <NavLink>
+                            <CategoriesDropdown />
+                        </NavLink>
                     </NavItem>
                 </Nav>
-                <Nav navbar className="ml-auto">
+                <Nav navbar>
                     <InputGroup size="sm" seamless>
                         <InputGroupAddon type="prepend">
                             <InputGroupText>
@@ -51,15 +52,17 @@ import {
                         <FormInput className="border-0" placeholder="Search..." />
                     </InputGroup>
                 </Nav>
-
-                <div className="carticon">
+            </Collapse>
+            <div className="right">
+                <Collapse navbar>
+                <div>
                     <ShoppingCartIcon fontSize="large" />
                 </div>
-                <div className="right">
-                    <Dropdown>
-                        <Dropdown.Toggle variant="inf" id="dropdown-basic">
-                            <BsPersonSquare size="30" />
-                        </Dropdown.Toggle>
+                <Dropdown>
+                    <Dropdown.Toggle variant="inf" id="dropdown-basic">
+                        <BsPersonSquare size="30" />
+                    </Dropdown.Toggle>
+
 
                         <Dropdown.Menu>
                             <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
@@ -70,6 +73,8 @@ import {
                 </div>
                 <div className="right"></div>
             </Collapse>
+            </div>
+
         </Navbar>
     );
 };

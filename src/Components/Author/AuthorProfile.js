@@ -17,6 +17,7 @@ export default function AuthorProfile() {
     const [qualification, setqualification] = useState('Qaulification');
     const [biography, setBiography] = useState('Biography ');
 
+
     useEffect( () => {
         Axios.post('/author/profile').then(res => {
             //console.log("Project : " , res.data)
