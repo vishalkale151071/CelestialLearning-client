@@ -34,12 +34,7 @@ export const Header = () => {
     const signupHandleClick = () => {
         history.push('/subscriber/signup');
     };
-    const subDashboard = () => {
-        history.push('/subscriber/dashboard');
-    };
-    const autDashboard = () => {
-        history.push('/author/dashboard');
-    };
+   
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
@@ -69,12 +64,7 @@ export const Header = () => {
                 
             </Collapse>
             <div className="right">
-                    <Button outline theme="danger" onClick={subDashboard}>
-                        Subscriber Dashboard
-                    </Button>
-                    <Button outline theme="danger" onClick={autDashboard}>
-                        Author Dashboard
-                    </Button>
+                    
                     <Button outline theme="danger" onClick={loginHandleClick}>
                         LogIn
                     </Button>

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import '../styles/Header.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
@@ -22,6 +21,7 @@ import {
     FormInput,
     Collapse
 } from 'shards-react';
+import CategoriesDropdown from "../Utils/CategoriesDropdown"
 
 // import { useDispatch } from 'react-redux';
 // import { logout } from '../../actions/subscriberActions';
@@ -67,10 +67,9 @@ import {
                         <Dropdown.Menu>
                             <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
                             <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
-                            <Button >Logout</Button>
+                            <Button className="logoutbutton" theme="danger" href="/">Logout</Button>
                         </Dropdown.Menu>
                     </Dropdown>
-                </div>
                 <div className="right"></div>
             </Collapse>
             </div>
