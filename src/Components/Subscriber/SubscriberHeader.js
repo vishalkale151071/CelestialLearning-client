@@ -1,5 +1,5 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+
 import '../styles/Header.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
@@ -22,8 +22,12 @@ import {
     FormInput,
     Collapse
 } from 'shards-react';
+// import { useDispatch } from 'react-redux';
+// import { logout } from '../../actions/subscriberActions';
 
-export const Header_auth = () => {
+ export const Header_auth = () => {
+
+   
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
@@ -60,7 +64,7 @@ export const Header_auth = () => {
                         <Dropdown.Menu>
                             <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
                             <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
-                            <Dropdown.Item href="/">Log Out</Dropdown.Item>
+                            <Button >Logout</Button>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>

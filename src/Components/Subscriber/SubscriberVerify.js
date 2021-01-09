@@ -21,10 +21,10 @@ function SubscriberVerify({match}) {
                    icon : 'error' ,
                    text : `${error}`
               })
-           if(verify){
-                console.log("True")
-                history.push('/subscriber/login')
-           }
+         }
+         if(verify){
+            console.log("True")
+            history.push('/subscriber/login')
          }
      }, [ history , verify , error ]);
  

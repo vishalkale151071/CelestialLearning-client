@@ -5,20 +5,32 @@ import '../styles/UserProfile.css';
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Button } from 'shards-react';
 import { Tabs, Tab } from 'react-bootstrap';
+import Axios from 'axios'
 
 export default function AuthorProfile() {
-    const [firstName, setfirstName] = useState('fname');
-    const [middleName, setmiddleName] = useState('mname');
-    const [lastName, setlastName] = useState('lname');
-    const [phNum, setphNum] = useState('phn');
-    const [linkedInURL, setlinkedInURL] = useState('lurl');
-    const [twitterURL, settwitterURL] = useState('turl');
-    const [qualification, setqualification] = useState('qua');
-    const [areaOfInterest, setareaOfInterest] = useState('aoi');
+    const [firstName, setfirstName] = useState('First Name');
+    const [middleName, setmiddleName] = useState('Middle Name');
+    const [lastName, setlastName] = useState('Last Name');
+    const [phNum, setphNum] = useState('Phone Number');
+    const [linkedInURL, setlinkedInURL] = useState('LinkedIn URL');
+    const [twitterURL, settwitterURL] = useState('Twitter URL');
+    const [qualification, setqualification] = useState('Qaulification');
+    const [biography, setBiography] = useState('Biography ');
 
-    const updateProfile = () => {
-        setfirstName(firstName);
-    };
+    useEffect( () => {
+        Axios.post('/author/profile').then(res => {
+            //console.log("Project : " , res.data)
+            setfirstName(res.data.message.firstName)
+            setmiddleName(res.data.message.middleName)
+            setlastName(res.data.message.lastName)
+            setphNum(res.data.message.phNum)
+            setlinkedInURL(res.data.message.linkedInURL)
+            settwitterURL(res.data.message.twitterURL)
+            setqualification(res.data.message.qualification)
+            setBiography(res.data.message.biography)
+        })
+
+   } , [])
 
     return (
         <div>
@@ -41,7 +53,7 @@ export default function AuthorProfile() {
                                 <label htmlFor="#middleName">Middle Name</label>
                                 <FormInput
                                     id="#middleName"
-                                    value={lastName}
+                                    value={middleName}
                                     onChange={event => {
                                         setmiddleName(event.target.value);
                                     }}
@@ -51,7 +63,7 @@ export default function AuthorProfile() {
                                 <label htmlFor="#lastName">Last Name</label>
                                 <FormInput
                                     id="#lastName"
-                                    value={middleName}
+                                    value={lastName}
                                     onChange={event => {
                                         setlastName(event.target.value);
                                     }}
@@ -67,7 +79,13 @@ export default function AuthorProfile() {
                                     }}
                                 />
                             </FormGroup>
-                            <Button theme="info" onClick={updateProfile}>Update</Button>
+                            <Button theme="info"
+                                onClick = {() => {
+                                    Axios.post('/author/update' , { firstName, middleName, lastName, phNum, linkedInURL, twitterURL, qualification, biography }).then(res => {
+
+                                    })
+                                }}
+                            >Update</Button>
                         </Form>
                     </Tab>
                     <Tab eventKey="social" title="Social Media Handles">
@@ -92,7 +110,13 @@ export default function AuthorProfile() {
                                     }}
                                 />
                             </FormGroup>
-                            <Button theme="info">Update</Button>
+                            <Button theme="info"
+                                onClick = {() => {
+                                    Axios.post('/author/update' , { firstName, middleName, lastName, phNum, linkedInURL, twitterURL, qualification, biography }).then(res => {
+
+                                    })
+                                }}
+                            >Update</Button>
                         </Form>
                     </Tab>
                     <Tab eventKey="education" title="Education">
@@ -111,13 +135,20 @@ export default function AuthorProfile() {
                                 <label htmlFor="#areaOfInterest">Area of Interest</label>
                                 <FormInput
                                     id="#areaOfInterest"
-                                    value={areaOfInterest}
+                                    value={biography}
                                     onChange={event => {
-                                        setareaOfInterest(event.target.value);
+                                        setBiography(event.target.value);
                                     }}
                                 />
                             </FormGroup>
-                            <Button theme="info">Update</Button>
+                            <Button theme="info"
+                            
+                            onClick = {() => {
+                                Axios.post('/author/update' , { firstName, middleName, lastName, phNum, linkedInURL, twitterURL, qualification, biography }).then(res => {
+
+                                })
+                            }}
+                            >Update</Button>
                         </Form>
                     </Tab>
                 </Tabs>

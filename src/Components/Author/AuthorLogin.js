@@ -19,7 +19,7 @@ function AuthorLogin({ history }) {
 
     useEffect(() => {
         if (authorInfo) {
-            history.push('/');
+            history.push('/author/dashboard');
         }
         if(error){
              Swal.fire({
