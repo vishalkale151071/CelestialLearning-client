@@ -17,7 +17,7 @@ export default function AuthorProfile() {
     const [areaOfInterest, setareaOfInterest] = useState('aoi');
 
     const updateProfile = () => {
-        setfirstName(firstName);
+        // function to update profile in backend
     };
 
     return (

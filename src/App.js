@@ -4,16 +4,18 @@ import SubscriberLogin from './Components/Subscriber/SubscriberLogin';
 
 import SubscriberSignup from './Components/Subscriber/SubscriberSignup';
 import SubscriberVerify from './Components/Subscriber/SubscriberVerify';
-import SubscriberProfile from "./Components/Subscriber/SubscriberProfile"
-import SubscriberDashboard from "./Components/Subscriber/SubscriberDashboard"
-import SubscriberSettings from "./Components/Subscriber/SubscriberSettings"
+import SubscriberProfile from './Components/Subscriber/SubscriberProfile';
+import SubscriberDashboard from './Components/Subscriber/SubscriberDashboard';
+import SubscriberSettings from './Components/Subscriber/SubscriberSettings';
+import SubscriberForgetPassword from './Components/Subscriber/SubscriberForgetPassword';
 
 import AuthorLogin from './Components/Author/AuthorLogin';
 import AuthorSignup from './Components/Author/AuthorSignup';
-import AuthorVerify from "./Components/Author/AuthorVerify"
-import AuthorProfile from "./Components/Author/AuthorProfile"
-import AuthorDashboard from "./Components/Author/AuthorDashboard"
-import AuthorSettings from "./Components/Author/AuthorSettings"
+import AuthorVerify from './Components/Author/AuthorVerify';
+import AuthorProfile from './Components/Author/AuthorProfile';
+import AuthorDashboard from './Components/Author/AuthorDashboard';
+import AuthorSettings from './Components/Author/AuthorSettings';
+import AuthorForgetPassword from './Components/Author/AuthorForgetPassword';
 
 import Home from './Components/Utils/Home';
 
@@ -30,6 +32,7 @@ function App() {
                         <Route path="/subscriber/dashboard/" exact component={SubscriberDashboard} />
                         <Route path="/subscriber/profile/" exact component={SubscriberProfile} />
                         <Route path="/subscriber/settings/" exact component={SubscriberSettings} />
+                        <Route path="/subscriber/forgetpassword/" exact component={SubscriberForgetPassword} />
                         <Route path="/subscriber/verify/:token" exact component={SubscriberVerify} />
 
                         <Route path="/author/login" exact component={AuthorLogin} />
@@ -37,9 +40,8 @@ function App() {
                         <Route path="/author/dashboard/" exact component={AuthorDashboard} />
                         <Route path="/author/profile/" exact component={AuthorProfile} />
                         <Route path="/author/settings/" exact component={AuthorSettings} />
+                        <Route path="/author/forgetpassword/" exact component={AuthorForgetPassword} />
                         <Route path="/author/verify/:token" exact component={AuthorVerify} />
-
-
                     </Switch>
                 </Router>
             </Router>

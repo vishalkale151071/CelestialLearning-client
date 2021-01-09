@@ -73,7 +73,7 @@ function AuthorLogin({ history }) {
                     <br />
                     <a href="/subscriber/login">Are you a Subscriber?</a>
                     <br />
-                    <a href="/path_to_page">Having problems logging in?</a>
+                    <a href="/author/forgetpassword">Having problems logging in?</a>
                 </CardFooter>
             </Card>
         </div>
