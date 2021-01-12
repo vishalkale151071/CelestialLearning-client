@@ -11,7 +11,7 @@ function SubscriberVerify({match}) {
      const history = useHistory()
  
      const subscriberVerify = useSelector(state => state.subscriberVerify);
-     const { loading, error, verify } = subscriberVerify;
+     const {  error, verify } = subscriberVerify;
  
      let token = match.params.token;
  

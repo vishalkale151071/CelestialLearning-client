@@ -7,7 +7,7 @@ function AuthorVerify({ match, history }) {
     const dispatch = useDispatch();
 
     const authorVerify = useSelector(state => state.authorVerify);
-    const { loading, error, verify } = authorVerify;
+    const {  verify } = authorVerify;
 
 
     let token = match.params.token;

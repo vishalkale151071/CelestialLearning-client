@@ -1,8 +1,6 @@
 import React from 'react';
 import Footer from 'rc-footer';
 import 'rc-footer/assets/index.css';
-import { FcGraduationCap } from "react-icons/fc";
-import fb from "../assets/fb.jpg"
 
 
 export default function Footer1() {
@@ -16,7 +14,7 @@ export default function Footer1() {
                         items: [
                             {
                                 title: 'Become an Author',
-                                url:"/row1"
+                                url:"#/row1"
                             },
                             {
                                 title: 'Get the App'
@@ -31,7 +29,7 @@ export default function Footer1() {
                         items: [
                             {
                                 title: 'Careers',
-                                url:"/row1"
+                                url:"#/row1"
                             },
                             {
                                 title: 'Blogs'
@@ -47,7 +45,7 @@ export default function Footer1() {
                         items: [
                             {
                                 title:'Facebook',
-                                url:"/row1"
+                                url:"#/row1"
                             },
                             {
                                 title: 'Instagram'
@@ -63,7 +61,7 @@ export default function Footer1() {
                         items: [
                             {
                                 title: 'Terms',
-                                url:"/row1"
+                                url:"#/row1"
                             },
                             {
                                 title: 'Help and Support'

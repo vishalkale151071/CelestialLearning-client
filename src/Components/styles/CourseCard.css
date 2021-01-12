@@ -1,4 +1,9 @@
-.coursecard {
-    width: 12cm;
-    margin-left: 1cm;
+.dr-example-container {
+    max-width: 80%;
+    margin-left: 6cm;
+    margin-bottom: 1cm;
+}
+
+.coursecard{
+    margin-right: -2cm;
 }

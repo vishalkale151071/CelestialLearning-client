@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import SubscriberHeader from './SubscriberHeader';
-import logo from '../assets/logo.png';
 import '../styles/UserProfile.css';
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Button } from 'shards-react';
@@ -39,10 +38,10 @@ export default function SubscriberProfile() {
     return (
         <div>
             <SubscriberHeader />
-            <div className="profiletab">
-                <Tabs  id="profileTab">
-                    <Tab eventKey="personal" title="Personal Details">
-                        <Form className="subform">
+            <div >
+                <Tabs id="profileTab" className="profiletab">
+                    <Tab eventKey="personal" title="Personal Details" >
+                        <Form className="subform" >
                             <FormGroup>
                                 <label htmlFor="#firstName">First Name</label>
                                 <FormInput id="#firstName" value={firstName} onChange = {(e) => setfirstName(e.target.value)} />

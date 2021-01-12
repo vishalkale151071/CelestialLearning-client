@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { register } from '../../actions/authorActions';
-import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
+import { Card, CardTitle, CardBody, CardFooter, Button } from 'shards-react';
 import '../styles/UserSignUp.css';
 import Swal from "sweetalert2"
 
@@ -22,7 +21,7 @@ import 'shards-ui/dist/css/shards.min.css';
     const dispatch = useDispatch();
 
     const authorRegister = useSelector(state => state.authorRegister);
-    const { loading, error ,success , message } = authorRegister;
+    const {  error ,success , message } = authorRegister;
 
 
 
