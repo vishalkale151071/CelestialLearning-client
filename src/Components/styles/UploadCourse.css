@@ -1,0 +1,57 @@
+.create1 {
+    margin-top: 2cm;
+    margin-left: 13cm;
+    width: 50%;
+    align-content: center;
+}
+
+.labelcreate {
+    margin-top: 1cm;
+    margin-left: 8cm;
+    margin-bottom: 0.5cm;
+}
+
+.create2 {
+    margin-top: 2cm;
+    margin-left: 13cm;
+    align-content: center;
+}
+
+.createdropdown {
+    margin-left: 9cm;
+    width: 10cm;
+}
+
+._3CDiP,
+._2RWmX {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    margin-left: 2cm;
+    margin-bottom: 1cm;
+    width: 4cm;
+}
+
+._hsN1w {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    margin-left: 45cm;
+    margin-bottom: 1cm;
+    width: 4cm;
+}
+
+hr.rounded {
+    position: relative;
+}
+
+.line{
+    position: absolute;
+}
+
+.buttonexit{
+    margin-left: 48cm;
+    margin-top: 5px;
+}

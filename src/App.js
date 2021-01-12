@@ -19,6 +19,7 @@ import AuthorForgetPassword from './Components/Author/AuthorForgetPassword';
 import AuthorCourses from './Components/Author/AuthorCourses';
 
 import Home from './Components/Utils/Home';
+import UploadCourse from './Components/Course/UploadCourse';
 
 function App() {
 
@@ -55,6 +56,8 @@ function App() {
                         <Route path="/author/forgetpassword/" exact component={AuthorForgetPassword} />
                         <Route path="/author/verify/:token" exact component={AuthorVerify} />
                         <Route path="/author/mycourses" exact component={AuthorCourses} />
+
+                        <Route path="/author/uploadcourse" exact component={UploadCourse} />
                     </Switch>
                 </Router>
             </Router>
