@@ -1,24 +1,62 @@
 import React, { useEffect } from 'react';
 import { Header } from './Header';
 import CourseCard from './CourseCard';
-import { useCookies } from 'react-cookie';
-import Cookies from 'js-cookie';
-import { CookiesProvider } from 'react-cookie';
+import HomeCarousel from './HomeCarousel';
+import Footer1 from './Footer';
+import { Container, Row, Col } from 'shards-react';
+
+
 export default function Home({ history }) {
-    
-    
-    
     return (
         <div className="home">
-            <Header />
+            <div className="header">
+                <Header />
+            </div>
+            <HomeCarousel />
+
             <div className="main">
-                        
-                        <CourseCard />
-                        <CourseCard />
-                        <CourseCard />
-                        <CourseCard />
-                        <CourseCard />
-                    </div>
+                <Container className="dr-example-container">
+                    <Row>
+                        <Col>
+                            <CourseCard />
+                        </Col>
+                        <Col>
+                            <CourseCard />
+                        </Col>
+                        <Col>
+                            <CourseCard />
+                        </Col>
+                        <Col>
+                            <CourseCard />
+                        </Col>
+                        <Col>
+                            <CourseCard />
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+            <div className="main">
+                <Container className="dr-example-container">
+                    <Row>
+                        <Col>
+                            <CourseCard />
+                        </Col>
+                        <Col>
+                            <CourseCard />
+                        </Col>
+                        <Col>
+                            <CourseCard />
+                        </Col>
+                        <Col>
+                            <CourseCard />
+                        </Col>
+                        <Col>
+                            <CourseCard />
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+            <Footer1 />
         </div>
     );
 }

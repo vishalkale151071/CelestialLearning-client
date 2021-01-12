@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import login from "../../actions/authorActions"
 import { Form, FormInput, FormGroup } from 'shards-react';
-import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
+import { Card, CardHeader, CardTitle, CardBody, CardFooter, Button } from 'shards-react';
 import "../styles/UserLogin.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
@@ -15,7 +15,7 @@ function AuthorLogin({ history }) {
     const dispatch = useDispatch();
 
     const authorLogin = useSelector(state => state.authorLogin);
-    const { loading, error, authorInfo } = authorLogin;
+    const {  error, authorInfo } = authorLogin;
 
     useEffect(() => {
         if (authorInfo) {
@@ -73,7 +73,7 @@ function AuthorLogin({ history }) {
                     <br />
                     <a href="/subscriber/login">Are you a Subscriber?</a>
                     <br />
-                    <a href="/path_to_page">Having problems logging in?</a>
+                    <a href="/author/forgetpassword">Having problems logging in?</a>
                 </CardFooter>
             </Card>
         </div>

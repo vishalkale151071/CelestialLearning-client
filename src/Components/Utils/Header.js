@@ -3,11 +3,10 @@ import { useHistory } from 'react-router-dom';
 import '../styles/Header.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SearchIcon from '@material-ui/icons/Search';
-import logo from '../assets/logo2.svg';
+import logo from '../assets/CL.png';
 import { Button } from 'shards-react';
-
+import CategoriesDropdown from './CategoriesDropdown';
 import {
     Navbar,
     NavbarToggler,
@@ -33,29 +32,24 @@ export const Header = () => {
     const signupHandleClick = () => {
         history.push('/subscriber/signup');
     };
-    const subDashboard = () => {
-        history.push('/subscriber/dashboard');
-    };
-    const autDashboard = () => {
-        history.push('/author/dashboard');
-    };
+   
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
-                <img src={logo} />
+                <img src={logo} width='60' heigh='40' />
             </NavbarBrand>
             <NavbarToggler />
 
             <Collapse navbar>
                 <Nav navbar>
                     <NavItem>
-                        <NavLink>Categories</NavLink>
+                        <NavLink><CategoriesDropdown /></NavLink>
                     </NavItem>
                 </Nav>
 
-                <Nav navbar className="ml-auto">
-                    <InputGroup size="sm" seamless>
-                        <InputGroupAddon type="prepend">
+                <Nav navbar >
+                    <InputGroup size="sm" seamless className="headersearch" >
+                        <InputGroupAddon  type="prepend">
                             <InputGroupText>
                                 <SearchIcon />
                             </InputGroupText>
@@ -64,16 +58,11 @@ export const Header = () => {
                     </InputGroup>
                 </Nav>
 
-                <div className="carticon">
-                    <ShoppingCartIcon fontSize="large" />
-                </div>
-                <div className="right">
-                    <Button outline theme="danger" onClick={subDashboard}>
-                        Subscriber Dashboard
-                    </Button>
-                    <Button outline theme="danger" onClick={autDashboard}>
-                        Author Dashboard
-                    </Button>
+                
+                
+            </Collapse>
+            <div className="right">
+                    
                     <Button outline theme="danger" onClick={loginHandleClick}>
                         LogIn
                     </Button>
@@ -81,8 +70,6 @@ export const Header = () => {
                         SignUp
                     </Button>
                 </div>
-                <div className="right"></div>
-            </Collapse>
         </Navbar>
     );
 };

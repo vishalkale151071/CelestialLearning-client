@@ -1,32 +1,51 @@
-*{
-     margin : 0 ;
-     padding: 0 ;
+* {
+    margin: 0;
+    padding: 0;
 }
-.app{
-     display : flex ;
-     flex-direction: column ;
-     margin : auto ;
-     
+.app {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
 }
-.app_header{
-     flex : 1 ;
+.app_header {
+    flex: 1;
 }
-.app_footer{
-     flex : 1 ;
+.app_footer {
+    flex: 1;
 }
 
-.main{
-     display: flex; 
-     justify-content: space-around; 
-     margin-top: 1cm;
-    
-     
+.main {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1cm;
 }
-.main_sidebar{
-     width : 15%
-     
+.main_sidebar {
+    width: 15%;
 }
-.main_content{
+.main_content {
+    width: 85%;
+}
 
-     width : 85%
+.header {
+    box-shadow: black 1px 2px 7px;
+}
+
+.footer {
+    box-shadow: black 1px 0.7px 15px;
+    text-align: center;
+    margin-top: 2cm;
+}
+
+.logoutbutton {
+    width: 150px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.profiletab {
+    margin-top: 5px;
+}
+
+.subscriberheader, .authorheader {
+    box-shadow: black 1px 0.8px 7px;
 }

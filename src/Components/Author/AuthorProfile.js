@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import AuthorHeader from './AuthorHeader';
-import logo from '../assets/logo.png';
 import '../styles/UserProfile.css';
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Button } from 'shards-react';
@@ -16,6 +15,7 @@ export default function AuthorProfile() {
     const [twitterURL, settwitterURL] = useState('Twitter URL');
     const [qualification, setqualification] = useState('Qaulification');
     const [biography, setBiography] = useState('Biography ');
+
 
     useEffect( () => {
         Axios.post('/author/profile').then(res => {
