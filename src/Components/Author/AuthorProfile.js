@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import AuthorHeader from './AuthorHeader';
-import logo from '../assets/logo.png';
 import '../styles/UserProfile.css';
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Button } from 'shards-react';

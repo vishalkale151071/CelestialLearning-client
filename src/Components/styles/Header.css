@@ -1,5 +1,5 @@
 .nav{
-     background-color: skyblue;
+     background-color: whitesmoke;
 }
 button{
      margin-left: 5px;
@@ -8,8 +8,8 @@ button{
      width : 500px;
 }
 
+.headersearch{
+     border: 2px solid gray;
+     border-radius: 10px;
 
-.right{
-     margin-left: 6cm;
-     
 }

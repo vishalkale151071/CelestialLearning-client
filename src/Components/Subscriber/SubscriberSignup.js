@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Form, FormInput, FormGroup } from 'shards-react';
 //import { register } from '../../actions/userActions';
 import {register} from '../../actions/subscriberActions'
-import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
+import { Card,  CardTitle, CardBody, CardFooter, Button } from 'shards-react';
 
 import '../styles/UserSignUp.css';
 
