@@ -25,7 +25,7 @@ export const AuthorHeader = () => {
         <div className="authorheader">
             <Navbar className="nav" expand="md">
                 <NavbarBrand>
-                    <img src={logo} width="90" heigh="90" alt="logo"/>
+                    <img src={logo} width="90" heigh="90" alt="logo" />
                 </NavbarBrand>
                 <NavbarToggler />
 
@@ -44,6 +44,9 @@ export const AuthorHeader = () => {
                         </InputGroup>
                     </Nav>
                 </Collapse>
+                <Button theme="outline-danger" href="/author/uploadcourse">
+                    Create Course
+                </Button>
                 <div className="right">
                     <Dropdown>
                         <Dropdown.Toggle variant="inf" id="dropdown-basic">
