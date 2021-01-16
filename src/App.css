@@ -18,6 +18,8 @@
     display: flex;
     justify-content: space-around;
     margin-top: 1cm;
+    max-width: 90%;
+    margin-left: 2.5cm;
 }
 .main_sidebar {
     width: 15%;
@@ -46,6 +48,8 @@
     margin-top: 5px;
 }
 
-.subscriberheader, .authorheader {
+.subscriberheader,
+.authorheader {
     box-shadow: black 1px 0.8px 7px;
 }
+
