@@ -66,7 +66,7 @@ export const Header = () => {
                     <Button outline theme="danger" onClick={loginHandleClick}>
                         LogIn
                     </Button>
-                    <Button outline theme="danger" onClick={signupHandleClick}>
+                    <Button className="signupButton" outline theme="danger" onClick={signupHandleClick}>
                         SignUp
                     </Button>
                 </div>

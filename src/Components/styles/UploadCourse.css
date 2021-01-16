@@ -1,34 +1,46 @@
-.create1 {
-    margin-top: 2cm;
-    margin-left: 13cm;
+.step2{
+    margin-left: 9cm;
     width: 50%;
-    align-content: center;
+    text-align: center;
+
 }
 
-.labelcreate {
+.labelstep2{
     margin-top: 1cm;
-    margin-left: 8cm;
-    margin-bottom: 0.5cm;
 }
 
-.create2 {
-    margin-top: 2cm;
-    margin-left: 13cm;
-    align-content: center;
+.step3{
+    margin-left: 12cm;
+    margin-top: 1cm;
+    text-align: center;
+
+}
+.labelstep3{
+    margin-right: 12cm;
 }
 
 .createdropdown {
-    margin-left: 9cm;
     width: 10cm;
+    margin-left: 1.3cm;
+    margin-top: 5px;
 }
 
+.step4{
+    width: 50%;
+    margin-left: 9cm;
+    text-align: center;
+}
+
+.labelstep4{
+    margin-top: 1cm;
+}
 ._3CDiP,
 ._2RWmX {
     position: fixed;
     left: 0;
     bottom: 0;
     text-align: center;
-    margin-left: 2cm;
+    margin-left: 1cm;
     margin-bottom: 1cm;
     width: 4cm;
 }
@@ -38,7 +50,7 @@
     left: 0;
     bottom: 0;
     text-align: center;
-    margin-left: 45cm;
+    margin-left: 46cm;
     margin-bottom: 1cm;
     width: 4cm;
 }
@@ -47,11 +59,25 @@ hr.rounded {
     position: relative;
 }
 
-.line{
+.line {
     position: absolute;
 }
 
-.buttonexit{
-    margin-left: 48cm;
-    margin-top: 5px;
+.buttonexit {
+    margin-left: 47cm;
+    margin-top: 20px;
+    width: 3cm;
 }
+
+
+.institle {
+    margin-left: 16cm;
+    font-size: xx-large;
+}
+
+.uploadcard {
+    margin-left: 4.37cm;
+    margin-top: 0.3cm;
+    min-height: 15cm;
+}
+
