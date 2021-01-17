@@ -16,13 +16,16 @@ import AuthorProfile from './Components/Author/AuthorProfile';
 import AuthorDashboard from './Components/Author/AuthorDashboard';
 import AuthorSettings from './Components/Author/AuthorSettings';
 import AuthorForgetPassword from './Components/Author/AuthorForgetPassword';
+import AuthorCourses from './Components/Author/AuthorCourses';
 
 import Home from './Components/Utils/Home';
-import { useEffect } from 'react';
+import UploadCourse from './Components/Course/UploadCourse';
+import CreateCourse from "./Components/Course/CreateCourse"
+import CourseHome from "./Components/Course/CourseHome"
 
 function App() {
 
-    const isSubscriber = localStorage.getItem('isSubscriber')
+    //const isSubscriber = localStorage.getItem('isSubscriber')
   //  const history1 = useHistory()
 
     // useEffect(() => {
@@ -54,6 +57,11 @@ function App() {
                         <Route path="/author/settings/" exact component={AuthorSettings} />
                         <Route path="/author/forgetpassword/" exact component={AuthorForgetPassword} />
                         <Route path="/author/verify/:token" exact component={AuthorVerify} />
+                        <Route path="/author/mycourses" exact component={AuthorCourses} />
+
+                        <Route path="/author/uploadcourse" exact component={UploadCourse} />
+                        <Route path="/course/create" exact component={CreateCourse} />
+                        <Route path="/course/:title" exact component={CourseHome} />
                     </Switch>
                 </Router>
             </Router>

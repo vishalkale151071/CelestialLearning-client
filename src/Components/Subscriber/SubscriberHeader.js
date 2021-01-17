@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../styles/Header.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
@@ -26,8 +26,9 @@ import CategoriesDropdown from "../Utils/CategoriesDropdown"
 // import { useDispatch } from 'react-redux';
 // import { logout } from '../../actions/subscriberActions';
 
- export const Header_auth = () => {
+ export const SubscriberHeader = () => {
     return (
+        <div className="subscriberheader">
         <Navbar className="nav" expand="md">
             <NavbarBrand>
                 <img src={logo}  width='90' heigh='90' />
@@ -43,7 +44,7 @@ import CategoriesDropdown from "../Utils/CategoriesDropdown"
                     </NavItem>
                 </Nav>
                 <Nav navbar>
-                    <InputGroup size="sm" seamless>
+                    <InputGroup size="sm" seamless className="headersearch">
                         <InputGroupAddon type="prepend">
                             <InputGroupText>
                                 <SearchIcon />
@@ -58,7 +59,7 @@ import CategoriesDropdown from "../Utils/CategoriesDropdown"
                 <div>
                     <ShoppingCartIcon fontSize="large" />
                 </div>
-                <Dropdown>
+                <Dropdown >
                     <Dropdown.Toggle variant="inf" id="dropdown-basic">
                         <BsPersonSquare size="30" />
                     </Dropdown.Toggle>
@@ -67,7 +68,8 @@ import CategoriesDropdown from "../Utils/CategoriesDropdown"
                         <Dropdown.Menu>
                             <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
                             <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
-                            <Button className="logoutbutton" theme="danger" href="/">Logout</Button>
+                            <Dropdown.Divider />
+                            <Button className="logoutbutton" theme="outline-danger" href="/">Logout</Button>
                         </Dropdown.Menu>
                     </Dropdown>
                 <div className="right"></div>
@@ -75,7 +77,8 @@ import CategoriesDropdown from "../Utils/CategoriesDropdown"
             </div>
 
         </Navbar>
+        </div>
     );
 };
 
-export default Header_auth;
+export default SubscriberHeader;

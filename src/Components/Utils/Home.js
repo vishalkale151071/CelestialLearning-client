@@ -3,15 +3,12 @@ import { Header } from './Header';
 import CourseCard from './CourseCard';
 import HomeCarousel from './HomeCarousel';
 import Footer1 from './Footer';
-
-import { useCookies } from 'react-cookie';
-import Cookies from 'js-cookie';
-import { CookiesProvider } from 'react-cookie';
+import { Container, Row, Col } from 'shards-react';
 
 export default function Home({ history }) {
-    
-    
-        return (
+    const cardTitles = ['Python', 'MERN', 'JAVA', 'PhotoShop', 'C++'];
+
+    return (
         <div className="home">
             <div className="header">
                 <Header />
@@ -19,12 +16,39 @@ export default function Home({ history }) {
             <HomeCarousel />
 
             <div className="main">
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
+                {cardTitles.map(title => (
+                    <Container className="cc">
+                        <Row>
+                            <Col>
+                                <CourseCard title={title} />
+                            </Col>
+                        </Row>
+                    </Container>
+                ))}
+                ;
             </div>
+            <div className="main2">
+                <Container className="dr-example-container">
+                    <Row>
+                        {/* <Col>
+                            <CourseCard title="title6"/>
+                        </Col>
+                        <Col>
+                            <CourseCard title="title7"/>
+                        </Col>
+                        <Col>
+                            <CourseCard title="title8"/>
+                        </Col>
+                        <Col>
+                            <CourseCard title="title9"/>
+                        </Col>
+                        <Col>
+                            <CourseCard title="title10"/>
+                        </Col> */}
+                    </Row>
+                </Container>
+            </div>
+
             <Footer1 />
         </div>
     );

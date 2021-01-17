@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, FormInput, FormGroup } from 'shards-react';
-import { Card, CardHeader, CardTitle, CardImg, CardBody, CardFooter, Button } from 'shards-react';
+import { Card, CardHeader, CardTitle, CardBody, CardFooter, Button } from 'shards-react';
 
 export default function AuthorForgetPassword() {
 

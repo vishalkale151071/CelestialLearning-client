@@ -1,5 +1,6 @@
 .carousal{
-    width: 60%;
+    width: 65%;
     margin-left: 9cm;
-    margin-top: 1cm;
+    margin-top: 20px;
+    box-shadow: black 1px 0.7px 15px;
 }

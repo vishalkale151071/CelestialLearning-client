@@ -3,11 +3,10 @@ import { useHistory } from 'react-router-dom';
 import '../styles/Header.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SearchIcon from '@material-ui/icons/Search';
 import logo from '../assets/CL.png';
 import { Button } from 'shards-react';
-
+import CategoriesDropdown from './CategoriesDropdown';
 import {
     Navbar,
     NavbarToggler,
@@ -21,7 +20,6 @@ import {
     FormInput,
     Collapse
 } from 'shards-react';
-import CategoriesDropdown from './CategoriesDropdown';
 
 export var type = "";
 
@@ -38,7 +36,7 @@ export const Header = () => {
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
-                <img src={logo} width='90' heigh='90' />
+                <img src={logo} width='60' heigh='40' />
             </NavbarBrand>
             <NavbarToggler />
 
@@ -50,8 +48,8 @@ export const Header = () => {
                 </Nav>
 
                 <Nav navbar >
-                    <InputGroup size="sm" seamless >
-                        <InputGroupAddon type="prepend">
+                    <InputGroup size="sm" seamless className="headersearch" >
+                        <InputGroupAddon  type="prepend">
                             <InputGroupText>
                                 <SearchIcon />
                             </InputGroupText>
@@ -68,7 +66,7 @@ export const Header = () => {
                     <Button outline theme="danger" onClick={loginHandleClick}>
                         LogIn
                     </Button>
-                    <Button outline theme="danger" onClick={signupHandleClick}>
+                    <Button className="signupButton" outline theme="danger" onClick={signupHandleClick}>
                         SignUp
                     </Button>
                 </div>
