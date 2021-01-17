@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { callPlugin } from '../Components/Utils/plugin'
 import {
   
   SUBSCRIBER_LOGIN_FAIL,
@@ -99,9 +100,11 @@ export const register = (username, email, password , confirm_password) => async 
          { email, password },
          config
        )
-
-       console.log("Call here")
-   
+        //call plugin here
+       if(data.target){
+        callPlugin(data.target);
+       }
+       
        dispatch({
          type: SUBSCRIBER_LOGIN_SUCCESS,
          payload: data,
