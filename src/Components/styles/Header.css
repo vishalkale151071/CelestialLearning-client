@@ -2,7 +2,10 @@
      background-color: whitesmoke;
 }
 button{
-     margin-left: 5px;
+     margin-left: 10px;
+}
+.signupButton{
+     margin-left: 10px;
 }
 .border-0{
      width : 500px;

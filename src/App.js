@@ -20,6 +20,8 @@ import AuthorCourses from './Components/Author/AuthorCourses';
 
 import Home from './Components/Utils/Home';
 import UploadCourse from './Components/Course/UploadCourse';
+import CreateCourse from "./Components/Course/CreateCourse"
+import CourseHome from "./Components/Course/CourseHome"
 
 function App() {
 
@@ -58,6 +60,8 @@ function App() {
                         <Route path="/author/mycourses" exact component={AuthorCourses} />
 
                         <Route path="/author/uploadcourse" exact component={UploadCourse} />
+                        <Route path="/course/create" exact component={CreateCourse} />
+                        <Route path="/course/:title" exact component={CourseHome} />
                     </Switch>
                 </Router>
             </Router>
