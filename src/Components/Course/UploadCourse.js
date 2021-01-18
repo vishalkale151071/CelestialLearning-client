@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
@@ -6,8 +6,16 @@ import { Form, FormInput, FormGroup, FormTextarea, Button } from 'shards-react';
 import '../styles/UploadCourse.css';
 import { Dropdown, Forms } from 'react-bootstrap';
 import { Card, CardTitle, CardImg, CardBody } from 'shards-react';
+import axios from 'axios';
 
 export default function UploadCourse() {
+
+    const [title, setTitle] = useState('Course Name') 
+    const [description, setDescription] = useState('') 
+    const [category , setCategory] = useState('') 
+    const [suitableFor, setSuitableFor] = useState('') 
+    const [platform , setPlatform] = useState('')
+    const [prerequisite, setPrerequisite] = useState('') 
     // setup the step content
     let history = useHistory();
     const step1Content = (
@@ -20,6 +28,7 @@ export default function UploadCourse() {
             </Card>
         </div>
     );
+
     const step2Content = (
         <div>
             <Card className="uploadcard" style={{ maxWidth: '1500px' }}>
@@ -31,13 +40,13 @@ export default function UploadCourse() {
                                     What would you like to name your course?
                                 </label>
 
-                                <FormInput type="text" id="name" placeholder="Enter Something.." />
+                                <FormInput type="text" id="title"  onChange = {(e) => setTitle(e.target.value)} placeholder="Enter Something.." ></FormInput>
                             </FormGroup>
                             <FormGroup>
                                 <label className="labelstep2" htmlFor="desc">
                                     Give a short Description about your course!
                                 </label>
-                                <FormTextarea rows="5" type="text" id="desc" placeholder="Enter Something.." />
+                                <FormTextarea rows="5" type="text" id="desc" onChange = {(e) => setDescription(e.target.value)} placeholder="Enter Something.." />
                             </FormGroup>
                         </Form>
                     </div>
@@ -45,6 +54,7 @@ export default function UploadCourse() {
             </Card>
         </div>
     );
+    
     const step3Content = (
         <div>
             <Card className="uploadcard" style={{ maxWidth: '1500px' }}>
@@ -53,12 +63,16 @@ export default function UploadCourse() {
                         <label className="labelstep3" htmlFor="dropdown">
                             Where would you categorize your course?
                         </label>
-                        <Dropdown className="createdropdown">
+                        <Dropdown className="createdropdown"
+                            
+                        >
                             <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-                                Choose a Category.
+                                Choose
                             </Dropdown.Toggle>
-
-                            <Dropdown.Menu>
+                            <input type = "text" onChange = {(e) => setCategory(e.target.value)}/>
+                            <Dropdown.Menu
+                            
+                            >
                                 <Dropdown.Item href="#Development">Development</Dropdown.Item>
                                 <Dropdown.Item href="#Business">Business</Dropdown.Item>
                                 <Dropdown.Item href="#Finance&Accounting">Finance & Accounting</Dropdown.Item>
@@ -82,19 +96,25 @@ export default function UploadCourse() {
                             <label className="labelstep4" htmlFor="suit">
                                 For whom this course will be suitable for?
                             </label>
-                            <FormInput type="suit" id="suit" placeholder="Enter Something.." />
+                            <FormInput type="suit" id="suit" 
+                             onChange = {(e) => {setSuitableFor(e.target.value)}}
+                            placeholder="Enter Something.." />
                         </FormGroup>
                         <FormGroup>
                             <label className="labelstep4" htmlFor="platform">
                                 Platform?
                             </label>
-                            <FormInput type="text" id="platform" placeholder="Enter Something.." />
+                            <FormInput type="text" id="platform" 
+                            onChange = {(e) => {setPlatform(e.target.value)}}
+                            placeholder="Enter Something.." />
                         </FormGroup>
                         <FormGroup>
                             <label className="labelstep4" htmlFor="prerequisites">
                                 Any prerequisites?
                             </label>
-                            <FormInput type="suit" id="prerequisites" placeholder="Enter Something.." />
+                            <FormInput type="suit" id="prerequisites" 
+                            onChange = {(e) => {setPrerequisite(e.target.value)}}
+                            placeholder="Enter Something.." />
                         </FormGroup>
                     </Form>
                 </div>
@@ -120,11 +140,22 @@ export default function UploadCourse() {
     }
 
     function onFormSubmit() {
-        // handle the submit logic here
-        // This function will be executed at the last step
-        // when the submit button (next button in the previous steps) is pressed
-        history.push('/course/create');
+
+        axios.post('/author/create-course' ,{title , description , category , suitableFor , platform ,   prerequisite}).then(res => {
+            console.log(res.data.courseId)
+            history.push(
+                {
+                    pathname: '/course/create',
+                    state: { id: res.data.courseId}
+                }
+            );
+        })
+        
+       //
     }
+
+    
+    
 
     return (
         <div>
