@@ -13,6 +13,7 @@ import {
   AUTHOR_VERIFY_REQUEST,
   AUTHOR_VERIFY_SUCCESS,
   AUTHOR_VERIFY_FAIL,
+  SET_COURSE_ID,
 
 } from '../constants/userConstants'
 
@@ -130,3 +131,6 @@ export const register = (username, email, password , confirm_password) => async 
    }
 
    export default login 
+
+   
+
