@@ -307,7 +307,7 @@ export default function CreateCourse() {
             axios.post('/author/create-section' , {
                 number : sectionCount ,
                 sectionName : name ,
-                courseId : '60040871ca5848206b593c66'
+                courseId : '6006db170db0231310bd4728'
             }).then(res => {
                 const values = [...sections];
                 values[i].sectionNumber = sectionCount
