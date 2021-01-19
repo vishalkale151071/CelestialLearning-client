@@ -6,7 +6,7 @@ import Footer1 from './Footer';
 import { Container, Row, Col } from 'shards-react';
 
 export default function Home({ history }) {
-    const cardTitles = ['Python', 'MERN', 'JAVA', 'PhotoShop', 'C++'];
+    const cardTitles = ['Complete Ethical Hacking Bootcamp 2021: Zero to Mastery', 'MERN', 'JAVA', 'PhotoShop', 'C++'];
 
     return (
         <div className="home">
