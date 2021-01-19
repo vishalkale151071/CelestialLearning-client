@@ -22,6 +22,7 @@ import Home from './Components/Utils/Home';
 import UploadCourse from './Components/Course/UploadCourse';
 import CreateCourse from "./Components/Course/CreateCourse"
 import CourseHome from "./Components/Course/CourseHome"
+import CourseView from "./Components/Course/CourseView"
 
 function App() {
 
@@ -62,6 +63,8 @@ function App() {
                         <Route path="/author/uploadcourse" exact component={UploadCourse} />
                         <Route path="/course/create" exact component={CreateCourse} />
                         <Route path="/course/:title" exact component={CourseHome} />
+                        <Route path="/course/view/:title" exact component={CourseView} />
+
                     </Switch>
                 </Router>
             </Router>

@@ -1,0 +1,23 @@
+.tpCard{
+    margin-top: 1cm;
+    margin-left: 1cm;
+    min-height: 10cm;
+}
+
+.crdImg{
+    position: fixed;
+    width: 4cm;
+    height: 4cm;
+    margin-left: 30px;
+    margin-top: 1.6cm;
+}
+
+.crhmCT{
+    position: fixed;
+    margin-left: 5cm;
+}
+
+.crhmBT{
+    margin-left: 5cm;
+    margin-top: 4cm;
+}
