@@ -62,32 +62,38 @@
     width: 10cm;
 }
 
-.secdelbut{
-    margin-left: 3cm;
-    margin-top: 10px;
-    width: 8cm;
-}
 
-.secaddbut{
-    margin-top: 1cm;
-}
-
-.viddelbut{
-    margin-top: -1.5cm;
-    margin-left: 11cm;
-}
-
-.vidaddbut{
-    margin-left: 6cm;
-    margin-top: 1cm;
-}
 
 .sectionForm{
     margin-left: 10px;
     margin-top: 10px;
 }
 
-.sectionCard{
-    min-height: 6cm;
-    margin-left: 9cm;
+.CrCoCard{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border: black solid 1px;
+
+}
+
+.CrCoSaveLectureBut{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.CrCoAddLectureBut{
+    margin-right: 10px;
+    margin-top: 1cm;
+}
+.CrCoShowStateBut{
+    margin-top: 1cm ;
+}
+
+.CrCoSaveSecBut{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.CrCoAddSectionBtn{
+    margin-top: 1cm;
 }
