@@ -1,13 +1,18 @@
-.header{
-     background-color:  grey ;
-     display: flex;
-     justify-content: space-around;
-     align-items: center;
-         
+.nav{
+     background-color: whitesmoke;
 }
-.header_input > input{
-     width : 1000px;
-     height : 40px ;
-     font-size: larger;
-     
+button{
+     margin-left: 10px;
+}
+.signupButton{
+     margin-left: 10px;
+}
+.border-0{
+     width : 500px;
+}
+
+.headersearch{
+     border: 2px solid gray;
+     border-radius: 10px;
+
 }

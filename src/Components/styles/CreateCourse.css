@@ -1,0 +1,93 @@
+#components-layout-demo-top-side-2 .logo {
+    float: left;
+    width: 120px;
+    height: 31px;
+    margin: 16px 24px 16px 0;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.ant-row-rtl #components-layout-demo-top-side-2 .logo {
+    float: right;
+    margin: 16px 0 16px 24px;
+}
+
+.site-layout-background {
+    background: #fff;
+}
+
+.buttonexitc {
+    position: fixed;
+    margin-left: 47cm;
+    margin-top: 20px;
+    width: 3cm;
+}
+.buttonbackc {
+    position: fixed;
+    margin-top: 20px;
+    margin-left: 2cm;
+    width: 3cm;
+}
+
+.stepbar{
+    margin-top: 2cm;
+}
+
+.createheading{
+    position: fixed;
+    margin-left: 20cm;
+    margin-top: 20px;
+}
+
+.createcard{
+    margin-left: 4.37cm;
+    margin-top: 1cm;
+    min-height: 15cm;
+}
+
+.thumbnailUpload{
+    margin-top: 1cm;
+}
+
+.previewUpload{
+    margin-top: 1cm;
+}
+
+.sectionIp{
+    width: 10cm;
+    margin-top: 5px;
+    margin-bottom: 1cm;
+}
+
+.videoIp{
+    width: 10cm;
+}
+
+.secdelbut{
+    margin-left: 3cm;
+    margin-top: 10px;
+    width: 8cm;
+}
+
+.secaddbut{
+    margin-top: 1cm;
+}
+
+.viddelbut{
+    margin-top: -1.5cm;
+    margin-left: 11cm;
+}
+
+.vidaddbut{
+    margin-left: 6cm;
+    margin-top: 1cm;
+}
+
+.sectionForm{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.sectionCard{
+    min-height: 6cm;
+    margin-left: 9cm;
+}
