@@ -5,6 +5,9 @@ import { Form, FormInput, FormGroup } from 'shards-react';
 import { Button } from 'shards-react';
 import { Tabs, Tab } from 'react-bootstrap';
 import Axios from "axios" ;
+import { Upload, message } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import ImgCrop from 'antd-img-crop';
 
 export default function SubscriberProfile() {
     const [firstName, setfirstName] = useState('First Name');
@@ -15,6 +18,44 @@ export default function SubscriberProfile() {
     const [twitterURL, settwitterURL] = useState('Twitter URL');
     const [higherEducation, sethigherEducation] = useState('Higher Education');
     const [areaOfInterest, setareaOfInterest] = useState('Area Of Interest');
+
+    const SubscriberProfilePic = () => {
+        const [fileList, setFileList] = useState([]);
+
+        const onChange = ({ fileList: newFileList }) => {
+            setFileList(newFileList);
+        };
+
+        const onPreview = async file => {
+            let src = file.url;
+            if (!src) {
+                src = await new Promise(resolve => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file.originFileObj);
+                    reader.onload = () => resolve(reader.result);
+                });
+            }
+            const image = new Image();
+            image.src = src;
+            const imgWindow = window.open(src);
+            imgWindow.document.write(image.outerHTML);
+        };
+
+        return (
+            <ImgCrop rotate>
+                <Upload
+                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    listType="picture-card"
+                    fileList={fileList}
+                    onChange={onChange}
+                    onPreview={onPreview}
+                >
+                    {fileList.length < 1 && '+ Upload'}
+                </Upload>
+            </ImgCrop>
+        );
+    };
+
 
 
     useEffect(() => {
@@ -41,6 +82,10 @@ export default function SubscriberProfile() {
             <div >
                 <Tabs id="profileTab" className="profiletab">
                     <Tab eventKey="personal" title="Personal Details" >
+                    <div className="ProfilePic">
+
+                        <SubscriberProfilePic />
+                        </div>
                         <Form className="subform" >
                             <FormGroup>
                                 <label htmlFor="#firstName">First Name</label>
