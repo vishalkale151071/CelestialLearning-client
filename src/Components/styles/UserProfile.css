@@ -7,3 +7,9 @@
 .profiletab ul > li > :hover {
     background-color: pink;
 }
+
+.ProfilePic{
+    position: absolute;
+    margin-left: 1cm;
+    margin-top: 2cm;
+}
