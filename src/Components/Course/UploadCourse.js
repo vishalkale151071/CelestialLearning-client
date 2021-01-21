@@ -141,7 +141,7 @@ export default function UploadCourse() {
 
     function onFormSubmit() {
 
-        axios.post('/author/create-course' ,{title , description , category , suitableFor , platform ,   prerequisite}).then(res => {
+        axios.post('/author/create-course' ,{title , description , category , suitableFor , platform ,  prerequisite}).then(res => {
             console.log(res.data.courseId)
             history.push(
                 {

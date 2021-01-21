@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Hls from 'hls.js';
+import { BsReverseLayoutSidebarInsetReverse } from 'react-icons/bs';
 
 export default class HLSSource extends Component {
   constructor(props, context) {
@@ -39,3 +40,4 @@ export default class HLSSource extends Component {
     );
   }
 }
+
