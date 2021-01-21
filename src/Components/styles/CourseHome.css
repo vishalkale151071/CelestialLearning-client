@@ -1,23 +1,49 @@
-.tpCard{
+.tpCard {
     margin-top: 1cm;
-    margin-left: 1cm;
+    margin-left: 1.7cm;
     min-height: 10cm;
+    z-index: 1;
 }
 
-.crdImg{
-    position: fixed;
+.tpCard1 {
+    margin-top: -3cm;
+    margin-left: 1.7cm;
+    margin-bottom: 1cm;
+    min-height: 20cm;
+}
+
+.crdImg {
     width: 4cm;
     height: 4cm;
     margin-left: 30px;
     margin-top: 1.6cm;
 }
 
-.crhmCT{
-    position: fixed;
+.crhmCT {
     margin-left: 5cm;
+    margin-top: -5cm;
 }
 
-.crhmBT{
+.crhmBT {
     margin-left: 5cm;
     margin-top: 4cm;
+}
+
+.CoHoCollaps {
+    margin-left: 29cm;
+    min-width: 16cm;
+}
+
+.topCard {
+    min-width: 31cm;
+}
+
+.footer1 {
+    clear: both;
+}
+
+.CoHoText{
+    margin-right: 5cm;
+    margin-top: 7cm;
+    max-width: 27cm;
 }
