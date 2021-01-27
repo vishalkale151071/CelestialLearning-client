@@ -13,8 +13,8 @@ export default function SubscriberDashboard({ history }) {
 
     useEffect(() => {
         Axios.post('/subscriber/profile').then(res => {
-            console.log('Project : ', res.data.message);
-            setName(res.data.message.firstName);
+            console.log('Project : ', res);
+            //setName(res.data.message.firstName);
         });
     }, []);
 
@@ -22,7 +22,7 @@ export default function SubscriberDashboard({ history }) {
         <div>
             <SubscriberHeader history={history} />
             <div className="all">
-                <h1>Welcome {name}!</h1>
+                <h1>Welcome </h1>
                 Use the Icon on the top right corner to Go to Profile/ Account Settings/ Log out!
                 <div className="main">
                 {cardTitles.map(title => (
