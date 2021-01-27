@@ -20,6 +20,7 @@
     "rc-footer": "^0.6.3",
     "rc-scrollbars": "^1.0.3",
     "react": "^17.0.1",
+    "react-avatar": "^3.9.7",
     "react-bootstrap": "^1.4.0",
     "react-cookie": "^4.0.3",
     "react-dom": "^17.0.1",

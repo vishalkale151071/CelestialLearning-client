@@ -47,8 +47,7 @@ export default function CourseView() {
                 </Panel>
             </Collapse>
         )
-    }
-    
+    }   
     return (
         <div>
             <SubscriberHeader />
@@ -73,7 +72,8 @@ export default function CourseView() {
                 <Scrollbars style={{ width: 525, height: 630 }}>
                     {
                         sections.map(section => <Section section = {section} key={section.sectionName}/>) 
-                    }                       
+                    } 
+                    
                 </Scrollbars>
             </div>
         </div>

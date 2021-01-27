@@ -16,6 +16,7 @@ export default function UploadCourse() {
     const [suitableFor, setSuitableFor] = useState('') 
     const [platform , setPlatform] = useState('')
     const [prerequisite, setPrerequisite] = useState('') 
+    
     // setup the step content
     let history = useHistory();
     const step1Content = (
