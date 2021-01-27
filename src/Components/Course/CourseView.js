@@ -16,7 +16,7 @@ export default function CourseView() {
     
     useEffect(() => {
         axios.post('/author/course/sections' , {
-            courseId : "60040871ca5848206b593c66"
+            courseId : "60097233b0e01b325b2ccfed"
         }).then(res => {
             res.data.sections.forEach((value , index) => {
                 setSections(oldArray => [...oldArray, {sectionName : value.sectionName , sectionVedios : value.video}])
