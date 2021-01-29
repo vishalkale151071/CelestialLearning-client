@@ -97,3 +97,15 @@
 .CrCoAddSectionBtn{
     margin-top: 1cm;
 }
+
+.ThumbnailIpButton{
+    position: absolute;
+    margin-left: -3cm;
+    margin-top: 1cm;
+}
+
+.ThumbnailSubmitButton{
+    position: absolute;
+    margin-top: 1cm;
+    margin-left: 5cm;
+}
