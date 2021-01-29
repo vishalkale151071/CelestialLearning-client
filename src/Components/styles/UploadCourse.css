@@ -36,7 +36,6 @@
 }
 ._3CDiP,
 ._2RWmX {
-    position: fixed;
     left: 0;
     bottom: 0;
     text-align: center;
@@ -46,11 +45,10 @@
 }
 
 ._hsN1w {
-    position: fixed;
     left: 0;
     bottom: 0;
     text-align: center;
-    margin-left: 46cm;
+    margin-left: 43cm;
     margin-bottom: 1cm;
     width: 4cm;
 }

@@ -11,10 +11,9 @@ export default function AuthorDashboard() {
     const [name, setName] = useState('');
 
     useEffect(() => {
-        // Axios.post('/author/profile').then(res => {
-        //     console.log('Project : ', res.data.message);
-        //     setName(res.data.message.firstName);
-        // });
+        Axios.post('/author/profile').then(res => {
+            setName(res.data.profiledata.firstName);
+        });
     }, []);
 
     return (
