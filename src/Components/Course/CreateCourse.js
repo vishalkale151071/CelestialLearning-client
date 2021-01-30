@@ -7,34 +7,39 @@ import '../styles/CreateCourse.css';
 import { Card, CardTitle, CardImg, CardBody } from 'shards-react';
 import { Image } from 'react-bootstrap';
 import 'antd/dist/antd.css';
-import {  message } from 'antd';
+import { message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 import { Slider, Switch } from 'antd';
 import axios from 'axios';
-import { Upload  } from 'antd';
+import { Upload } from 'antd';
 
 export default function CreateCourse() {
     let history = useHistory();
-    const [courseId , setCourseId] = useState('')
+    const [courseId, setCourseId] = useState('');
 
     useEffect(() => {
+<<<<<<< HEAD
          console.log("History : " , history.location.state.id)
+=======
+        console.log("History : " , history.location.state.id)
+>>>>>>> ae0adb246ac49f971a7b96081bd87e394db87a98
           if(history.location.state === undefined){
               history.push('/author/uploadcourse')
           }else{
             setCourseId(history.location.state.id)
           }
+<<<<<<< HEAD
           
+=======
+>>>>>>> ae0adb246ac49f971a7b96081bd87e394db87a98
     }, []);
 
     const ImageUpload = () => {
-        const [file , setFile] = useState('')
-        const [imagePreviewUrl , setImagePreview] = useState('')
+        const [file, setFile] = useState('');
+        const [imagePreviewUrl, setImagePreview] = useState('');
 
-        
-        
-        const _handleSubmit = (e) => {
+        const _handleSubmit = e => {
             e.preventDefault();
             // TODO: do something with -> this.state.file
             console.log('handle uploading-', file);
@@ -43,44 +48,41 @@ export default function CreateCourse() {
             // axios({
             //     method: 'post',
             //     url: '/subscriber/profileImageUpdate',
-            //     data: formData 
+            //     data: formData
             // })
+        };
 
-        }
-
-        const _handleImageChange = (e) => {
+        const _handleImageChange = e => {
             e.preventDefault();
 
             let reader = new FileReader();
             let file = e.target.files[0];
 
             reader.onloadend = () => {
-                setFile(file)
-                setImagePreview(reader.result)
-            }
-            reader.readAsDataURL(file)
-        }
+                setFile(file);
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        };
 
-        return(
-                <div >
-                <form onSubmit={(e)=>_handleSubmit(e)}>
-                <input  
-                    type="file" 
-                    onChange={(e)=>_handleImageChange(e)} 
-
-                    />
-                <button    
-                    type="submit" 
-                    onClick={(e)=>_handleSubmit(e)}>Upload Image</button>
+        return (
+            <div>
+                <form onSubmit={e => _handleSubmit(e)}>
+                    <input className="ThumbnailIpButton" type="file" onChange={e => _handleImageChange(e)} />
+                    <Button className="ThumbnailSubmitButton" type="submit" onClick={e => _handleSubmit(e)}>
+                        Upload Image
+                    </Button>
                 </form>
-                <div style ={{textAlign : "center" , height : "100px" , width:"100px", border : "5px solid gray"}}>
-                    {
-                    imagePreviewUrl ? <img style={{width : "100%" , height : "100%"}}src={imagePreviewUrl} /> : <div >Please select an Image for Preview</div>
-                    }
+                <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
+                    {imagePreviewUrl ? (
+                        <img style={{ width: '100%', height: '100%' }} src={imagePreviewUrl} />
+                    ) : (
+                        <div>Please select an Image for Preview</div>
+                    )}
                 </div>
             </div>
-        )
-    }
+        );
+    };
 
     // Course Thumbnail
     const CourseThumbnail = () => {
@@ -135,13 +137,10 @@ export default function CreateCourse() {
                 message.success(`${info.file.name} file uploaded successfully`);
             } else if (info.file.status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
-                console.log("error ; " , info)
-
+                console.log('error ; ', info);
             }
         }
     };
-
-    
 
     // Price Slider
     class PriceSlider extends React.Component {
@@ -162,10 +161,6 @@ export default function CreateCourse() {
             );
         }
     }
-
-    
-
-    
 
     function Section({ sectionId }) {
         const [section, createSection] = useState(true);
@@ -216,7 +211,7 @@ export default function CreateCourse() {
                 <Card className="CrCoCard">
                     <CardBody>
                         <CardTitle>
-                            <h4>Section Name</h4>
+                            <h4>Section Name here</h4>
                         </CardTitle>
                         {fields.map((field, idx) => {
                             return (
@@ -267,11 +262,16 @@ export default function CreateCourse() {
 
         const saveSection = i => {
             setSectionCount(sectionCount + 1);
-            axios.post('/author/create-section', {
+            axios
+                .post('/author/create-section', {
                     number: sectionCount,
                     sectionName: name,
                     courseId: `${history.location.state.id}`
+<<<<<<< HEAD
                     //courseId: "60143a128da9340a70d2e03d"
+=======
+                    //courseId: '6006db170db0231310bd4728'
+>>>>>>> ae0adb246ac49f971a7b96081bd87e394db87a98
                 })
                 .then(res => {
                     const values = [...sections];
@@ -280,8 +280,9 @@ export default function CreateCourse() {
                     values[i].sectionName = name;
                     values[i].sectionId = `${res.data.sectionId}`;
                     setSections(values);
-                }).catch(err => {
-                    console.log("Error : " , err)
+                })
+                .catch(err => {
+                    console.log('Error : ', err);
                 });
         };
         const addSection = () => {
@@ -317,12 +318,9 @@ export default function CreateCourse() {
                 <Button className="CrCoAddSectionBtn" theme="success" type="button" onClick={addSection}>
                     Add Section
                 </Button>
-                
             </div>
         );
     }
-
-   
 
     const step1Content = (
         <div>
@@ -356,7 +354,6 @@ export default function CreateCourse() {
                             <Upload {...previewprops}>
                                 <Button icon={<UploadOutlined />}>Upload</Button>
                             </Upload>
-                          
                         </div>
                         <Form>
                             <FormGroup></FormGroup>

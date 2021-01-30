@@ -9,18 +9,17 @@ import { Card, CardTitle, CardImg, CardBody } from 'shards-react';
 import axios from 'axios';
 
 export default function UploadCourse() {
+    const [title, setTitle] = useState('Course Name');
+    const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('');
+    const [suitableFor, setSuitableFor] = useState('');
+    const [platform, setPlatform] = useState('');
+    const [prerequisite, setPrerequisite] = useState('');
 
-    const [title, setTitle] = useState('Course Name') 
-    const [description, setDescription] = useState('') 
-    const [category , setCategory] = useState('') 
-    const [suitableFor, setSuitableFor] = useState('') 
-    const [platform , setPlatform] = useState('')
-    const [prerequisite, setPrerequisite] = useState('') 
-    
     // setup the step content
     let history = useHistory();
     const step1Content = (
-        <div> 
+        <div>
             <Card className="uploadcard" style={{ maxWidth: '1500px' }}>
                 <CardBody>
                     <CardTitle className="institle">Instructions</CardTitle>
@@ -41,13 +40,24 @@ export default function UploadCourse() {
                                     What would you like to name your course?
                                 </label>
 
-                                <FormInput type="text" id="title"  onChange = {(e) => setTitle(e.target.value)} placeholder="Enter Something.." ></FormInput>
+                                <FormInput
+                                    type="text"
+                                    id="title"
+                                    onChange={e => setTitle(e.target.value)}
+                                    placeholder="Enter Something.."
+                                ></FormInput>
                             </FormGroup>
                             <FormGroup>
                                 <label className="labelstep2" htmlFor="desc">
                                     Give a short Description about your course!
                                 </label>
-                                <FormTextarea rows="5" type="text" id="desc" onChange = {(e) => setDescription(e.target.value)} placeholder="Enter Something.." />
+                                <FormTextarea
+                                    rows="5"
+                                    type="text"
+                                    id="desc"
+                                    onChange={e => setDescription(e.target.value)}
+                                    placeholder="Enter Something.."
+                                />
                             </FormGroup>
                         </Form>
                     </div>
@@ -55,7 +65,7 @@ export default function UploadCourse() {
             </Card>
         </div>
     );
-    
+
     const step3Content = (
         <div>
             <Card className="uploadcard" style={{ maxWidth: '1500px' }}>
@@ -64,16 +74,12 @@ export default function UploadCourse() {
                         <label className="labelstep3" htmlFor="dropdown">
                             Where would you categorize your course?
                         </label>
-                        <Dropdown className="createdropdown"
-                            
-                        >
+                        <Dropdown className="createdropdown">
                             <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
                                 Choose
                             </Dropdown.Toggle>
-                            <input type = "text" onChange = {(e) => setCategory(e.target.value)}/>
-                            <Dropdown.Menu
-                            
-                            >
+                            <input type="text" onChange={e => setCategory(e.target.value)} />
+                            <Dropdown.Menu>
                                 <Dropdown.Item href="#Development">Development</Dropdown.Item>
                                 <Dropdown.Item href="#Business">Business</Dropdown.Item>
                                 <Dropdown.Item href="#Finance&Accounting">Finance & Accounting</Dropdown.Item>
@@ -97,25 +103,40 @@ export default function UploadCourse() {
                             <label className="labelstep4" htmlFor="suit">
                                 For whom this course will be suitable for?
                             </label>
-                            <FormInput type="suit" id="suit" 
-                             onChange = {(e) => {setSuitableFor(e.target.value)}}
-                            placeholder="Enter Something.." />
+                            <FormInput
+                                type="suit"
+                                id="suit"
+                                onChange={e => {
+                                    setSuitableFor(e.target.value);
+                                }}
+                                placeholder="Enter Something.."
+                            />
                         </FormGroup>
                         <FormGroup>
                             <label className="labelstep4" htmlFor="platform">
                                 Platform?
                             </label>
-                            <FormInput type="text" id="platform" 
-                            onChange = {(e) => {setPlatform(e.target.value)}}
-                            placeholder="Enter Something.." />
+                            <FormInput
+                                type="text"
+                                id="platform"
+                                onChange={e => {
+                                    setPlatform(e.target.value);
+                                }}
+                                placeholder="Enter Something.."
+                            />
                         </FormGroup>
                         <FormGroup>
                             <label className="labelstep4" htmlFor="prerequisites">
                                 Any prerequisites?
                             </label>
-                            <FormInput type="suit" id="prerequisites" 
-                            onChange = {(e) => {setPrerequisite(e.target.value)}}
-                            placeholder="Enter Something.." />
+                            <FormInput
+                                type="suit"
+                                id="prerequisites"
+                                onChange={e => {
+                                    setPrerequisite(e.target.value);
+                                }}
+                                placeholder="Enter Something.."
+                            />
                         </FormGroup>
                     </Form>
                 </div>
@@ -141,22 +162,16 @@ export default function UploadCourse() {
     }
 
     function onFormSubmit() {
+        axios.post('/author/create-course', { title, description, category, suitableFor, platform, prerequisite }).then(res => {
+            console.log(res.data.courseId);
+            history.push({
+                pathname: '/course/create',
+                state: { id: res.data.courseId }
+            });
+        });
 
-        axios.post('/author/create-course' ,{title , description , category , suitableFor , platform ,  prerequisite}).then(res => {
-            console.log(res.data.courseId)
-            history.push(
-                {
-                    pathname: '/course/create',
-                    state: { id: res.data.courseId}
-                }
-            );
-        })
-        
-       //
+        //
     }
-
-    
-    
 
     return (
         <div>
@@ -195,7 +210,6 @@ export default function UploadCourse() {
                     }
                 ]}
             />
-            ;
         </div>
     );
 }
