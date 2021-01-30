@@ -19,12 +19,12 @@ export default function CreateCourse() {
     const [courseId , setCourseId] = useState('')
 
     useEffect(() => {
-         // console.log("History : " , history.location.state.id)
-        //   if(history.location.state === undefined){
-        //       history.push('/author/uploadcourse')
-        //   }else{
-        //     setCourseId(history.location.state.id)
-        //   }
+         console.log("History : " , history.location.state.id)
+          if(history.location.state === undefined){
+              history.push('/author/uploadcourse')
+          }else{
+            setCourseId(history.location.state.id)
+          }
           
     }, []);
 
@@ -270,8 +270,8 @@ export default function CreateCourse() {
             axios.post('/author/create-section', {
                     number: sectionCount,
                     sectionName: name,
-                    //courseId: `${history.location.state.id}`
-                    courseId: "60040cd8ca5848206b593c67"
+                    courseId: `${history.location.state.id}`
+                    //courseId: "60143a128da9340a70d2e03d"
                 })
                 .then(res => {
                     const values = [...sections];
