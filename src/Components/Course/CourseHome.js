@@ -1,34 +1,170 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import '../styles/CourseHome.css';
 import { useParams } from 'react-router';
 import Header from '../Utils/Header';
-import { Card, CardHeader, CardTitle, CardBody, CardFooter, CardImg, Button } from 'shards-react';
-import logo from '../assets/CEH.jpg';
+import { Card, CardHeader, CardTitle, CardBody, CardFooter, CardImg, Button, Container, Row, Col } from 'shards-react';
+
+import Footer1 from '../Utils/Footer';
+import { Collapse } from 'antd';
+import { Divider } from 'semantic-ui-react';
+import HLSSource from '../Utils/HLSSource';
+import Axios from 'axios';
+import { Scrollbars } from 'rc-scrollbars';
+import { Player, ControlBar, ForwardControl, ReplayControl } from 'video-react';
 
 export default function CourseHome() {
-    const history = useHistory();
-    let { title } = useParams();
-    let description =
-        'Learn Ethical Hacking + Penetration Testing! Use real techniques by black hat hackers then learn to defend against them!';
+    
+    const [title,setTitle] = useState('');
+    const [price,setPrice] = useState(0);
+    const [suitableFor,setSuitableFor] = useState('');
+    const [description,setDescription] = useState('');
+    const [prerequisite,setPrerequisite] = useState([]);
+    const [authorName,setAuthorName] = useState('');
+    const [category,setCategory] = useState('');
+    const [courseThumbnail,setCourseThumbnail] = useState('');
+    const [coursePreview,setCoursePreview] = useState('');
+    const [sectionData , setSections] = useState([])        
 
-    const butclk = (title) => {
-        history.push(`/course/view/${title}`);
-    };
+    let { courseTitle } = useParams();
+    
+    useEffect(() => {
 
+        Axios.post('/subscriber/courseHome',
+        {
+            courseTitle: courseTitle
+        }).then(res => {
+            console.log('Project : ', res.data);
+            setTitle(res.data.title);
+            setPrice(res.data.price);
+            setSuitableFor(res.data.suitableFor);
+            setDescription(res.data.description);
+            setPrerequisite(res.data.prerequisite);
+            setAuthorName(res.data.authorName);
+            setCategory(res.data.category);
+            setCourseThumbnail(res.data.courseThumbnail);
+            setCoursePreview(res.data.coursePreview);
+            res.data.sectionData.forEach((value , index) => {
+                setSections(oldArray => [...oldArray, {sectionName : value.sectionName , sectionNumber : value.sectionNumber}])
+            })
+        }); 
+    }, []);
+    
+    const { Panel } = Collapse;
+    let itemList = [];
+    
+    prerequisite.map((item,index)=>{
+        itemList.push( <li key={index}>{item}</li>)
+      })
+    
+    console.log(sectionData)
+    
+    const Section = ({section}) => {
+        const { Panel } = Collapse;
+
+        return(
+            
+            <Collapse>
+                 <Panel header = {section.sectionName} key = {section.sectionNumber} >
+                {   
+                }
+                </Panel>
+            </Collapse>
+        )
+    }   
     return (
         <div>
             <Header />
             <div className="topCard">
-                <Card className="tpCard" style={{ maxWidth: '1500px' }}>
-                    <CardHeader></CardHeader>
-                    <CardImg className="crdImg" src={logo} />
+                <Card className="tpCard" style={{ maxWidth: '1800px' }}>
+                    <CardImg className="crdImg" src={courseThumbnail} />
                     <CardBody>
                         <CardTitle className="crhmCT">{title}</CardTitle>
-                        <Button className="crhmBT" onClick={() => butclk(title)}>View</Button>
+                        <div className="SmallDesc">
+                            <p><h6>Price: {price}</h6></p>
+                            <p>Author: {authorName}</p>
+                            <p>Category: {category}</p>
+                            <p>Language: English</p>
+                        </div>
+                        <Button className="crhmBT" >
+                            View
+                        </Button>
+                        <Button className="WishlistButton">Wishlist</Button>
+                        <Button className="ShareButton">Share</Button>
                     </CardBody>
-                    <CardFooter></CardFooter>
                 </Card>
+                <div>
+                    <Card className="tpCard1" style={{ maxWidth: '1800px' }}>
+                        <CardBody>
+                            <div className="TextDescription">
+                                <h2>Description:</h2>
+                                {description}
+                                <div className="TextSuitableFor">
+                                    <h3>Suitable For:</h3>
+                                    {suitableFor}
+                                </div>
+                            </div>
+                            <h2 className="H2Heading">Course Preview:</h2>
+                            <div className="CRHMVidPlayerDiv">
+                                <Player className="CRHMvidPlayer"
+                                
+                                    src = {coursePreview}
+                                >
+                                    {/* <HLSSource
+                                        isVideoChild
+                                        src="https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8"
+                                    /> */}
+                                    <ControlBar className="ctrlbar" autoHide={true}>
+                                        <ReplayControl seconds={10} order={2.2} />
+                                        <ForwardControl seconds={10} order={3.2} />
+                                    </ControlBar>
+                                </Player>
+                            </div>
+                            <h2 className="H2Heading">What You'll Learn:</h2>
+
+                            <div className="TextWhatLearn">
+                                <Container>
+                                    <Row>
+                                        <Col>
+                                            <ul>
+                                                <li>Spf/Dmarc</li>
+                                                <li>Cookie Issues</li>
+                                                <li>XSS</li>
+                                                <li>SQLi</li>
+                                            </ul>
+                                        </Col>
+
+                                        <Col>
+                                            <ul>
+                                                <li>IDOR</li>
+                                                <li>Authentication Bypass</li>
+                                                <li>Rate Limiting</li>
+                                                <li>RCE</li>
+                                            </ul>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </div>
+                            <h2 className="H2Heading">PreRequisites:</h2>
+                            <div className="PrereqText">
+                                {itemList}
+                            </div>
+                        </CardBody>
+                        <CardFooter></CardFooter>
+                    </Card>
+                </div>
+                <h3 className="ContentsHeading">Contents</h3>
+                 <Collapse className="CoHoCollaps">
+                    <Scrollbars style={{ width: 525, height: 630 }}>
+                        {
+                            sectionData.map(section => <Section section = {section} key={section.sectionName}/>) 
+                        }     
+                    </Scrollbars>
+                </Collapse>
+            </div>
+
+            <div>
+                <Footer1 />
             </div>
         </div>
     );

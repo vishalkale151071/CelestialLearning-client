@@ -4,9 +4,13 @@ import '../styles/UserProfile.css';
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Button } from 'shards-react';
 import { Tabs, Tab } from 'react-bootstrap';
-import Axios from 'axios'
+import axios from 'axios';
+import { Upload, message } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import ImgCrop from 'antd-img-crop';
 
 export default function AuthorProfile() {
+    
     const [firstName, setfirstName] = useState('First Name');
     const [middleName, setmiddleName] = useState('Middle Name');
     const [lastName, setlastName] = useState('Last Name');
@@ -16,21 +20,79 @@ export default function AuthorProfile() {
     const [qualification, setqualification] = useState('Qaulification');
     const [biography, setBiography] = useState('Biography ');
 
+    
 
-    useEffect( () => {
-        Axios.post('/author/profile').then(res => {
+    useEffect(() => {
+        axios.post('/author/profile').then(res => {
             //console.log("Project : " , res.data)
-            setfirstName(res.data.message.firstName)
-            setmiddleName(res.data.message.middleName)
-            setlastName(res.data.message.lastName)
-            setphNum(res.data.message.phNum)
-            setlinkedInURL(res.data.message.linkedInURL)
-            settwitterURL(res.data.message.twitterURL)
-            setqualification(res.data.message.qualification)
-            setBiography(res.data.message.biography)
-        })
+            setfirstName(res.data.profiledata.firstName);
+            setmiddleName(res.data.profiledata.middleName);
+            setlastName(res.data.profiledata.lastName);
+            setphNum(res.data.profiledata.phNum);
+            setlinkedInURL(res.data.profiledata.linkedInURL);
+            settwitterURL(res.data.profiledata.twitterURL);
+            setqualification(res.data.profiledata.qualification);
+            setBiography(res.data.profiledata.biography);
+        });
+    }, []);
 
-   } , [])
+    const ImageUpload = () => {
+        const [file , setFile] = useState('')
+        const [imagePreviewUrl , setImagePreview] = useState('')
+
+        useEffect(() => {
+            axios.post('/author/profileImageView').then(res => {
+                setImagePreview(res.data.url)
+            })
+        } , [])
+        
+        const _handleSubmit = (e) => {
+            e.preventDefault();
+            // TODO: do something with -> this.state.file
+            console.log('handle uploading-', file);
+            const formData = new FormData();
+            formData.append('image', file);
+            axios({
+                method: 'post',
+                url: '/author/profileImageUpdate',
+                data: formData 
+            })
+        }
+
+        const _handleImageChange = (e) => {
+            e.preventDefault();
+
+            let reader = new FileReader();
+            let file = e.target.files[0];
+
+            reader.onloadend = () => {
+                setFile(file)
+                setImagePreview(reader.result)
+            }
+            reader.readAsDataURL(file)
+        }
+
+        return(
+                <div >
+                <form onSubmit={(e)=>_handleSubmit(e)}>
+                <input  
+                    type="file" 
+                    onChange={(e)=>_handleImageChange(e)} 
+
+                    />
+                <button    
+                    type="submit" 
+                    onClick={(e)=>_handleSubmit(e)}>Upload Image</button>
+                </form>
+                <div style ={{textAlign : "center" , height : "100px" , width:"100px", border : "5px solid gray"}}>
+                    {
+                    imagePreviewUrl ? <img style={{width : "100%" , height : "100%"}}src={imagePreviewUrl} /> : <div >Please select an Image for Preview</div>
+                    }
+                </div>
+            </div>
+        )
+    }
+
 
     return (
         <div>
@@ -38,6 +100,9 @@ export default function AuthorProfile() {
             <div className="profiletab">
                 <Tabs id="profileTab">
                     <Tab eventKey="personal" title="Personal Details">
+                        <div className="ProfilePic">
+                            <ImageUpload />
+                        </div>
                         <Form className="subform">
                             <FormGroup>
                                 <label htmlFor="#firstName">First Name</label>
@@ -79,13 +144,23 @@ export default function AuthorProfile() {
                                     }}
                                 />
                             </FormGroup>
-                            <Button theme="info"
-                                onClick = {() => {
-                                    Axios.post('/author/update' , { firstName, middleName, lastName, phNum, linkedInURL, twitterURL, qualification, biography }).then(res => {
-
-                                    })
+                            <Button
+                                theme="info"
+                                onClick={() => {
+                                    axios.post('/author/update', {
+                                        firstName,
+                                        middleName,
+                                        lastName,
+                                        phNum,
+                                        linkedInURL,
+                                        twitterURL,
+                                        qualification,
+                                        biography
+                                    }).then(res => {});
                                 }}
-                            >Update</Button>
+                            >
+                                Update
+                            </Button>
                         </Form>
                     </Tab>
                     <Tab eventKey="social" title="Social Media Handles">
@@ -110,13 +185,23 @@ export default function AuthorProfile() {
                                     }}
                                 />
                             </FormGroup>
-                            <Button theme="info"
-                                onClick = {() => {
-                                    Axios.post('/author/update' , { firstName, middleName, lastName, phNum, linkedInURL, twitterURL, qualification, biography }).then(res => {
-
-                                    })
+                            <Button
+                                theme="info"
+                                onClick={() => {
+                                    axios.post('/author/update', {
+                                        firstName,
+                                        middleName,
+                                        lastName,
+                                        phNum,
+                                        linkedInURL,
+                                        twitterURL,
+                                        qualification,
+                                        biography
+                                    }).then(res => {});
                                 }}
-                            >Update</Button>
+                            >
+                                Update
+                            </Button>
                         </Form>
                     </Tab>
                     <Tab eventKey="education" title="Education">
@@ -141,14 +226,23 @@ export default function AuthorProfile() {
                                     }}
                                 />
                             </FormGroup>
-                            <Button theme="info"
-                            
-                            onClick = {() => {
-                                Axios.post('/author/update' , { firstName, middleName, lastName, phNum, linkedInURL, twitterURL, qualification, biography }).then(res => {
-
-                                })
-                            }}
-                            >Update</Button>
+                            <Button
+                                theme="info"
+                                onClick={() => {
+                                    axios.post('/author/update', {
+                                        firstName,
+                                        middleName,
+                                        lastName,
+                                        phNum,
+                                        linkedInURL,
+                                        twitterURL,
+                                        qualification,
+                                        biography
+                                    }).then(res => {});
+                                }}
+                            >
+                                Update
+                            </Button>
                         </Form>
                     </Tab>
                 </Tabs>

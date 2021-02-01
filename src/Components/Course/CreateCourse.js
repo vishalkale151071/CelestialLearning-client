@@ -7,21 +7,95 @@ import '../styles/CreateCourse.css';
 import { Card, CardTitle, CardImg, CardBody } from 'shards-react';
 import { Image } from 'react-bootstrap';
 import 'antd/dist/antd.css';
-import { Upload, message } from 'antd';
+import {  message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 import { Slider, Switch } from 'antd';
 import axios from 'axios';
+import { Upload  } from 'antd';
 
 export default function CreateCourse() {
-
-
-    
     let history = useHistory();
+    const [courseId , setCourseId] = useState('')
 
     useEffect(() => {
-      //  console.log("History : " , history.location.state.id) 
-    },[])
+         // console.log("History : " , history.location.state.id)
+        //   if(history.location.state === undefined){
+        //       history.push('/author/uploadcourse')
+        //   }else{
+        //     setCourseId(history.location.state.id)
+        //   }
+    }, []);
+
+    const PreviewVedioUpload = () => {
+        const [vedioFile , setVedioFile] = useState(null)
+        function handelFileChange(e) {
+            setVedioFile(e.target.files[0])
+        }
+        function handleSubmit() {
+            const formData = new FormData()
+            formData.append('image', vedioFile);
+            formData.append('courseId', '60040871ca5848206b593c66'); //Inserting course ID maunually    
+            axios({
+                method: 'post',
+                url: '/author/uploadPreview',
+                data: formData 
+            })
+        }
+        return(
+            <div>
+                <input type = 'file' onChange = {e => handelFileChange(e)}/>
+                <br />
+                <button onClick = {handleSubmit}>Upload</button>
+            </div>
+        )
+    }
+
+    const ImageUpload = () => {
+        const [file , setFile] = useState('')
+        const [imagePreviewUrl , setImagePreview] = useState('')
+        const _handleSubmit = (e) => {
+            e.preventDefault();
+            console.log('handle uploading-', file);
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('courseId' , '60040871ca5848206b593c66' ) // Inserting course Id manually 
+            axios({
+                method: 'post',
+                url: '/author/uploadThumbnail',
+                data: formData 
+            })
+        }
+        const _handleImageChange = (e) => {
+            e.preventDefault();
+            let reader = new FileReader();
+            let file = e.target.files[0];
+            reader.onloadend = () => {
+                setFile(file)
+                setImagePreview(reader.result)
+            }
+            reader.readAsDataURL(file)
+        }
+        return(
+                <div >
+                <form onSubmit={(e)=>_handleSubmit(e)}>
+                <input  
+                    type="file" 
+                    onChange={(e)=>_handleImageChange(e)} 
+
+                    />
+                <button    
+                    type="submit" 
+                    onClick={(e)=>_handleSubmit(e)}>Upload Image</button>
+                </form>
+                <div style ={{textAlign : "center" , height : "100px" , width:"100px", border : "5px solid gray"}}>
+                    {
+                    imagePreviewUrl ? <img style={{width : "100%" , height : "100%"}}src={imagePreviewUrl} /> : <div >Please select an Image for Preview</div>
+                    }
+                </div>
+            </div>
+        )
+    }
 
     // Course Thumbnail
     const CourseThumbnail = () => {
@@ -64,7 +138,7 @@ export default function CreateCourse() {
     // Preview Video
     const previewprops = {
         name: 'file',
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        action: 'author/uploadThumbnailPreview',
         headers: {
             authorization: 'authorization-text'
         },
@@ -76,9 +150,13 @@ export default function CreateCourse() {
                 message.success(`${info.file.name} file uploaded successfully`);
             } else if (info.file.status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
+                console.log("error ; " , info)
+
             }
         }
     };
+
+    
 
     // Price Slider
     class PriceSlider extends React.Component {
@@ -100,129 +178,17 @@ export default function CreateCourse() {
         }
     }
 
-    // Section and Video Inputs
-    function SecIp() {
-        const [secName , setSecName] = useState('Name')
-        const [section, setFields] = useState([{ value: null }]);   
-        console.log(section);
-        function handleChange(i, event) {
-            const values = [...section];
-            values[i].value = event.target.value;
-            setFields(values);
-        }
+    function Section({ sectionId }) {
+        const [section, createSection] = useState(true);
+        const [sectionName, setSectionName] = useState('');
 
-        function handleAdd() {
-            const values = [...section];
-            values.push({ value: null });
-            setFields(values);
-        }
+        console.log('$$$$$$$$$$$$ Secid : ', sectionId);
 
-        
-
-        function handleRemove(i) {
-            const values = [...section];
-            values.splice(i, 1);
-            setFields(values);
-        }
-
-        return (
-            <div className="App">
-                {section.map((field, idx) => {
-                    return (
-                        <div className="sectionForm" key={`${field}-${idx}`}>
-                            <Card className="sectionCard" style={{ maxWidth: '600px' }}>
-                                <CardBody>
-
-                                   
-                                    <FormInput
-                                        className="sectionIp"
-                                        type="text"
-                                        placeholder="Enter Section Name"
-                                        value={secName || ''}
-                                        onChange={e => handleChange(idx, e)}
-                                     />
-                                    <VidIp />
-                                    <Button theme="danger" className="secdelbut" type="button" onClick={() => handleRemove(idx)}>
-                                        Del Sec
-                                    </Button>
-                                </CardBody>
-                            </Card>
-                        </div>
-                    );
-                })}
-                <Button theme="success" className="secaddbut" type="button" onClick={() => handleAdd()}>
-                    Add Sec
-                </Button>
-            </div>
-        );
-    }
-
-    // Video IP
-    function VidIp() {          
-        const [fields, setFields] = useState([{ value: null }]);
-        const [file , setFile] = useState()
-        console.log(fields);
-        function handleChange(i, event) {
-            const values = [...fields];
-            values[i].value = event.target.value;
-            setFields(values);
-        }
+        const [fields, setFields] = useState([{ lectureName: '', lectureFile: null }]);
 
         function handleAdd() {
             const values = [...fields];
-            values.push({ value: null });
-            setFields(values);
-        }
-
-        function handleRemove(i) {
-            const values = [...fields];
-            values.splice(i, 1);
-            setFields(values);
-        }
-
-        return (
-            <div className="App">
-                {fields.map((field, idx) => {
-                    return (
-                        <div key={`${field}-${idx}`}>
-                            <FormInput
-                                className="videoIp"
-                                type="text"
-                                placeholder="Enter Lecture Name and attach file"
-                                value={field.value || ''}
-        
-                            />
-                            <FormInput
-                                className="videoIp"
-                                type="file"
-                                placeholder="Upload File"
-                                
-                            />
-                            <Button theme="danger" className="viddelbut" type="button" onClick={() => handleRemove(idx)}>
-                                Delete Lecture
-                            </Button>
-                        </div>
-                    );
-                })}
-                <Button theme="success" className="vidaddbut" type="button" onClick={() => handleAdd()}>
-                    Add Lecture
-                </Button>
-            </div>
-        );
-    }
-
-    function Section({sectionId}){
-         const [section , createSection] = useState(true)
-         const [sectionName , setSectionName] = useState('')
-
-         console.log("$$$$$$$$$$$$ Secid : " , sectionId)
-         
-
-         const [fields, setFields] = useState([{ lectureName: '' , lectureFile : null }]);
-
-         function handleAdd() {
-            const values = [...fields];
-            values.push({ lectureName: '' , lectureFile : null });
+            values.push({ lectureName: '', lectureFile: null });
             setFields(values);
         }
 
@@ -243,213 +209,132 @@ export default function CreateCourse() {
             setFields(values);
         }
 
-        function saveLecture(i){
+        function saveLecture(i) {
             const values = [...fields];
             const formData = new FormData();
-            formData.append('image', values[i].lectureFile)
-            formData.append('vedioName', `${values[i].lectureName}`) 
-            formData.append('sectionId', `${sectionId}`)
+            formData.append('image', values[i].lectureFile);
+            formData.append('vedioName', `${values[i].lectureName}`);
+            formData.append('sectionId', `${sectionId}`);
             axios({
-                method: 'post', 
+                method: 'post',
                 url: '/author/add-video',
-                data: formData,
-            })
+                data: formData
+            });
         }
-    
-        return(
 
-            <div style={{border: "2px solid red"}}>
-                {fields.map((field, idx) => {
-                    return (
-                        <div key={`${field}-${idx}`}>
+        return (
+            <div>
+                <Card className="CrCoCard">
+                    <CardBody>
+                        <CardTitle>
+                            <h4>Section Name</h4>
+                        </CardTitle>
+                        {fields.map((field, idx) => {
+                            return (
+                                <div key={`${field}-${idx}`}>
+                                    <FormInput
+                                        className="videoIp"
+                                        type="text"
+                                        placeholder="Enter Lecture Name and attach file"
+                                        value={field.lectureName || ''}
+                                        onChange={e => handleNameChange(idx, e)}
+                                    />
+                                    <FormInput
+                                        className="videoIp"
+                                        type="file"
+                                        placeholder="Upload File"
+                                        onChange={e => handleFileChange(idx, e)}
+                                    />
+                                    <Button theme="success" className="CrCoSaveLectureBut" type="button" onClick={() => saveLecture(idx)}>
+                                        Save Lecture
+                                    </Button>
+                                </div>
+                            );
+                        })}
+                        <Button theme="success" className="CrCoAddLectureBut" type="button" onClick={() => handleAdd()}>
+                            Add Lecture
+                        </Button>
+                        <Button
+                            theme="success"
+                            className="CrCoShowStateBut"
+                            type="button"
+                            onClick={() => {
+                                console.log('Feilds : ', fields);
+                            }}
+                        >
+                            Show State
+                        </Button>
+                    </CardBody>
+                </Card>
+            </div>
+        );
+    }
+
+    function SectionContainer() {
+        //  const courseId = '60040cd8ca5848206b593c67'
+        const [sections, setSections] = useState([{ sectionNumber: 0, sectionSaved: false, sectionName: '', sectionId: '' }]);
+        const [sectionCount, setSectionCount] = useState(0);
+        const [name, setName] = useState('');
+
+        const saveSection = i => {
+            setSectionCount(sectionCount + 1);
+            axios.post('/author/create-section', {
+                    number: sectionCount,
+                    sectionName: name,
+                    //courseId: `${history.location.state.id}`
+                    courseId: "60040cd8ca5848206b593c67"
+                })
+                .then(res => {
+                    const values = [...sections];
+                    values[i].sectionNumber = sectionCount;
+                    values[i].sectionSaved = true;
+                    values[i].sectionName = name;
+                    values[i].sectionId = `${res.data.sectionId}`;
+                    setSections(values);
+                }).catch(err => {
+                    console.log("Error : " , err)
+                });
+        };
+        const addSection = () => {
+            setName('');
+            const values = [...sections];
+            values.push({ sectionNumber: 0, sectionSaved: false, sectionName: '', sectionId: '' });
+            setSections(values);
+        };
+
+        return (
+            <div>
+                {sections.map((section, idx) => {
+                    return !section.sectionSaved ? (
+                        <div>
                             <FormInput
                                 className="videoIp"
                                 type="text"
-                                placeholder="Enter Lecture Name and attach file"
-                                value = {field.lectureName || ''}
-                                onChange = {(e) => handleNameChange(idx,e)}
+                                placeholder="Enter Section Name"
+                                value={name || ''}
+                                onChange={e => setName(e.target.value)}
                             />
-                            <FormInput
-                                className="videoIp"
-                                type="file"
-                                placeholder="Upload File"
-                                onChange = {(e) => handleFileChange(idx,e)}   
-                            />
-                            <Button theme="success" className="viddelbut" type="button" onClick = {() => saveLecture(idx)}>
-                                Save Lecture
+
+                            <Button theme="success" className="CrCoSaveSecBut" type="button" onClick={() => saveSection(idx)}>
+                                Save Section
                             </Button>
+                        </div>
+                    ) : (
+                        <div>
+                            <Section sectionId={section.sectionId} />
                         </div>
                     );
                 })}
-                 <Button theme="success" className="vidaddbut" type="button" onClick={() => handleAdd()}>
-                    Add Lecture
+                <Button className="CrCoAddSectionBtn" theme="success" type="button" onClick={addSection}>
+                    Add Section
                 </Button>
-                <Button theme="success" className="vidaddbut" type="button" onClick={() => {
-                    console.log("Feilds : " , fields)
-                }}>
-                    Show State
-                </Button>
-
+                
             </div>
-        )
+        );
     }
 
-    function SectionContainer(){
+   
 
-      //  const courseId = '60040cd8ca5848206b593c67'
-        const [sections, setSections] = useState([{ sectionNumber : 0 , sectionSaved : false , sectionName: '' , sectionId : '' }]);
-        const [sectionCount , setSectionCount] = useState(0)
-        const [name , setName] = useState('')
-
-        const saveSection = (i) => {
-
-            setSectionCount(sectionCount + 1)
-            axios.post('/author/create-section' , {
-                number : sectionCount ,
-                sectionName : name ,
-                courseId : '6006db170db0231310bd4728'
-            }).then(res => {
-                const values = [...sections];
-                values[i].sectionNumber = sectionCount
-                values[i].sectionSaved = true
-                values[i].sectionName = name
-                values[i].sectionId = `${res.data.sectionId}`
-                setSections(values)
-            })
-            
-        }
-        const addSection = () => {
-            setName('')
-            const values = [...sections];
-            values.push({ sectionNumber : 0 , sectionSaved : false , sectionName: '' , sectionId : '' });
-            setSections(values)
-        }
-
-        return(
-            <div>
-                {sections.map((section, idx) => {
-                    return (
-                       !section.sectionSaved ? 
-                            <div>
-                                <FormInput
-                                    className="videoIp"
-                                    type="text"
-                                    placeholder="Enter Section Name"
-                                    value = {name || ''}
-                                    onChange = {(e) => setName(e.target.value)}
-                                    
-                                />
-                            
-                                <Button theme="success" className="viddelbut" type="button" 
-                                    onClick = {() => saveSection(idx)}
-                                >
-                                    Save Section
-                                </Button>
-                            </div> 
-                       : 
-                            <div >
-                                <Section sectionId = {section.sectionId} />
-                            </div>
-                    );
-                })}
-                     <Button theme="success"  type="button" 
-                            onClick = {addSection}
-                      >
-                            Add Section
-                     </Button>
-                     {/* <Button theme="success"  type="button" 
-                                    onClick = {() => console.log("Section : " , sections)}
-                                >
-                                    State
-                     </Button> */}
-
-            </div>
-        )
-
-
-    }
-
-    // function Section(){
-
-    //     const courseId = '60043f1bca5848206b593c6a'
-    //     const [section , createSection] = useState(false)
-    //     const [sectionName , setSectionName] = useState('')
-    //     const [lectName , setLectName] = useState('')
-    //     const [file ,setFile] = useState()
-    //     const [sectionId , setSectionId] = useState('') 
-
-    //     if(!section){
-    //         return(
-    //             <div>
-    //                 <FormInput
-    //                     className="videoIp"
-    //                     type="text"
-    //                     value = {sectionName}
-    //                     onChange = {(e) => setSectionName(e.target.value)}
-    //                 />
-    //                 <Button theme="success" className="vidaddbut" type="button" 
-    //                 onClick={() => {
-    //                     axios.post('/author/create-section' , {
-    //                         "number" : 1 ,
-    //                         "sectionName" : `${sectionName}` ,
-    //                         "courseId" : `${courseId}`
-    //                     }).then(res => {
-    //                         console.log("Section Id : " , res.data.sectionId )
-    //                         setSectionId(res.data.sectionId)
-    //                         createSection(true)
-    //                     })
-                        
-    //                 }}>
-    //                     Create Section 
-    //             </Button>
-    //             </div>
-    //         )
-    //     }else{
-    //         return(
-    //             <div>
-    //                  <FormInput
-    //                     className="videoIp"
-    //                     type="text"
-    //                     placeholder="Enter Lecture Name "
-    //                     value = {lectName}
-    //                     onChange = {(e) => setLectName(e.target.value)}
-
-    //                 />
-    //                 <FormInput
-    //                     className="videoIp"
-    //                     type="file"
-    //                     placeholder="Upload File"
-    //                     onChange = {(e) => setFile(e.target.files[0])}
-    //                 />
-    //                 <Button theme="success" className="viddelbut" type="button" 
-    //                     onClick = {
-    //                         (e) => {
-
-
-    //                             e.preventDefault()
-    //                             console.log("name : " , lectName)
-    //                             console.log("image : " , file)
-    //                             const formData = new FormData();
-    //                             formData.append('image', file)
-    //                             formData.append('vedioName', `${lectName}`) 
-    //                             formData.append('sectionId', '600472176ddf051db87a9611')
-    //                             axios({
-    //                                 method: 'post', 
-    //                                 url: '/author/add-video',
-    //                                 data: formData,
-    //                             })
-    //                         }
-    //                     }
-    //                 >
-    //                     Save Lecuret
-    //                 </Button>
-    //             </div>
-    //         )
-    //     }
-
-    // }
-
-     
     const step1Content = (
         <div>
             <Card className="createcard" style={{ maxWidth: '1500px' }}>
@@ -475,13 +360,12 @@ export default function CreateCourse() {
                         Add a thumbnail and preview
                         <div className="thumbnailUpload">
                             <h4>Thumbnail</h4>
-                            <CourseThumbnail />
+                            <ImageUpload />
                         </div>
                         <div className="previewUpload">
                             <h4>Preview</h4>
-                            <Upload {...previewprops}>
-                                <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                            </Upload>
+                            <PreviewVedioUpload />
+                          
                         </div>
                         <Form>
                             <FormGroup></FormGroup>
