@@ -1,12 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from './Header';
 import CourseCard from './CourseCard';
 import HomeCarousel from './HomeCarousel';
 import Footer1 from './Footer';
 import { Container, Row, Col } from 'shards-react';
+import axios from 'axios';
 
 export default function Home({ history }) {
-    const cardTitles = ['Complete Ethical Hacking Bootcamp 2021: Zero to Mastery', 'MERN', 'JAVA', 'PhotoShop', 'C++'];
+
+    const [courses , setCourses] = useState([])
+
+    useEffect(() => {
+        axios.get('/homePage').then(res => {
+            console.log("Result : " , res.data.courseData  )
+            setCourses(res.data.courseData)
+
+        })
+
+    }, [])
 
     return (
         <div className="home">
@@ -16,16 +27,16 @@ export default function Home({ history }) {
             <HomeCarousel />
 
             <div className="main">
-                {cardTitles.map(title => (
+                {courses.map(course => (
                     <Container className="cc">
                         <Row>
                             <Col>
-                                <CourseCard title={title} />
+                                <CourseCard course={course} />
                             </Col>
                         </Row>
                     </Container>
                 ))}
-                ;
+                
             </div>
             
 
