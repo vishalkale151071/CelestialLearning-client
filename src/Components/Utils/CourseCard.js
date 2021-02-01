@@ -4,7 +4,7 @@ import "../styles/CourseCard.css"
 import { useHistory } from 'react-router-dom';
 
 
-export default function CourseCard(props) {
+export default function CourseCard({course}) {
     const history = useHistory();
 
     const submit = (title) => {
@@ -14,11 +14,12 @@ export default function CourseCard(props) {
     return (
         <div className="coursecard">
             <Card style={{ maxWidth: '250px'}} >
-                <CardImg src="https://picsum.photos/300/200" />
+                <CardImg src={course.courseThumbnail} />
                 <CardBody>
-                    <CardTitle>{props.title}</CardTitle>
-                    <p></p>
-                    <Button onClick={() => submit(props.title)}>Read more &rarr;</Button>
+                    <CardTitle>{course.courseName}</CardTitle>
+                    <p>{course.authorName}</p>
+                    <p>Rs : {course.price}</p>
+                    <Button onClick={() => submit(course.courseName)}>Read more &rarr;</Button>
                 </CardBody>
             </Card>
         </div>

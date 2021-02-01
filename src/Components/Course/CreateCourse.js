@@ -19,51 +19,87 @@ export default function CreateCourse() {
     const [courseId, setCourseId] = useState('');
 
     useEffect(() => {
-        console.log("History : " , history.location.state.id)
-          if(history.location.state === undefined){
-              history.push('/author/uploadcourse')
-          }else{
-            setCourseId(history.location.state.id)
-          }
+
+         // console.log("History : " , history.location.state.id)
+        //   if(history.location.state === undefined){
+        //       history.push('/author/uploadcourse')
+        //   }else{
+        //     setCourseId(history.location.state.id)
+        //   }
+
+        
+
     }, []);
 
-    const ImageUpload = () => {
-        const [file, setFile] = useState('');
-        const [imagePreviewUrl, setImagePreview] = useState('');
+    const PreviewVedioUpload = () => {
+        const [vedioFile , setVedioFile] = useState(null)
+        function handelFileChange(e) {
+            setVedioFile(e.target.files[0])
+        }
+        function handleSubmit() {
+            const formData = new FormData()
+            formData.append('image', vedioFile);
+            formData.append('courseId', '60040871ca5848206b593c66'); //Inserting course ID maunually    
+            axios({
+                method: 'post',
+                url: '/author/uploadPreview',
+                data: formData 
+            })
+        }
+        return(
+            <div>
+                <input type = 'file' onChange = {e => handelFileChange(e)}/>
+                <br />
+                <button onClick = {handleSubmit}>Upload</button>
+            </div>
+        )
+    }
 
-        const _handleSubmit = e => {
+    const ImageUpload = () => {
+
+        const [file , setFile] = useState('')
+        const [imagePreviewUrl , setImagePreview] = useState('')
+        const _handleSubmit = (e) => {
+
             e.preventDefault();
-            // TODO: do something with -> this.state.file
             console.log('handle uploading-', file);
             const formData = new FormData();
             formData.append('image', file);
-            // axios({
-            //     method: 'post',
-            //     url: '/subscriber/profileImageUpdate',
-            //     data: formData
-            // })
-        };
+
+            formData.append('courseId' , '60040871ca5848206b593c66' ) // Inserting course Id manually 
+            axios({
+                method: 'post',
+                url: '/author/uploadThumbnail',
+                data: formData 
+            })
+        }
+       
+
 
         const _handleImageChange = e => {
-            e.preventDefault();
 
+            e.preventDefault();
             let reader = new FileReader();
             let file = e.target.files[0];
-
             reader.onloadend = () => {
-                setFile(file);
-                setImagePreview(reader.result);
-            };
-            reader.readAsDataURL(file);
-        };
 
-        return (
-            <div>
-                <form onSubmit={e => _handleSubmit(e)}>
-                    <input className="ThumbnailIpButton" type="file" onChange={e => _handleImageChange(e)} />
-                    <Button className="ThumbnailSubmitButton" type="submit" onClick={e => _handleSubmit(e)}>
-                        Upload Image
-                    </Button>
+                setFile(file)
+                setImagePreview(reader.result)
+            }
+            reader.readAsDataURL(file)
+        }
+        return(
+                <div >
+                <form onSubmit={(e)=>_handleSubmit(e)}>
+                <input  
+                    type="file" 
+                    onChange={(e)=>_handleImageChange(e)} 
+
+                    />
+                <button    
+                    type="submit" 
+                    onClick={(e)=>_handleSubmit(e)}>Upload Image</button>
+
                 </form>
                 <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
                     {imagePreviewUrl ? (
@@ -339,9 +375,10 @@ export default function CreateCourse() {
                         </div>
                         <div className="previewUpload">
                             <h4>Preview</h4>
-                            <Upload {...previewprops}>
-                                <Button icon={<UploadOutlined />}>Upload</Button>
-                            </Upload>
+
+                            <PreviewVedioUpload />
+                          
+
                         </div>
                         <Form>
                             <FormGroup></FormGroup>
