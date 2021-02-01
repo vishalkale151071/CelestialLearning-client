@@ -1,5 +1,5 @@
 .step2{
-    margin-left: 9cm;
+    margin-left: 25%;
     width: 50%;
     text-align: center;
 
@@ -10,7 +10,7 @@
 }
 
 .step3{
-    margin-left: 12cm;
+    margin-left: 30%;
     margin-top: 1cm;
     text-align: center;
 
@@ -27,7 +27,7 @@
 
 .step4{
     width: 50%;
-    margin-left: 9cm;
+    margin-left: 25%;
     text-align: center;
 }
 
@@ -48,7 +48,7 @@
     left: 0;
     bottom: 0;
     text-align: center;
-    margin-left: 43cm;
+    margin-left: 0%;
     margin-bottom: 1cm;
     width: 4cm;
 }
@@ -62,20 +62,22 @@ hr.rounded {
 }
 
 .buttonexit {
-    margin-left: 47cm;
-    margin-top: 20px;
+    margin: auto;
+    margin-top: 15px;
+    margin-left: 80%;
     width: 3cm;
 }
 
 
 .institle {
-    margin-left: 16cm;
+    margin-left: 42%;
     font-size: xx-large;
 }
 
 .uploadcard {
-    margin-left: 4.37cm;
-    margin-top: 0.3cm;
-    min-height: 15cm;
+    margin: auto;
+    margin-top: 1cm;
+    min-height: 14.8cm;
 }
+
 
