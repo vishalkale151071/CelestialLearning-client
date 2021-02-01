@@ -4,7 +4,7 @@ import '../styles/CourseHome.css';
 import { useParams } from 'react-router';
 import Header from '../Utils/Header';
 import { Card, CardHeader, CardTitle, CardBody, CardFooter, CardImg, Button, Container, Row, Col } from 'shards-react';
-
+import razorpayLogo from '../assets/razorpay.png'
 import Footer1 from '../Utils/Footer';
 import { Collapse } from 'antd';
 import { Divider } from 'semantic-ui-react';
@@ -13,6 +13,20 @@ import Axios from 'axios';
 import { Scrollbars } from 'rc-scrollbars';
 import { Player, ControlBar, ForwardControl, ReplayControl } from 'video-react';
 
+function loadScript(src) {
+	return new Promise((resolve) => {
+		const script = document.createElement('script')
+		script.src = src
+		script.onload = () => {
+			resolve(true)
+		}
+		script.onerror = () => {
+			resolve(false)
+		}
+		document.body.appendChild(script)
+	})
+}
+const __DEV__ = document.domain === 'localhost'
 export default function CourseHome() {
     
     const [title,setTitle] = useState('');
@@ -27,7 +41,7 @@ export default function CourseHome() {
     const [sectionData , setSections] = useState([])        
 
     let { courseTitle } = useParams();
-    
+    console.log(courseTitle)
     useEffect(() => {
 
         Axios.post('/subscriber/courseHome',
@@ -57,8 +71,6 @@ export default function CourseHome() {
         itemList.push( <li key={index}>{item}</li>)
       })
     
-    console.log(sectionData)
-    
     const Section = ({section}) => {
         const { Panel } = Collapse;
 
@@ -71,7 +83,47 @@ export default function CourseHome() {
                 </Panel>
             </Collapse>
         )
-    }   
+    } 
+    async function DisplayRazorpay() {
+		const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+
+		if (!res) {
+			alert('Razorpay SDK failed to load. Are you online?')
+			return
+		}
+        // const data = await fetch('http://localhost:5000/subscriber/payment', { method: 'POST' }).then((t) =>
+		// 	t.json()
+		// )
+        Axios.post('/subscriber/payment',
+        {
+            price
+        }).then(res=>{
+            console.log(res);
+            const options = {
+                key: __DEV__ ? 'rzp_test_3LqDzu8J6aTI9F' : 'PRODUCTION_KEY',
+                currency: res.data.currency,//data.currency,
+                amount: res.data.price,
+                order_id: res.data.id,//data.id,
+                name: 'Payment for course ${title}',
+                description: `Course buy`,
+                image: razorpayLogo,
+                handler: function (response) {
+                    alert(response.razorpay_payment_id)
+                    alert(response.razorpay_order_id)
+                    alert(response.razorpay_signature)
+                },
+                prefill: {
+                    name : 'Saumya Sinha',
+                    email: 'saumyasinha38@gmail.com',
+                    contact: 9899999999
+                }
+            }
+            const paymentObject = new window.Razorpay(options)
+            paymentObject.open()
+        })
+            
+		
+	}   
     return (
         <div>
             <Header />
@@ -89,7 +141,7 @@ export default function CourseHome() {
                         <Button className="crhmBT" >
                             View
                         </Button>
-                        <Button className="WishlistButton">Wishlist</Button>
+                        <Button className="WishlistButton" onClick = {DisplayRazorpay}>Buy Now</Button>
                         <Button className="ShareButton">Share</Button>
                     </CardBody>
                 </Card>

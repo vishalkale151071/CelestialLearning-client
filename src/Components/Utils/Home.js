@@ -8,8 +8,6 @@ import axios from 'axios';
 
 export default function Home({ history }) {
 
-    const cardTitles = ['Complete Ethical Hacking Bootcamp 2021: Zero to Mastery', 'MERN', 'JAVA', 'PhotoShop', 'C++'];
-
     const [courses , setCourses] = useState([])
 
     useEffect(() => {
