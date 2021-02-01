@@ -62,7 +62,7 @@ function App() {
 
                         <Route path="/author/uploadcourse" exact component={UploadCourse} />
                         <Route path="/course/create" exact component={CreateCourse} />
-                        <Route path="/course/:title" exact component={CourseHome} />
+                        <Route path="/course/:courseTitle" exact component={CourseHome} />
                         <Route path="/course/view/:title" exact component={CourseView} />
 
                     </Switch>

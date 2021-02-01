@@ -25,42 +25,57 @@ export default function CreateCourse() {
         //   }else{
         //     setCourseId(history.location.state.id)
         //   }
-          
     }, []);
+
+    const PreviewVedioUpload = () => {
+        const [vedioFile , setVedioFile] = useState(null)
+        function handelFileChange(e) {
+            setVedioFile(e.target.files[0])
+        }
+        function handleSubmit() {
+            const formData = new FormData()
+            formData.append('image', vedioFile);
+            formData.append('courseId', '60040871ca5848206b593c66'); //Inserting course ID maunually    
+            axios({
+                method: 'post',
+                url: '/author/uploadPreview',
+                data: formData 
+            })
+        }
+        return(
+            <div>
+                <input type = 'file' onChange = {e => handelFileChange(e)}/>
+                <br />
+                <button onClick = {handleSubmit}>Upload</button>
+            </div>
+        )
+    }
 
     const ImageUpload = () => {
         const [file , setFile] = useState('')
         const [imagePreviewUrl , setImagePreview] = useState('')
-
-        
-        
         const _handleSubmit = (e) => {
             e.preventDefault();
-            // TODO: do something with -> this.state.file
             console.log('handle uploading-', file);
             const formData = new FormData();
             formData.append('image', file);
-            // axios({
-            //     method: 'post',
-            //     url: '/subscriber/profileImageUpdate',
-            //     data: formData 
-            // })
-
+            formData.append('courseId' , '60040871ca5848206b593c66' ) // Inserting course Id manually 
+            axios({
+                method: 'post',
+                url: '/author/uploadThumbnail',
+                data: formData 
+            })
         }
-
         const _handleImageChange = (e) => {
             e.preventDefault();
-
             let reader = new FileReader();
             let file = e.target.files[0];
-
             reader.onloadend = () => {
                 setFile(file)
                 setImagePreview(reader.result)
             }
             reader.readAsDataURL(file)
         }
-
         return(
                 <div >
                 <form onSubmit={(e)=>_handleSubmit(e)}>
@@ -162,10 +177,6 @@ export default function CreateCourse() {
             );
         }
     }
-
-    
-
-    
 
     function Section({ sectionId }) {
         const [section, createSection] = useState(true);
@@ -353,9 +364,7 @@ export default function CreateCourse() {
                         </div>
                         <div className="previewUpload">
                             <h4>Preview</h4>
-                            <Upload {...previewprops}>
-                                <Button icon={<UploadOutlined />}>Upload</Button>
-                            </Upload>
+                            <PreviewVedioUpload />
                           
                         </div>
                         <Form>
