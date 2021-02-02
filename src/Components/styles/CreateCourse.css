@@ -16,14 +16,15 @@
 }
 
 .buttonexitc {
-    position: fixed;
-    margin-left: 47cm;
-    margin-top: 20px;
+    position: absolute;
+    margin: auto;
+    margin-top: 0.8cm;
+    margin-left: 85%;
     width: 3cm;
 }
 .buttonbackc {
-    position: fixed;
-    margin-top: 20px;
+    position: absolute;
+    margin-top: 0.8cm;
     margin-left: 2cm;
     width: 3cm;
 }
@@ -33,15 +34,15 @@
 }
 
 .createheading{
-    position: fixed;
-    margin-left: 20cm;
-    margin-top: 20px;
+    position: absolute;
+    margin: auto;
+    margin-left: 45%;
 }
 
 .createcard{
-    margin-left: 4.37cm;
+    margin: auto;
     margin-top: 1cm;
-    min-height: 15cm;
+    min-height: 14.8cm;
 }
 
 .thumbnailUpload{

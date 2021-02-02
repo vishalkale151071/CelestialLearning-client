@@ -1,6 +1,6 @@
 .tpCard {
+    margin: auto;
     margin-top: 1cm;
-    margin-left: 20%;
     min-height: 10cm;
     z-index: 1;
     width: 60%;
@@ -8,14 +8,12 @@
 }
 
 .tpCard1 {
-    margin-top: -0.5cm;
-    margin-left: 20%;
+    margin: auto;
+    margin-top: -1cm;
     margin-bottom: 1cm;
     min-height: 20cm;
     width: 60%;
     border: gray solid 1px;
-
-
 }
 
 .crdImg {
@@ -36,7 +34,7 @@
 }
 
 .CoHoCollaps {
-    margin-left: 20%;
+    margin: auto;
     width: 60%;
 }
 
@@ -48,69 +46,68 @@
     clear: both;
 }
 
-.TextDescription{
+.TextDescription {
     margin-top: 1cm;
-    text-align:left;
+    text-align: left;
     border: solid rgb(189, 188, 188) 0.6px;
-    background-color:rgb(248, 243, 243);
-    padding:1cm;
+    background-color: rgb(248, 243, 243);
+    padding: 1cm;
 }
 
-
-.TextWhatLearn{
+.TextWhatLearn {
     margin-top: 1cm;
     text-align: left;
     margin-left: 1cm;
 }
 
-.H2Heading{
+.H2Heading {
     margin-top: 1cm;
     margin-left: 1cm;
 }
 
-.ContentsHeading{
+.ContentsHeading {
+    margin-left: 21%;
     margin-top: 1cm;
-    margin-left: 11cm;
 }
 
-.SmallDesc{
+.SmallDesc {
     position: absolute;
     margin-top: 0cm;
     margin-left: 5cm;
 }
 
-.ShareButton{
+.ShareButton {
     position: absolute;
-    margin-left: 15cm;
+    margin: auto;
+    margin-left: 40%;
     margin-top: 1.5cm;
 }
 
-.WishlistButton{
+.WishlistButton {
     position: absolute;
-    margin-left: 15cm;
+    margin: auto;
+    margin-left: 40%;
 }
 
-.PrereqText{
+.PrereqText {
     margin-top: 1cm;
     text-align: left;
     margin-left: 1.3cm;
 }
 
-.CRHMvidPlayer{
+.CRHMvidPlayer {
     position: absolute;
     max-width: 5cm;
     max-height: 5cm;
-    margin-top: 1cm;
-    margin-left: 2cm;
+    margin: auto;
     box-shadow: black 1px 0.7px 15px;
 }
 
-.CRHMVidPlayerDiv{
-
+.CRHMVidPlayerDiv {
     max-width: 25cm;
     max-height: 15cm;
 }
 
-.TextSuitableFor{
+.TextSuitableFor {
     margin-top: 40px;
 }
