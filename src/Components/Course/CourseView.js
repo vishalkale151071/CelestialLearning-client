@@ -16,15 +16,13 @@ export default function CourseView() {
     
     useEffect(() => {
         axios.post('/author/course/sections' , {
-            courseId : "60143de08da9340a70d2e040"
+            courseId : "6014f58c2bc3101ae01b6d4a"
         }).then(res => {
             res.data.sections.forEach((value , index) => {
                 setSections(oldArray => [...oldArray, {sectionName : value.sectionName , sectionVedios : value.video}])
             })
         })
     } , [])
-
-   
 
     const Section = ({section}) => {
         const { Panel } = Collapse;
