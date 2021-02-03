@@ -19,6 +19,12 @@ export default function CreateCourse() {
     const [courseId, setCourseId] = useState('');
 
     useEffect(() => {
+         console.log("History : " , history.location.state.id)
+          if(history.location.state === undefined){
+              history.push('/author/uploadcourse')
+          }else{
+            setCourseId(history.location.state.id)
+          }
 
          // console.log("History : " , history.location.state.id)
         //   if(history.location.state === undefined){
@@ -26,8 +32,6 @@ export default function CreateCourse() {
         //   }else{
         //     setCourseId(history.location.state.id)
         //   }
-
-        
 
     }, []);
 
