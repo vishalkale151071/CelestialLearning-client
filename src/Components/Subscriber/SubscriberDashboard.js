@@ -8,12 +8,18 @@ import '../styles/UserDashboard.css';
 
 export default function SubscriberDashboard({ history }) {
     const cardTitles = ['title1', 'title5', 'title4', 'title3', 'title2'];
+    const [courses, setCourses] = useState([]);
 
     const [name, setName] = useState('');
 
     useEffect(() => {
         Axios.post('/subscriber/profile').then(res => {
             setName(res.data.profiledata.firstName);
+        });
+
+        Axios.get('/homePage').then(res => {
+            console.log('Result : ', res.data.courseData);
+            setCourses(res.data.courseData);
         });
     }, []);
 
@@ -24,28 +30,16 @@ export default function SubscriberDashboard({ history }) {
                 <h1>Welcome {name}</h1>
                 Use the Icon on the top right corner to Go to Profile/ Account Settings/ Log out!
                 <div className="main">
-                {cardTitles.map(title => (
-                    <Container className="cc">
-                        <Row>
-                            <Col>
-                                <CourseCard title={title} />
-                            </Col>
-                            {/* <Col>
-                            <CourseCard title="title2"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title3"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title4"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title5"/>
-                        </Col> */}
-                        </Row>
-                    </Container>
-                ))}
-                ;
+                    {courses.map(course => (
+                        <Container className="cc">
+                            <Row>
+                                <Col>
+                                    <CourseCard course={course} />
+                                </Col>
+                            </Row>
+                        </Container>
+                    ))}
+                    ;
                 </div>
             </div>
         </div>
