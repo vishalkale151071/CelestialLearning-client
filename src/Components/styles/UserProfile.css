@@ -13,3 +13,15 @@
     margin-left: 1cm;
     margin-top: 2cm;
 }
+
+.ProfileImageInputButton{
+    position: absolute;
+    margin-top: 4cm;
+    margin-left: 7px;
+    max-width: 2.3cm;
+}
+
+.ProfileImageSubmitButton{
+    position: absolute;
+    margin-top: 5cm;
+}

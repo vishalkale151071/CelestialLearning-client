@@ -10,7 +10,6 @@ import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 
 export default function AuthorProfile() {
-    
     const [firstName, setfirstName] = useState('First Name');
     const [middleName, setmiddleName] = useState('Middle Name');
     const [lastName, setlastName] = useState('Last Name');
@@ -19,8 +18,6 @@ export default function AuthorProfile() {
     const [twitterURL, settwitterURL] = useState('Twitter URL');
     const [qualification, setqualification] = useState('Qaulification');
     const [biography, setBiography] = useState('Biography ');
-
-    
 
     useEffect(() => {
         axios.post('/author/profile').then(res => {
@@ -37,16 +34,16 @@ export default function AuthorProfile() {
     }, []);
 
     const ImageUpload = () => {
-        const [file , setFile] = useState('')
-        const [imagePreviewUrl , setImagePreview] = useState('')
+        const [file, setFile] = useState('');
+        const [imagePreviewUrl, setImagePreview] = useState('');
 
         useEffect(() => {
             axios.post('/author/profileImageView').then(res => {
-                setImagePreview(res.data.url)
-            })
-        } , [])
-        
-        const _handleSubmit = (e) => {
+                setImagePreview(res.data.url);
+            });
+        }, []);
+
+        const _handleSubmit = e => {
             e.preventDefault();
             // TODO: do something with -> this.state.file
             console.log('handle uploading-', file);
@@ -55,44 +52,41 @@ export default function AuthorProfile() {
             axios({
                 method: 'post',
                 url: '/author/profileImageUpdate',
-                data: formData 
-            })
-        }
+                data: formData
+            });
+        };
 
-        const _handleImageChange = (e) => {
+        const _handleImageChange = e => {
             e.preventDefault();
 
             let reader = new FileReader();
             let file = e.target.files[0];
 
             reader.onloadend = () => {
-                setFile(file)
-                setImagePreview(reader.result)
-            }
-            reader.readAsDataURL(file)
-        }
+                setFile(file);
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        };
 
-        return(
-                <div >
-                <form onSubmit={(e)=>_handleSubmit(e)}>
-                <input  
-                    type="file" 
-                    onChange={(e)=>_handleImageChange(e)} 
-
-                    />
-                <button    
-                    type="submit" 
-                    onClick={(e)=>_handleSubmit(e)}>Upload Image</button>
+        return (
+            <div>
+                <form onSubmit={e => _handleSubmit(e)}>
+                    <input className="ProfileImageInputButton" type="file" onChange={e => _handleImageChange(e)} />
+                    <Button className="ProfileImageSubmitButton" type="submit" onClick={e => _handleSubmit(e)}>
+                        Upload Image
+                    </Button>
                 </form>
-                <div style ={{textAlign : "center" , height : "100px" , width:"100px", border : "5px solid gray"}}>
-                    {
-                    imagePreviewUrl ? <img style={{width : "100%" , height : "100%"}}src={imagePreviewUrl} /> : <div >Please select an Image for Preview</div>
-                    }
+                <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
+                    {imagePreviewUrl ? (
+                        <img style={{ width: '100%', height: '100%' }} src={imagePreviewUrl} />
+                    ) : (
+                        <div>Please select an Image for Preview</div>
+                    )}
                 </div>
             </div>
-        )
-    }
-
+        );
+    };
 
     return (
         <div>
@@ -147,16 +141,18 @@ export default function AuthorProfile() {
                             <Button
                                 theme="info"
                                 onClick={() => {
-                                    axios.post('/author/update', {
-                                        firstName,
-                                        middleName,
-                                        lastName,
-                                        phNum,
-                                        linkedInURL,
-                                        twitterURL,
-                                        qualification,
-                                        biography
-                                    }).then(res => {});
+                                    axios
+                                        .post('/author/update', {
+                                            firstName,
+                                            middleName,
+                                            lastName,
+                                            phNum,
+                                            linkedInURL,
+                                            twitterURL,
+                                            qualification,
+                                            biography
+                                        })
+                                        .then(res => {});
                                 }}
                             >
                                 Update
@@ -188,16 +184,18 @@ export default function AuthorProfile() {
                             <Button
                                 theme="info"
                                 onClick={() => {
-                                    axios.post('/author/update', {
-                                        firstName,
-                                        middleName,
-                                        lastName,
-                                        phNum,
-                                        linkedInURL,
-                                        twitterURL,
-                                        qualification,
-                                        biography
-                                    }).then(res => {});
+                                    axios
+                                        .post('/author/update', {
+                                            firstName,
+                                            middleName,
+                                            lastName,
+                                            phNum,
+                                            linkedInURL,
+                                            twitterURL,
+                                            qualification,
+                                            biography
+                                        })
+                                        .then(res => {});
                                 }}
                             >
                                 Update
@@ -229,16 +227,18 @@ export default function AuthorProfile() {
                             <Button
                                 theme="info"
                                 onClick={() => {
-                                    axios.post('/author/update', {
-                                        firstName,
-                                        middleName,
-                                        lastName,
-                                        phNum,
-                                        linkedInURL,
-                                        twitterURL,
-                                        qualification,
-                                        biography
-                                    }).then(res => {});
+                                    axios
+                                        .post('/author/update', {
+                                            firstName,
+                                            middleName,
+                                            lastName,
+                                            phNum,
+                                            linkedInURL,
+                                            twitterURL,
+                                            qualification,
+                                            biography
+                                        })
+                                        .then(res => {});
                                 }}
                             >
                                 Update

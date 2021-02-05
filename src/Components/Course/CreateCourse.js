@@ -7,24 +7,32 @@ import '../styles/CreateCourse.css';
 import { Card, CardTitle, CardImg, CardBody } from 'shards-react';
 import { Image } from 'react-bootstrap';
 import 'antd/dist/antd.css';
-import {  message } from 'antd';
+import { message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 import { Slider, Switch } from 'antd';
 import axios from 'axios';
-import { Upload  } from 'antd';
+import { Upload } from 'antd';
 
 export default function CreateCourse() {
     let history = useHistory();
-    const [courseId , setCourseId] = useState('')
+    const [courseId, setCourseId] = useState('');
 
     useEffect(() => {
+         console.log("History : " , history.location.state.id)
+          if(history.location.state === undefined){
+              history.push('/author/uploadcourse')
+          }else{
+            setCourseId(history.location.state.id)
+          }
+
          // console.log("History : " , history.location.state.id)
         //   if(history.location.state === undefined){
         //       history.push('/author/uploadcourse')
         //   }else{
         //     setCourseId(history.location.state.id)
         //   }
+
     }, []);
 
     const PreviewVedioUpload = () => {
@@ -52,13 +60,16 @@ export default function CreateCourse() {
     }
 
     const ImageUpload = () => {
+
         const [file , setFile] = useState('')
         const [imagePreviewUrl , setImagePreview] = useState('')
         const _handleSubmit = (e) => {
+
             e.preventDefault();
             console.log('handle uploading-', file);
             const formData = new FormData();
             formData.append('image', file);
+
             formData.append('courseId' , '60040871ca5848206b593c66' ) // Inserting course Id manually 
             axios({
                 method: 'post',
@@ -66,11 +77,16 @@ export default function CreateCourse() {
                 data: formData 
             })
         }
-        const _handleImageChange = (e) => {
+       
+
+
+        const _handleImageChange = e => {
+
             e.preventDefault();
             let reader = new FileReader();
             let file = e.target.files[0];
             reader.onloadend = () => {
+
                 setFile(file)
                 setImagePreview(reader.result)
             }
@@ -87,15 +103,18 @@ export default function CreateCourse() {
                 <button    
                     type="submit" 
                     onClick={(e)=>_handleSubmit(e)}>Upload Image</button>
+
                 </form>
-                <div style ={{textAlign : "center" , height : "100px" , width:"100px", border : "5px solid gray"}}>
-                    {
-                    imagePreviewUrl ? <img style={{width : "100%" , height : "100%"}}src={imagePreviewUrl} /> : <div >Please select an Image for Preview</div>
-                    }
+                <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
+                    {imagePreviewUrl ? (
+                        <img style={{ width: '100%', height: '100%' }} src={imagePreviewUrl} />
+                    ) : (
+                        <div>Please select an Image for Preview</div>
+                    )}
                 </div>
             </div>
-        )
-    }
+        );
+    };
 
     // Course Thumbnail
     const CourseThumbnail = () => {
@@ -150,13 +169,10 @@ export default function CreateCourse() {
                 message.success(`${info.file.name} file uploaded successfully`);
             } else if (info.file.status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
-                console.log("error ; " , info)
-
+                console.log('error ; ', info);
             }
         }
     };
-
-    
 
     // Price Slider
     class PriceSlider extends React.Component {
@@ -227,7 +243,7 @@ export default function CreateCourse() {
                 <Card className="CrCoCard">
                     <CardBody>
                         <CardTitle>
-                            <h4>Section Name</h4>
+                            <h4>Section Name here</h4>
                         </CardTitle>
                         {fields.map((field, idx) => {
                             return (
@@ -278,11 +294,12 @@ export default function CreateCourse() {
 
         const saveSection = i => {
             setSectionCount(sectionCount + 1);
-            axios.post('/author/create-section', {
+            axios
+                .post('/author/create-section', {
                     number: sectionCount,
                     sectionName: name,
-                    //courseId: `${history.location.state.id}`
-                    courseId: "60040cd8ca5848206b593c67"
+                    courseId: `${history.location.state.id}`
+                    //courseId: '6006db170db0231310bd4728'
                 })
                 .then(res => {
                     const values = [...sections];
@@ -291,8 +308,9 @@ export default function CreateCourse() {
                     values[i].sectionName = name;
                     values[i].sectionId = `${res.data.sectionId}`;
                     setSections(values);
-                }).catch(err => {
-                    console.log("Error : " , err)
+                })
+                .catch(err => {
+                    console.log('Error : ', err);
                 });
         };
         const addSection = () => {
@@ -328,12 +346,9 @@ export default function CreateCourse() {
                 <Button className="CrCoAddSectionBtn" theme="success" type="button" onClick={addSection}>
                     Add Section
                 </Button>
-                
             </div>
         );
     }
-
-   
 
     const step1Content = (
         <div>
@@ -364,8 +379,10 @@ export default function CreateCourse() {
                         </div>
                         <div className="previewUpload">
                             <h4>Preview</h4>
+
                             <PreviewVedioUpload />
                           
+
                         </div>
                         <Form>
                             <FormGroup></FormGroup>

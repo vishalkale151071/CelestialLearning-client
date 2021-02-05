@@ -38,27 +38,7 @@ export default function Home({ history }) {
                 ))}
                 
             </div>
-            <div className="main2">
-                <Container className="dr-example-container">
-                    <Row>
-                        {/* <Col>
-                            <CourseCard title="title6"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title7"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title8"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title9"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title10"/>
-                        </Col> */}
-                    </Row>
-                </Container>
-            </div>
+            
 
             <Footer1 />
         </div>
