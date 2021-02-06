@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
 
 
 function SubscriberLogin({history}) {
-     const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
 
     const [password, setPassword] = useState('');
 
