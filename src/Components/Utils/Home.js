@@ -5,6 +5,7 @@ import HomeCarousel from './HomeCarousel';
 import Footer1 from './Footer';
 import { Container, Row, Col } from 'shards-react';
 import axios from 'axios';
+import CarouselDemo from "../Utils/Carousel"
 
 export default function Home({ history }) {
 
@@ -26,7 +27,7 @@ export default function Home({ history }) {
             </div>
             <HomeCarousel />
 
-            <div className="main">
+            {/* <div className="main">
                 {courses.map(course => (
                     <Container className="cc">
                         <Row>
@@ -37,9 +38,9 @@ export default function Home({ history }) {
                     </Container>
                 ))}
                 
-            </div>
+            </div> */}
             
-
+            <CarouselDemo />
             <Footer1 />
         </div>
     );

@@ -20,14 +20,13 @@ import AuthorCourses from './Components/Author/AuthorCourses';
 
 import Home from './Components/Utils/Home';
 import UploadCourse from './Components/Course/UploadCourse';
-import CreateCourse from "./Components/Course/CreateCourse"
-import CourseHome from "./Components/Course/CourseHome"
-import CourseView from "./Components/Course/CourseView"
+import CreateCourse from './Components/Course/CreateCourse';
+import CourseHome from './Components/Course/CourseHome';
+import CourseView from './Components/Course/CourseView';
 
 function App() {
-
     //const isSubscriber = localStorage.getItem('isSubscriber')
-  //  const history1 = useHistory()
+    //  const history1 = useHistory()
 
     // useEffect(() => {
     //     if(isSubscriber){
@@ -36,11 +35,10 @@ function App() {
     // } , [])
     return (
         <div className="app">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine"></link>
             <Router>
                 <Router>
                     <Switch>
-
-
                         <Route path="/" exact component={Home} />
 
                         <Route path="/subscriber/login" exact component={SubscriberLogin} />
@@ -64,7 +62,6 @@ function App() {
                         <Route path="/course/create" exact component={CreateCourse} />
                         <Route path="/course/:courseTitle" exact component={CourseHome} />
                         <Route path="/course/view/:title" exact component={CourseView} />
-
                     </Switch>
                 </Router>
             </Router>

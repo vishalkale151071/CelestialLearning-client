@@ -57,7 +57,7 @@ import CategoriesDropdown from "../Utils/CategoriesDropdown"
             <div className="right">
                 <Collapse navbar>
                 <div>
-                    <ShoppingCartIcon fontSize="large" />
+                    <ShoppingCartIcon fontSize="large"/>
                 </div>
                 <Dropdown >
                     <Dropdown.Toggle variant="inf" id="dropdown-basic">
