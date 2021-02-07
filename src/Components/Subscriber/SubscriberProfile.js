@@ -10,7 +10,7 @@ import Avatar from 'react-avatar';
 
 import axios from 'axios';
 
-export default function SubscriberProfile() {
+export default function SubscriberProfile({ history }) {
     const [url, setUrl] = useState('');
 
     const [firstName, setfirstName] = useState('First Name');
@@ -29,6 +29,10 @@ export default function SubscriberProfile() {
         useEffect(() => {
             axios.post('/subscriber/profileImageView').then(res => {
                 setImagePreview(res.data.url);
+            }).catch(error => {
+                if(error.response.data.message == "Unauthorised."){
+                    history.push('/subscriber/login');
+                }
             });
         }, []);
 
@@ -79,16 +83,24 @@ export default function SubscriberProfile() {
 
     useEffect(() => {
         Axios.post('/subscriber/profile').then(res => {
+            console.log("Response Invalid: ", res);
             setUrl(res.data.url);
             console.log('Project : ', res.data);
-            setfirstName(res.data.profiledata.firstName);
-            setmiddleName(res.data.profiledata.middleName);
-            setlastName(res.data.profiledata.lastName);
-            setphNum(res.data.profiledata.phNum);
-            setlinkedInURL(res.data.profiledata.linkedInURL);
-            settwitterURL(res.data.profiledata.twitterURL);
-            sethigherEducation(res.data.profiledata.higherEducation);
-            setareaOfInterest(res.data.profiledata.areaOfInterest);
+            const { firstName, middleName, lastName, phNum, linkedInURL, twitterURL, higherEducation, areaOfInterest } = res.data.profiledata
+
+            setfirstName(firstName);
+            setmiddleName(middleName);
+            setlastName(lastName);
+            setphNum(phNum);
+            setlinkedInURL(linkedInURL);
+            settwitterURL(twitterURL);
+            sethigherEducation(higherEducation);
+            setareaOfInterest(areaOfInterest);
+            
+        }).catch(error => {
+            if(error.response.data.message == "Unauthorised."){
+                history.push('/subscriber/login');
+            }
         });
     }, []);
 
