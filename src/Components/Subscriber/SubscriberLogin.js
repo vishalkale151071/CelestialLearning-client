@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Card, CardHeader, CardTitle, CardBody, CardFooter, Button } from 'shards-react';
-import "../styles/UserLogin.css"
+import '../styles/UserLogin.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
+
 import login from "../../actions/subscriberActions"
 import Swal from 'sweetalert2'
 import Axios from 'axios';
@@ -15,6 +16,7 @@ function SubscriberLogin({history}) {
     const [password, setPassword] = useState('');
 
     // const dispatch = useDispatch();
+
 
     // const subscriberLogin = useSelector(state => state.subscriberLogin);
     // const {  error, subscriberInfo } = subscriberLogin;
@@ -80,7 +82,9 @@ function SubscriberLogin({history}) {
                                 }}
                             />
                         </FormGroup>
-                        <Button className="button1" theme="success">Login</Button>
+                        <Button className="button1" theme="success">
+                            Login
+                        </Button>
                     </Form>
                 </CardBody>
                 <CardFooter>
@@ -95,6 +99,4 @@ function SubscriberLogin({history}) {
     );
 }
 
-export default SubscriberLogin
-
-
+export default SubscriberLogin;

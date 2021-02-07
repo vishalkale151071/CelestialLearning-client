@@ -43,6 +43,8 @@ export default function CourseHome({history}) {
     let { courseTitle } = useParams();
     //console.log(courseTitle)
     useEffect(() => {
+        window.scrollTo(0, 0)
+
 
         Axios.post('/subscriber/courseHome',
         {

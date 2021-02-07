@@ -19,91 +19,74 @@ export default function CreateCourse() {
     const [courseId, setCourseId] = useState('');
 
     useEffect(() => {
-         console.log("History : " , history.location.state.id)
-          if(history.location.state === undefined){
-              history.push('/author/uploadcourse')
-          }else{
-            setCourseId(history.location.state.id)
-          }
-
-         // console.log("History : " , history.location.state.id)
-        //   if(history.location.state === undefined){
-        //       history.push('/author/uploadcourse')
-        //   }else{
-        //     setCourseId(history.location.state.id)
-        //   }
-
+        console.log('History : ', history.location.state.id);
+        if (history.location.state === undefined) {
+            history.push('/author/uploadcourse');
+        } else {
+            setCourseId(history.location.state.id);
+        }
     }, []);
 
     const PreviewVedioUpload = () => {
-        const [vedioFile , setVedioFile] = useState(null)
+        const [vedioFile, setVedioFile] = useState(null);
         function handelFileChange(e) {
-            setVedioFile(e.target.files[0])
+            setVedioFile(e.target.files[0]);
         }
         function handleSubmit() {
-            const formData = new FormData()
+            const formData = new FormData();
             formData.append('image', vedioFile);
+
             formData.append('courseId', history.location.state.id); //Inserting course ID maunually    
             axios({
                 method: 'post',
                 url: '/author/uploadPreview',
-                data: formData 
-            })
+                data: formData
+            });
         }
-        return(
+        return (
             <div>
-                <input type = 'file' onChange = {e => handelFileChange(e)}/>
+                <input type="file" onChange={e => handelFileChange(e)} />
                 <br />
-                <button onClick = {handleSubmit}>Upload</button>
+                <button onClick={handleSubmit}>Upload</button>
             </div>
-        )
-    }
+        );
+    };
 
     const ImageUpload = () => {
-
-        const [file , setFile] = useState('')
-        const [imagePreviewUrl , setImagePreview] = useState('')
-        const _handleSubmit = (e) => {
-
+        const [file, setFile] = useState('');
+        const [imagePreviewUrl, setImagePreview] = useState('');
+        const _handleSubmit = e => {
             e.preventDefault();
             console.log('handle uploading-', file);
             const formData = new FormData();
             formData.append('image', file);
 
+
             formData.append('courseId' , history.location.state.id ) // Inserting course Id manually 
             axios({
                 method: 'post',
                 url: '/author/uploadThumbnail',
-                data: formData 
-            })
-        }
-       
-
+                data: formData
+            });
+        };
 
         const _handleImageChange = e => {
-
             e.preventDefault();
             let reader = new FileReader();
             let file = e.target.files[0];
             reader.onloadend = () => {
-
-                setFile(file)
-                setImagePreview(reader.result)
-            }
-            reader.readAsDataURL(file)
-        }
-        return(
-                <div >
-                <form onSubmit={(e)=>_handleSubmit(e)}>
-                <input  
-                    type="file" 
-                    onChange={(e)=>_handleImageChange(e)} 
-
-                    />
-                <button    
-                    type="submit" 
-                    onClick={(e)=>_handleSubmit(e)}>Upload Image</button>
-
+                setFile(file);
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        };
+        return (
+            <div>
+                <form onSubmit={e => _handleSubmit(e)}>
+                    <input type="file" onChange={e => _handleImageChange(e)} />
+                    <button type="submit" onClick={e => _handleSubmit(e)}>
+                        Upload Image
+                    </button>
                 </form>
                 <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
                     {imagePreviewUrl ? (
@@ -381,8 +364,6 @@ export default function CreateCourse() {
                             <h4>Preview</h4>
 
                             <PreviewVedioUpload />
-                          
-
                         </div>
                         <Form>
                             <FormGroup></FormGroup>
