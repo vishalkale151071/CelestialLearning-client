@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Swal  from "sweetalert2"
 import { verifySubscriber } from '../../actions/subscriberActions';
 import Axios from 'axios'
+import verify from '../Utils/verify';
 
 
 function SubscriberEmailVerify({match,history}) {
@@ -34,27 +35,8 @@ function SubscriberEmailVerify({match,history}) {
         //  dispatch(verifySubscriber(token));
         if(token)
         {
-            Axios.post('/subscriber/verify1',
-            {},
-            {
-                headers : {
-                'Authorization' : `Bearer ${token}`
-                }
-            }).then(res=>{
-                Swal.fire({
-                            icon : 'success' ,
-                            text : `${res.data.message}`
-                        })
-                        history.push('/subscriber/login')
-            }).catch(error=>{
-                Swal.fire({
-                            icon : 'error' ,
-                            text : `${error.response.data.message}`
-                        })
-            })
-        }
-        
-        
+            verify('/subscriber/verify1', '/subscriber/login', token, history);
+        } 
      };
  
      return (

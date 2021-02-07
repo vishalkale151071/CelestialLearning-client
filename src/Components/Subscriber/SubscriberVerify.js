@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Swal  from "sweetalert2"
 import { verifySubscriber } from '../../actions/subscriberActions';
-import Axios from 'axios'
-
+import Axios from 'axios';
+import verify from '../Utils/verify';
 
 function SubscriberVerify({match,history}) {
     //  const dispatch = useDispatch();
@@ -34,27 +34,9 @@ function SubscriberVerify({match,history}) {
         //  dispatch(verifySubscriber(token));
         if(token)
         {
-            Axios.post('/subscriber/verify',
-            {},
-            {
-                headers : {
-                'Authorization' : `Bearer ${token}`
-                }
-            }).then(res=>{
-                Swal.fire({
-                            icon : 'success' ,
-                            text : `${res.data.message}`
-                        })
-                        history.push('/subscriber/login')
-            }).catch(error=>{
-                Swal.fire({
-                            icon : 'error' ,
-                            text : `${error.response.data.message}`
-                        })
-            })
+            verify('/subscriber/verify', '/subscriber/login', token, history);
+            
         }
-        
-        
      };
  
      return (
