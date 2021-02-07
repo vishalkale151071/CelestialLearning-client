@@ -7,7 +7,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import Axios from 'axios';
 import { Upload, message } from 'antd';
 import Avatar from 'react-avatar';
-
+import Swal from 'sweetalert2'
 import axios from 'axios';
 
 export default function SubscriberProfile({ history }) {
@@ -33,6 +33,13 @@ export default function SubscriberProfile({ history }) {
                 if(error.response.data.message == "Unauthorised."){
                     history.push('/subscriber/login');
                 }
+                else
+                {
+                    Swal.fire({
+                        icon : 'error' ,
+                        text : `${error.response.data.message}`
+                    })
+                }
             });
         }, []);
 
@@ -46,6 +53,23 @@ export default function SubscriberProfile({ history }) {
                 method: 'post',
                 url: '/subscriber/profileImageUpdate',
                 data: formData
+            }).then(res=>{
+                Swal.fire({
+                    icon : 'success' ,
+                    text : `${res.data.message}`
+                })
+            }).catch(error=>{
+
+                if(error.response.data.message == "Unauthorised."){
+                    history.push('/subscriber/login');
+                }
+                else
+                {
+                    Swal.fire({
+                        icon : 'error' ,
+                        text : `${error.response.data.message}`
+                    })
+                }
             });
         };
 
@@ -101,12 +125,19 @@ export default function SubscriberProfile({ history }) {
             if(error.response.data.message == "Unauthorised."){
                 history.push('/subscriber/login');
             }
+            else
+            {
+                Swal.fire({
+                    icon : 'error' ,
+                    text : `${error.response.data.message}`
+                })
+            }
         });
     }, []);
 
     return (
         <div>
-            <SubscriberHeader />
+            <SubscriberHeader history={history}/>
             <div>
                 <Tabs id="profileTab" className="profiletab">
                     <Tab eventKey="personal" title="Personal Details">
@@ -142,7 +173,23 @@ export default function SubscriberProfile({ history }) {
                                         twitterURL,
                                         higherEducation,
                                         areaOfInterest
-                                    }).then(res => {});
+                                    }).then(res => {
+                                        Swal.fire({
+                                            icon : 'success' ,
+                                            text : `${res.data.message}`
+                                        })
+                                    }).catch(error => {
+                                        if(error.response.data.message == "Unauthorised."){
+                                            history.push('/subscriber/login');
+                                        }
+                                        else
+                                        {
+                                            Swal.fire({
+                                                icon : 'error' ,
+                                                text : `${error.response.data.message}`
+                                            })
+                                        }
+                                    });
                                 }}
                             >
                                 Update

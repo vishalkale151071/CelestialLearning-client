@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Swal  from "sweetalert2"
 import { verifySubscriber } from '../../actions/subscriberActions';
-import Axios from 'axios';
+import Axios from 'axios'
 import verify from '../Utils/verify';
 
-function SubscriberVerify({match,history}) {
+
+function SubscriberForgetVerify({match,history}) {
     //  const dispatch = useDispatch();
     //  const history = useHistory()
  
@@ -34,8 +35,7 @@ function SubscriberVerify({match,history}) {
         //  dispatch(verifySubscriber(token));
         if(token)
         {
-            verify('/subscriber/verify', '/subscriber/login', token, history);
-            
+            verify('/subscriber/forgetpasswordverify', '/subscriber/forgetpasswordupdate', token, history);
         }
      };
  
@@ -46,4 +46,4 @@ function SubscriberVerify({match,history}) {
      );
 }
 
-export default SubscriberVerify
+export default SubscriberForgetVerify

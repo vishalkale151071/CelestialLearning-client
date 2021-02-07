@@ -27,7 +27,7 @@ import axios from 'axios';
 // import { useDispatch } from 'react-redux';
 // import { logout } from '../../actions/subscriberActions';
 
- export const SubscriberHeader = ({ history }) => {
+ export default function SubscriberHeader({ history }){
     return (
         <div className="subscriberheader">
         <Navbar className="nav" expand="md">
@@ -88,5 +88,3 @@ import axios from 'axios';
         </div>
     );
 };
-
-export default SubscriberHeader;
