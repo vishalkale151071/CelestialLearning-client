@@ -5,35 +5,51 @@ import { Card, CardHeader, CardTitle, CardBody, CardFooter, Button } from 'shard
 import '../styles/UserLogin.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
-import login from '../../actions/subscriberActions';
-import Swal from 'sweetalert2';
 
-function SubscriberLogin({ history }) {
+import login from "../../actions/subscriberActions"
+import Swal from 'sweetalert2'
+import Axios from 'axios';
+
+function SubscriberLogin({history}) {
     const [email, setEmail] = useState('');
 
     const [password, setPassword] = useState('');
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    const subscriberLogin = useSelector(state => state.subscriberLogin);
-    const { error, subscriberInfo } = subscriberLogin;
 
-    useEffect(() => {
-        if (subscriberInfo) {
-            console.log('Loged In');
-            history.push('/subscriber/dashboard');
-        }
-        if (error) {
-            Swal.fire({
-                icon: 'error',
-                text: `${error}`
-            });
-        }
-    }, [subscriberInfo, error]);
+    // const subscriberLogin = useSelector(state => state.subscriberLogin);
+    // const {  error, subscriberInfo } = subscriberLogin;
+
+    // useEffect(() => {
+    //     if (subscriberInfo) {
+    //         console.log("Loged In")
+    //         history.push('/subscriber/dashboard')
+    //     }
+    //     if(error){
+    //          Swal.fire({
+    //               icon : 'error' ,
+    //               text : `${error}`
+    //          })
+    //     }
+    // }, [subscriberInfo , error]);   
+
 
     const submitHandler = e => {
         e.preventDefault();
-        dispatch(login(email, password));
+        //dispatch(login(email, password));
+        Axios.post("/subscriber/login",{
+            email,password
+        }).then(res=>{
+            
+            history.push('/subscriber/dashboard');
+        }).catch(error=>{
+            Swal.fire({
+                        icon : 'error' ,
+                        text : `${error.response.data.message}`
+                    })
+        })
+       
     };
 
     return (

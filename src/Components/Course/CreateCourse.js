@@ -35,7 +35,8 @@ export default function CreateCourse() {
         function handleSubmit() {
             const formData = new FormData();
             formData.append('image', vedioFile);
-            formData.append('courseId', courseId); //Inserting course ID maunually
+
+            formData.append('courseId', history.location.state.id); //Inserting course ID maunually    
             axios({
                 method: 'post',
                 url: '/author/uploadPreview',
@@ -60,7 +61,8 @@ export default function CreateCourse() {
             const formData = new FormData();
             formData.append('image', file);
 
-            formData.append('courseId', courseId); // Inserting course Id manually
+
+            formData.append('courseId' , history.location.state.id ) // Inserting course Id manually 
             axios({
                 method: 'post',
                 url: '/author/uploadThumbnail',

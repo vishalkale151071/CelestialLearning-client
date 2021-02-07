@@ -27,7 +27,7 @@ function loadScript(src) {
 	})
 }
 const __DEV__ = document.domain === 'localhost'
-export default function CourseHome() {
+export default function CourseHome({history}) {
     
     const [title,setTitle] = useState('');
     const [price,setPrice] = useState(0);
@@ -41,7 +41,7 @@ export default function CourseHome() {
     const [sectionData , setSections] = useState([])        
 
     let { courseTitle } = useParams();
-    console.log(courseTitle)
+    //console.log(courseTitle)
     useEffect(() => {
         window.scrollTo(0, 0)
 
@@ -50,7 +50,7 @@ export default function CourseHome() {
         {
             courseTitle: courseTitle
         }).then(res => {
-            console.log('Project : ', res.data);
+            //console.log('Project : ', res.data);
             setTitle(res.data.title);
             setPrice(res.data.price);
             setSuitableFor(res.data.suitableFor);
@@ -93,39 +93,46 @@ export default function CourseHome() {
 			alert('Razorpay SDK failed to load. Are you online?')
 			return
 		}
-        // const data = await fetch('http://localhost:5000/subscriber/payment', { method: 'POST' }).then((t) =>
-		// 	t.json()
-		// )
-        Axios.post('/subscriber/payment',
-        {
-            price
+        
+        
+        Axios.post('/subscriber/payment',{
+            price,
+            courseTitle,
         }).then(res=>{
-            console.log(res);
-            const options = {
-                key: __DEV__ ? 'rzp_test_3LqDzu8J6aTI9F' : 'PRODUCTION_KEY',
-                currency: res.data.currency,//data.currency,
-                amount: res.data.price,
-                order_id: res.data.id,//data.id,
-                name: 'Payment for course ${title}',
-                description: `Course buy`,
-                image: razorpayLogo,
-                handler: function (response) {
-                    alert(response.razorpay_payment_id)
-                    alert(response.razorpay_order_id)
-                    alert(response.razorpay_signature)
-                },
-                prefill: {
-                    name : 'Saumya Sinha',
-                    email: 'saumyasinha38@gmail.com',
-                    contact: 9899999999
-                }
-            }
-            const paymentObject = new window.Razorpay(options)
-            paymentObject.open()
-        })
+
             
-		
-	}   
+            console.log(res.data);
+                const options = {
+                    key: __DEV__ ? 'rzp_test_3LqDzu8J6aTI9F' : 'PRODUCTION_KEY',
+                    currency: res.data.currency,//data.currency,
+                    amount: res.data.price,
+                    order_id: res.data.id,//data.id,
+                    name: 'Payment for course ${title}',
+                    description: `Course buy`,
+                    image: razorpayLogo,
+                    
+                    // handler: function (response) {
+                    //     alert(response.razorpay_payment_id)
+                    //     alert(response.razorpay_order_id)
+                    //     alert(response.razorpay_signature)
+                    // },
+                    // prefill: {
+                    //     name : res.data.name,
+                    //     email: res.data.email,
+                    //     contact: res.data.contact
+                    // }
+                }
+                const paymentObject = new window.Razorpay(options)
+                paymentObject.open()
+            
+            
+        }).catch(error=>{
+       
+        if(error.response.data.message=="session expired")
+        {
+            history.push("/subscriber/login");
+        }
+    })}
     return (
         <div>
             <Header />

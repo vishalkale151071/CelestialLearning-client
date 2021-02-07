@@ -9,7 +9,8 @@ export default function AuthorCourses() {
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
-        Axios.get('/homePage').then(res => {
+
+        Axios.get('/subscriber/myCourses').then(res => {
             console.log('Result : ', res.data.courseData);
             setCourses(res.data.courseData);
         });

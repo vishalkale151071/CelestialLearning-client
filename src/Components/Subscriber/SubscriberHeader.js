@@ -22,11 +22,12 @@ import {
     Collapse
 } from 'shards-react';
 import CategoriesDropdown from "../Utils/CategoriesDropdown"
+import axios from 'axios';
 
 // import { useDispatch } from 'react-redux';
 // import { logout } from '../../actions/subscriberActions';
 
- export const SubscriberHeader = () => {
+ export default function SubscriberHeader({ history }){
     return (
         <div className="subscriberheader">
         <Navbar className="nav" expand="md">
@@ -69,7 +70,14 @@ import CategoriesDropdown from "../Utils/CategoriesDropdown"
                             <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
                             <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
                             <Dropdown.Divider />
-                            <Button className="logoutbutton" theme="outline-danger" href="/">Logout</Button>
+                            <Button className="logoutbutton" theme="outline-danger" onClick={ () => {
+                                axios.post('/logout').then(res => {
+                                    console.log(res.data.message);
+                                    history.push('/');
+                                }).catch(error => {
+                                    console.log(error);
+                                });
+                            } }>Logout</Button>
                         </Dropdown.Menu>
                     </Dropdown>
                 <div className="right"></div>
@@ -80,5 +88,3 @@ import CategoriesDropdown from "../Utils/CategoriesDropdown"
         </div>
     );
 };
-
-export default SubscriberHeader;

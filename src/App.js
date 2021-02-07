@@ -20,9 +20,13 @@ import AuthorCourses from './Components/Author/AuthorCourses';
 
 import Home from './Components/Utils/Home';
 import UploadCourse from './Components/Course/UploadCourse';
-import CreateCourse from './Components/Course/CreateCourse';
-import CourseHome from './Components/Course/CourseHome';
-import CourseView from './Components/Course/CourseView';
+
+import CreateCourse from "./Components/Course/CreateCourse"
+import CourseHome from "./Components/Course/CourseHome"
+import CourseView from "./Components/Course/CourseView"
+import SubscriberForgetVerify from './Components/Subscriber/SubscriberForgetVerify';
+import SubscriberNewPassword from './Components/Subscriber/SubscriberNewPassword';
+import SubscriberEmailVerify from './Components/Subscriber/SubscriberEmailVerify';
 
 function App() {
     //const isSubscriber = localStorage.getItem('isSubscriber')
@@ -48,6 +52,9 @@ function App() {
                         <Route path="/subscriber/settings/" exact component={SubscriberSettings} />
                         <Route path="/subscriber/forgetpassword/" exact component={SubscriberForgetPassword} />
                         <Route path="/subscriber/verify/:token" exact component={SubscriberVerify} />
+                        <Route path="/subscriber/forgetverify/:token" exact component={SubscriberForgetVerify} />
+                        <Route path="/subscriber/forgetpasswordupdate" exact component={SubscriberNewPassword} />
+                        <Route path="/subscriber/verify1/:token" exact component={SubscriberEmailVerify} />
 
                         <Route path="/author/login" exact component={AuthorLogin} />
                         <Route path="/author/signup" exact component={AuthorSignup} />
