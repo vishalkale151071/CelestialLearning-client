@@ -19,29 +19,12 @@ export default function CreateCourse() {
     const [courseId, setCourseId] = useState('');
 
     useEffect(() => {
-<<<<<<< HEAD
         console.log('History : ', history.location.state.id);
         if (history.location.state === undefined) {
             history.push('/author/uploadcourse');
         } else {
             setCourseId(history.location.state.id);
         }
-=======
-         console.log("History : " , history.location.state.id)
-          if(history.location.state === undefined){
-              history.push('/author/uploadcourse')
-          }else{
-            setCourseId(history.location.state.id)
-          }
-
-         // console.log("History : " , history.location.state.id)
-        //   if(history.location.state === undefined){
-        //       history.push('/author/uploadcourse')
-        //   }else{
-        //     setCourseId(history.location.state.id)
-        //   }
-
->>>>>>> 3dc5c737757fd3d8d29bdcb57ac8e56715036865
     }, []);
 
     const PreviewVedioUpload = () => {

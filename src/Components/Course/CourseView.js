@@ -7,14 +7,14 @@ import { Player, ControlBar, ForwardControl, ReplayControl } from 'video-react';
 import { Button } from 'shards-react';
 import { Collapse } from 'antd';
 import { Scrollbars } from 'rc-scrollbars';
-import axios from 'axios';
+import axios from 'axios'
 
-export default function CourseView() {
-    const [sections, setSections] = useState([]);
-    const [playerUrl, setUrl] = useState('');
+export default function CourseView({history}) {
 
+    const [sections , setSections] = useState([])
+    const [playerUrl , setUrl] = useState('')
+    
     useEffect(() => {
-
         axios.post('/author/course/sections' , {
             courseId : "6016bca4b217f3151fff05cb"
 
@@ -22,46 +22,41 @@ export default function CourseView() {
             res.data.sections.forEach((value , index) => {
                 setSections(oldArray => [...oldArray, {sectionName : value.sectionName , sectionVedios : value.video}])
             })
-            .then(res => {
-                console.log(res)
-                res.data.sections.forEach((value, index) => {
-                    setSections(oldArray => [...oldArray, { sectionName: value.sectionName, sectionVedios: value.video }]);
-                });
-            });
-    }, []);
-
+        })
+    } , [])
 
     const Section = ({section}) => {
         const { Panel } = Collapse;
 
-        return (
+        return(
+            
             <Collapse>
-                <Panel header={section.sectionName}>
-                    {section.sectionVedios.map(vedio => (
-                        <p>
-                            <Button
-                                key={vedio.videoName}
-                                onClick={() => {
-                                    setUrl(`${vedio.videoURL}`);
-                                    console.log('url : ', playerUrl);
-                                }}
-                            >
-                                {vedio.videoName}
-                            </Button>
-                        </p>
-                    ))}
+                 <Panel header = {section.sectionName} >
+                {
+                    section.sectionVedios.map(vedio => 
+                    <button key = {vedio.videoName} onClick = {() => {
+                        setUrl(`${vedio.videoURL}`)
+                        console.log("url : " , playerUrl)
+                        }}>
+                        {vedio.videoName}
+                    </button>
+                    
+                    )
+                }
                 </Panel>
             </Collapse>
-        );
-    };
+        )
+    }   
     return (
         <div>
-            <SubscriberHeader />
+            <SubscriberHeader history={history} />
             <div className="vidPlayerdiv">
                 <h1 className="crvTitle">Title</h1>
 
                 {/* If you want to use MP4 file, give a src prop to Player tag and remove HLSSoure tag || If you want to play m3u8 file, keep the HLSSource tag just change the url */}
-                <Player className="vidPlayer" src={playerUrl}>
+                <Player className="vidPlayer"
+                    src = {playerUrl}
+                >
                     {/* <HLSSource
                         isVideoChild
                         src="https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8"
@@ -72,11 +67,12 @@ export default function CourseView() {
                     </ControlBar>
                 </Player>
             </div>
-            <div className="crvCollapse">
+            <div  className="crvCollapse"> 
                 <Scrollbars style={{ width: 525, height: 630 }}>
-                    {sections.map(section => (
-                        <Section section={section} key={section.sectionName} />
-                    ))}
+                    {
+                        sections.map(section => <Section section = {section} key={section.sectionName}/>) 
+                    } 
+                    
                 </Scrollbars>
             </div>
         </div>
