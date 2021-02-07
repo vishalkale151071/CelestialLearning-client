@@ -137,7 +137,7 @@ export default function SubscriberProfile({ history }) {
 
     return (
         <div>
-            <SubscriberHeader />
+            <SubscriberHeader history={history}/>
             <div>
                 <Tabs id="profileTab" className="profiletab">
                     <Tab eventKey="personal" title="Personal Details">

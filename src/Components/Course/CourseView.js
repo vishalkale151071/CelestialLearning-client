@@ -9,7 +9,7 @@ import { Collapse } from 'antd';
 import { Scrollbars } from 'rc-scrollbars';
 import axios from 'axios'
 
-export default function CourseView() {
+export default function CourseView({history}) {
 
     const [sections , setSections] = useState([])
     const [playerUrl , setUrl] = useState('')
@@ -49,7 +49,7 @@ export default function CourseView() {
     }   
     return (
         <div>
-            <SubscriberHeader />
+            <SubscriberHeader history={history} />
             <div className="vidPlayerdiv">
                 <h1 className="crvTitle">Title</h1>
 

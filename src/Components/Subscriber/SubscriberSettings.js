@@ -88,7 +88,7 @@ export default function SubscriberSettings({history}) {
 
     return (
         <div>
-            <SubscriberHeader />
+            <SubscriberHeader history={history}/>
             <div className="profiletab">
                 <Tabs  id="settingtab">
                     <Tab eventKey="personal" title="Email">
