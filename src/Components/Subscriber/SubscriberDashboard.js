@@ -7,7 +7,7 @@ import Axios from 'axios';
 import '../styles/UserDashboard.css';
 
 export default function SubscriberDashboard({ history }) {
-    const cardTitles = ['title1', 'title5', 'title4', 'title3', 'title2'];
+    
     const [courses, setCourses] = useState([]);
 
     const [name, setName] = useState('');
@@ -17,7 +17,7 @@ export default function SubscriberDashboard({ history }) {
             setName(res.data.profiledata.firstName);
         });
 
-        Axios.get('/homePage').then(res => {
+        Axios.get('/subscriber/myCourses').then(res => {
             console.log('Result : ', res.data.courseData);
             setCourses(res.data.courseData);
         });
