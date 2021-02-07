@@ -14,9 +14,13 @@ export default function CourseView() {
     const [playerUrl, setUrl] = useState('');
 
     useEffect(() => {
-        axios
-            .post('/author/course/sections', {
-                courseId: '601a8f1ea0bfeb2d954f5964'
+
+        axios.post('/author/course/sections' , {
+            courseId : "6016bca4b217f3151fff05cb"
+
+        }).then(res => {
+            res.data.sections.forEach((value , index) => {
+                setSections(oldArray => [...oldArray, {sectionName : value.sectionName , sectionVedios : value.video}])
             })
             .then(res => {
                 console.log(res)
@@ -26,7 +30,8 @@ export default function CourseView() {
             });
     }, []);
 
-    const Section = ({ section }) => {
+
+    const Section = ({section}) => {
         const { Panel } = Collapse;
 
         return (
