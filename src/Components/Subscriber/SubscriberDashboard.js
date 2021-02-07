@@ -3,11 +3,12 @@ import CourseCard from '../Utils/CourseCard';
 import SubscriberHeader from './SubscriberHeader';
 import { Container, Row, Col } from 'shards-react';
 import Axios from 'axios';
+import Swal from 'sweetalert2'
 
 import '../styles/UserDashboard.css';
 
 export default function SubscriberDashboard({ history }) {
-    const cardTitles = ['title1', 'title5', 'title4', 'title3', 'title2'];
+    
     const [courses, setCourses] = useState([]);
 
     const [name, setName] = useState('');
@@ -15,12 +16,34 @@ export default function SubscriberDashboard({ history }) {
     useEffect(() => {
         Axios.post('/subscriber/profile').then(res => {
             setName(res.data.profiledata.firstName);
+        }).catch(error => {
+            if(error.response.data.message == "Unauthorised."){
+                history.push('/subscriber/login');
+            }
+            else
+            {
+                Swal.fire({
+                    icon : 'error' ,
+                    text : `${error.response.data.message}`
+                })
+            }
         });
 
-        Axios.get('/homePage').then(res => {
+        Axios.get('/subscriber/myCourses').then(res => {
             console.log('Result : ', res.data.courseData);
             setCourses(res.data.courseData);
-        });
+        }).catch(error => {
+            if(error.response.data.message == "Unauthorised."){
+                history.push('/subscriber/login');
+            }
+            else
+            {
+                Swal.fire({
+                    icon : 'error' ,
+                    text : `${error.response.data.message}`
+                })
+            }
+        });;
     }, []);
 
     return (

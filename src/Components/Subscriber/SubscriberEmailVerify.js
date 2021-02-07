@@ -6,7 +6,7 @@ import { verifySubscriber } from '../../actions/subscriberActions';
 import Axios from 'axios'
 
 
-function SubscriberVerify({match,history}) {
+function SubscriberEmailVerify({match,history}) {
     //  const dispatch = useDispatch();
     //  const history = useHistory()
  
@@ -34,7 +34,7 @@ function SubscriberVerify({match,history}) {
         //  dispatch(verifySubscriber(token));
         if(token)
         {
-            Axios.post('/subscriber/verify',
+            Axios.post('/subscriber/verify1',
             {},
             {
                 headers : {
@@ -64,4 +64,4 @@ function SubscriberVerify({match,history}) {
      );
 }
 
-export default SubscriberVerify
+export default SubscriberEmailVerify

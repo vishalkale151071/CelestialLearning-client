@@ -6,7 +6,7 @@ import { verifySubscriber } from '../../actions/subscriberActions';
 import Axios from 'axios'
 
 
-function SubscriberVerify({match,history}) {
+function SubscriberForgetVerify({match,history}) {
     //  const dispatch = useDispatch();
     //  const history = useHistory()
  
@@ -34,7 +34,7 @@ function SubscriberVerify({match,history}) {
         //  dispatch(verifySubscriber(token));
         if(token)
         {
-            Axios.post('/subscriber/verify',
+            Axios.post('/subscriber/forgetpasswordverify',
             {},
             {
                 headers : {
@@ -45,7 +45,7 @@ function SubscriberVerify({match,history}) {
                             icon : 'success' ,
                             text : `${res.data.message}`
                         })
-                        history.push('/subscriber/login')
+                        history.push('/subscriber/forgetpasswordupdate')
             }).catch(error=>{
                 Swal.fire({
                             icon : 'error' ,
@@ -64,4 +64,4 @@ function SubscriberVerify({match,history}) {
      );
 }
 
-export default SubscriberVerify
+export default SubscriberForgetVerify

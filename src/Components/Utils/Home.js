@@ -12,7 +12,7 @@ export default function Home({ history }) {
 
     useEffect(() => {
         axios.get('/homePage').then(res => {
-            console.log("Result : " , res.data.courseData  )
+           
             setCourses(res.data.courseData)
 
         })

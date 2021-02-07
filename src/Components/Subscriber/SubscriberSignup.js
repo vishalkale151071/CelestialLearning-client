@@ -12,7 +12,7 @@ import 'shards-ui/dist/css/shards.min.css';
 import Swal from "sweetalert2"
 import { useDispatch, useSelector } from 'react-redux';
 
-
+import Axios from 'axios';
 
 
 function SubscriberSignup() {
@@ -22,43 +22,62 @@ function SubscriberSignup() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    const subscriberRegister = useSelector(state => state.subscriberRegister);
-    const { loading, error ,success , message } = subscriberRegister;
+    // const subscriberRegister = useSelector(state => state.subscriberRegister);
+    // const { loading, error ,success , message } = subscriberRegister;
 
 //     const userLogin = useSelector(state => state.userLogin);
 //     const { userInfo } = userLogin;
 
-    useEffect(() => {
+    // useEffect(() => {
      
 
-          if(error){
-               Swal.fire({
-                    icon : 'error' ,
-                    text : `${error}`    
-               })
-               console.log("Error : " , error)
-          }
+    //       if(error){
+    //            Swal.fire({
+    //                 icon : 'error' ,
+    //                 text : `${error}`    
+    //            })
+    //            console.log("Error : " , error)
+    //       }
 
-          if(success){
-               Swal.fire({
-                    icon : 'success' ,
-                    text : `${message}`
-               })
-          }
-    }, [error ,success ]);
+    //       if(success){
+    //            Swal.fire({
+    //                 icon : 'success' ,
+    //                 text : `${message}`
+    //            })
+    //       }
+    // }, [error ,success ]);
 
 
 
     const submitHandler = e => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            console.log('Passwords do not match');
+            Swal.fire({
+                                icon : 'info' ,
+                                text : "Passwords do not match."
+                           })
         } else {
-            // console.log("matched")
-            dispatch(register(name, email, password, confirmPassword));
-            console.log(`Activation Link Sent to ${email}`);
+            
+            //dispatch(register(name, email, password, confirmPassword));
+            Axios.post("/subscriber/register",{
+                username: name,
+                email,
+                password,
+                confirm_password : confirmPassword
+            }).then(res=>{
+                Swal.fire({
+                    icon : 'success' ,
+                    text : `${res.data.message}`
+               })
+            }).catch(error=>{
+                Swal.fire({
+                    icon : 'error' ,
+                    text : `${error.response.data.message}`
+               })
+            })
+            //console.log(`Activation Link Sent to ${email}`);
 
         }
     };
