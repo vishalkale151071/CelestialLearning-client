@@ -43,7 +43,7 @@ export default function SubscriberDashboard({ history }) {
                     text : `${error.response.data.message}`
                 })
             }
-        });;
+        });
     }, []);
 
     return (

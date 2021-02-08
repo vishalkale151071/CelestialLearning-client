@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SubscriberHeader from '../Subscriber/SubscriberHeader';
+import { useHistory } from 'react-router-dom';
 import '../styles/CourseView.css';
 import '../styles/video-react.css'; // import css
 import HLSSource from '../Utils/HLSSource';
@@ -8,20 +9,31 @@ import { Button } from 'shards-react';
 import { Collapse } from 'antd';
 import { Scrollbars } from 'rc-scrollbars';
 import axios from 'axios'
-
-export default function CourseView({history}) {
-
+import Swal from 'sweetalert2'
+export default function CourseView() {
+    let history = useHistory();
     const [sections , setSections] = useState([])
     const [playerUrl , setUrl] = useState('')
     
     useEffect(() => {
         axios.post('/author/course/sections' , {
-            courseId : "6016bca4b217f3151fff05cb"
+            courseId : history.location.state.id
 
         }).then(res => {
             res.data.sections.forEach((value , index) => {
                 setSections(oldArray => [...oldArray, {sectionName : value.sectionName , sectionVedios : value.video}])
             })
+        }).catch(error=>{
+            if(error.response.data.message == "Unauthorised."){
+                history.push('/author/login');
+            }
+            else
+            {
+                Swal.fire({
+                    icon : 'error' ,
+                    text : `${error.response.data.message}`
+                })
+            }
         })
     } , [])
 

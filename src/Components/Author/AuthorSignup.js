@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+
 import { Form, FormInput, FormGroup } from 'shards-react';
-import { register } from '../../actions/authorActions';
+
 import { Card, CardTitle, CardBody, CardFooter, Button } from 'shards-react';
 import '../styles/UserSignUp.css';
 import Swal from "sweetalert2"
 
-
+import Axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 
- function AuthorSignup({ history }) {
+ function AuthorSignup() {
 
 
     const [name, setName] = useState('');
@@ -18,41 +18,36 @@ import 'shards-ui/dist/css/shards.min.css';
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const dispatch = useDispatch();
-
-    const authorRegister = useSelector(state => state.authorRegister);
-    const {  error ,success , message } = authorRegister;
-
-
-
-    useEffect(() => {
-          if(error){     
-               Swal.fire({
-                    icon : 'error' ,
-                    text : `${error}`
-               })
-          }
-          if(success){
-               Swal.fire({
-                    icon : 'success' ,
-                    text : `${message}`
-               }).then(res => {
-                    history.push('/author/login')
-               })
-          }
-        
-    }, [history, error , success ]);
-
-
     const submitHandler = e => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            console.log('Passwords do not match');
+            Swal.fire({
+                                icon : 'info' ,
+                                text : "Passwords do not match."
+                           })
         } else {
-            dispatch(register(name, email, password, confirmPassword));
-            console.log(`Activation Link Sent to ${email}`);
+            
+            Axios.post("/author/register",{
+                username: name,
+                email,
+                password,
+                confirm_password : confirmPassword
+            }).then(res=>{
+                Swal.fire({
+                    icon : 'success' ,
+                    text : `${res.data.message}`
+               })
+            }).catch(error=>{
+                Swal.fire({
+                    icon : 'error' ,
+                    text : `${error.response.data.message}`
+               })
+            })
+            
+
+        }
     };
-}
+
 
     return (
         <div className="signup">

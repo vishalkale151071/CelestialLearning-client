@@ -2,18 +2,19 @@ import React from 'react';
 import verify from '../Utils/verify';
 
 
-function SubscriberForgetVerify({match,history}) {
-    
-    let token = match.params.token;
-    console.log(token); 
+function AuthorEmailVerify({match,history}) {
+ 
+     let token = match.params.token;
+    console.log(token);
+
  
      const submitHandler = e => {
          e.preventDefault();
-        
+       
         if(token)
         {
-            verify('/subscriber/forgetpasswordverify', '/subscriber/forgetpasswordupdate', token, history);
-        }
+            verify('/author/verify1', '/author/login', token, history);
+        } 
      };
  
      return (
@@ -23,4 +24,4 @@ function SubscriberForgetVerify({match,history}) {
      );
 }
 
-export default SubscriberForgetVerify
+export default AuthorEmailVerify
