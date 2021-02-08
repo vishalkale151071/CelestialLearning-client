@@ -8,16 +8,17 @@ import { Card, CardTitle, CardImg, CardBody } from 'shards-react';
 import { Image } from 'react-bootstrap';
 import 'antd/dist/antd.css';
 import { message } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
-import { Slider, Switch } from 'antd';
+import { Slider } from 'antd';
 import axios from 'axios';
 import { Upload } from 'antd';
+
+import Swal from 'sweetalert2'
 
 export default function CreateCourse() {
     let history = useHistory();
     const [courseId, setCourseId] = useState('');
-
+    
     useEffect(() => {
          console.log("History : " , history.location.state.id)
           if(history.location.state === undefined){
@@ -26,12 +27,6 @@ export default function CreateCourse() {
             setCourseId(history.location.state.id)
           }
 
-         // console.log("History : " , history.location.state.id)
-        //   if(history.location.state === undefined){
-        //       history.push('/author/uploadcourse')
-        //   }else{
-        //     setCourseId(history.location.state.id)
-        //   }
 
     }, []);
 
@@ -48,6 +43,22 @@ export default function CreateCourse() {
                 method: 'post',
                 url: '/author/uploadPreview',
                 data: formData 
+            }).then(res=>{
+                Swal.fire({
+                    icon : 'success' ,
+                    text : `${res.data.message}`
+                })
+            }).catch(error=>{
+                if(error.response.data.message == "Unauthorised."){
+                    history.push('/author/login');
+                }
+                else
+                {
+                    Swal.fire({
+                        icon : 'error' ,
+                        text : `${error.response.data.message}`
+                    })
+                }
             })
         }
         return(
@@ -75,6 +86,22 @@ export default function CreateCourse() {
                 method: 'post',
                 url: '/author/uploadThumbnail',
                 data: formData 
+            }).then(res=>{
+                Swal.fire({
+                    icon : 'success' ,
+                    text : `${res.data.message}`
+                })
+            }).catch(error=>{
+                if(error.response.data.message == "Unauthorised."){
+                    history.push('/author/login');
+                }
+                else
+                {
+                    Swal.fire({
+                        icon : 'error' ,
+                        text : `${error.response.data.message}`
+                    })
+                }
             })
         }
        
@@ -235,6 +262,22 @@ export default function CreateCourse() {
                 method: 'post',
                 url: '/author/add-video',
                 data: formData
+            }).then(res=>{
+                Swal.fire({
+                    icon : 'success' ,
+                    text : `${res.data.message}`
+                })
+            }).catch(error=>{
+                if(error.response.data.message == "Unauthorised."){
+                    history.push('/author/login');
+                }
+                else
+                {
+                    Swal.fire({
+                        icon : 'error' ,
+                        text : `${error.response.data.message}`
+                    })
+                }
             });
         }
 
@@ -309,8 +352,17 @@ export default function CreateCourse() {
                     values[i].sectionId = `${res.data.sectionId}`;
                     setSections(values);
                 })
-                .catch(err => {
-                    console.log('Error : ', err);
+                .catch(error => {
+                    if(error.response.data.message == "Unauthorised."){
+                        history.push('/author/login');
+                    }
+                    else
+                    {
+                        Swal.fire({
+                            icon : 'error' ,
+                            text : `${error.response.data.message}`
+                        })
+                    }
                 });
         };
         const addSection = () => {

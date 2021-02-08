@@ -4,14 +4,14 @@ import { Card, CardHeader, CardTitle, CardBody, CardFooter, Button } from 'shard
 import Axios from 'axios';
 import Swal from "sweetalert2"
 
-export default function SubscriberNewPassword({history}) {
+export default function AuthorNewPassword({history}) {
 
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword,setConfirm] = useState('');
     
     const submitHandler = e => {
         e.preventDefault();
-        
+
         if (newPassword !== confirmNewPassword) {
             Swal.fire({
                                 icon : 'info' ,
@@ -20,7 +20,7 @@ export default function SubscriberNewPassword({history}) {
         } 
         else 
         {
-            Axios.post("/subscriber/updatepassword",{
+            Axios.post("/author/updatepassword",{
                 new_password:newPassword,
                 confirm_password: confirmNewPassword
             }).then(res=>{
@@ -29,7 +29,7 @@ export default function SubscriberNewPassword({history}) {
                     icon : 'success' ,
                     text : `${res.data.message}`   
                 })
-                history.push("/subscriber/login")
+                history.push("/author/login")
             }).catch(error=>{
                 Swal.fire({
                             icon : 'error' ,
@@ -75,7 +75,7 @@ export default function SubscriberNewPassword({history}) {
                     </Form>
                 </CardBody>
                 <CardFooter>
-                    <a href="/subscriber/login/">Log in</a>
+                    <a href="/author/login/">Log in</a>
                 </CardFooter>
             </Card>
         </div>

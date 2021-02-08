@@ -48,7 +48,7 @@ export default function SubscriberSettings({history}) {
 
     const submitPasswordUpdateHandler = e => {
         e.preventDefault();
-        //dispatch(login(email, password));
+        
         
         if(newPassword!==confirmPassword)
         {

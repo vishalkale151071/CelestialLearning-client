@@ -218,7 +218,23 @@ export default function SubscriberProfile({ history }) {
                                         twitterURL,
                                         higherEducation,
                                         areaOfInterest
-                                    }).then(res => {});
+                                    }).then(res => {
+                                        Swal.fire({
+                                        icon : 'success' ,
+                                        text : `${res.data.message}`
+                                        })
+                                    }).catch(error => {
+                                        if(error.response.data.message == "Unauthorised."){
+                                            history.push('/subscriber/login');
+                                        }
+                                        else
+                                        {
+                                            Swal.fire({
+                                                icon : 'error' ,
+                                                text : `${error.response.data.message}`
+                                            })
+                                        }
+                                    });;
                                 }}
                             >
                                 Update
@@ -251,7 +267,23 @@ export default function SubscriberProfile({ history }) {
                                         twitterURL,
                                         higherEducation,
                                         areaOfInterest
-                                    }).then(res => {});
+                                    }).then(res => {
+                                        Swal.fire({
+                                            icon : 'success' ,
+                                            text : `${res.data.message}`
+                                        })
+                                    }).catch(error => {
+                                        if(error.response.data.message == "Unauthorised."){
+                                            history.push('/subscriber/login');
+                                        }
+                                        else
+                                        {
+                                            Swal.fire({
+                                                icon : 'error' ,
+                                                text : `${error.response.data.message}`
+                                            })
+                                        }
+                                    });;
                                 }}
                             >
                                 Update

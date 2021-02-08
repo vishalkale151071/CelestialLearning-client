@@ -19,8 +19,8 @@ import {
     FormInput,
     Collapse
 } from 'shards-react';
-
-export const AuthorHeader = () => {
+import axios from 'axios';
+export default function AuthorHeader({history}){
     return (
         <div className="authorheader">
             <Navbar className="nav" expand="md">
@@ -58,9 +58,16 @@ export const AuthorHeader = () => {
                             <Dropdown.Item href="/author/settings">Account Settings</Dropdown.Item>
                             <Dropdown.Item href="/author/mycourses">My Courses</Dropdown.Item>
                             <Dropdown.Divider />
-                            <Button className="logoutbutton" theme="outline-danger" href="/">
-                                Logout
+                            <Button className="logoutbutton" theme="outline-danger" onClick={ () => {
+                                axios.post('/logout').then(res => {
+                                    console.log(res.data.message);
+                                    history.push('/');
+                                }).catch(error => {
+                                    console.log(error);
+                                });
+                            } }>Logout
                             </Button>
+                                
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
@@ -69,4 +76,4 @@ export const AuthorHeader = () => {
     );
 };
 
-export default AuthorHeader;
+

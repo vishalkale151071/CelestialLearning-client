@@ -12,6 +12,7 @@ import HLSSource from '../Utils/HLSSource';
 import Axios from 'axios';
 import { Scrollbars } from 'rc-scrollbars';
 import { Player, ControlBar, ForwardControl, ReplayControl } from 'video-react';
+import Swal from 'sweetalert2'
 
 function loadScript(src) {
 	return new Promise((resolve) => {
@@ -41,14 +42,14 @@ export default function CourseHome({history}) {
     const [sectionData , setSections] = useState([])        
 
     let { courseTitle } = useParams();
-    //console.log(courseTitle)
+ 
     useEffect(() => {
 
         Axios.post('/subscriber/courseHome',
         {
             courseTitle: courseTitle
         }).then(res => {
-            //console.log('Project : ', res.data);
+            
             setTitle(res.data.title);
             setPrice(res.data.price);
             setSuitableFor(res.data.suitableFor);
@@ -126,8 +127,13 @@ export default function CourseHome({history}) {
             
         }).catch(error=>{
        
-        if(error.response.data.message=="session expired")
+            
+        if(error.response.data.message=="Unauthorised.")
         {
+            Swal.fire({
+                icon : 'error' ,
+                text : `Your session has been expired. Kindly login again to continue.`
+            })
             history.push("/subscriber/login");
         }
     })}

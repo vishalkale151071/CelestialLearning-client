@@ -16,7 +16,7 @@ import AuthorProfile from './Components/Author/AuthorProfile';
 import AuthorDashboard from './Components/Author/AuthorDashboard';
 import AuthorSettings from './Components/Author/AuthorSettings';
 import AuthorForgetPassword from './Components/Author/AuthorForgetPassword';
-import AuthorCourses from './Components/Author/AuthorCourses';
+
 
 import Home from './Components/Utils/Home';
 import UploadCourse from './Components/Course/UploadCourse';
@@ -26,17 +26,12 @@ import CourseView from "./Components/Course/CourseView"
 import SubscriberForgetVerify from './Components/Subscriber/SubscriberForgetVerify';
 import SubscriberNewPassword from './Components/Subscriber/SubscriberNewPassword';
 import SubscriberEmailVerify from './Components/Subscriber/SubscriberEmailVerify';
+import AuthorForgetVerify from './Components/Author/AuthorForgetVerify';
+import AuthorNewPassword from './Components/Author/AuthorNewPassword';
+import AuthorEmailVerify from './Components/Author/AuthorEmailVerify';
 
 function App() {
 
-    //const isSubscriber = localStorage.getItem('isSubscriber')
-  //  const history1 = useHistory()
-
-    // useEffect(() => {
-    //     if(isSubscriber){
-    //         history.push('/subscriber/dashboard')
-    //     }
-    // } , [])
     return (
         <div className="app">
             <Router>
@@ -64,7 +59,9 @@ function App() {
                         <Route path="/author/settings/" exact component={AuthorSettings} />
                         <Route path="/author/forgetpassword/" exact component={AuthorForgetPassword} />
                         <Route path="/author/verify/:token" exact component={AuthorVerify} />
-                        <Route path="/author/mycourses" exact component={AuthorCourses} />
+                        <Route path="/author/forgetverify/:token" exact component={AuthorForgetVerify} />
+                        <Route path="/author/forgetpasswordupdate" exact component={AuthorNewPassword} />
+                        <Route path="/author/verify1/:token" exact component={AuthorEmailVerify} />
 
                         <Route path="/author/uploadcourse" exact component={UploadCourse} />
                         <Route path="/course/create" exact component={CreateCourse} />

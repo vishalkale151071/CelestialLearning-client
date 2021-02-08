@@ -11,7 +11,7 @@ export default function SubscriberForgetPassword() {
     
     const submitHandler = e => {
         e.preventDefault();
-        //dispatch(login(email, password));
+        
         Axios.post("/subscriber/forgetpassword",{
             email
         }).then(res=>{
