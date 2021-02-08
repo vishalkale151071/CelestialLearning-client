@@ -62,11 +62,12 @@ export const Header = () => {
                 
             </Collapse>
             <div className="right">
-                    
-                    <Button outline theme="danger" onClick={loginHandleClick}>
+                    <Button outline theme="info" onClick={loginHandleClick}>
                         LogIn
+                       
+
                     </Button>
-                    <Button className="signupButton" outline theme="danger" onClick={signupHandleClick}>
+                    <Button className="signupButton" outline theme="info" onClick={signupHandleClick}>
                         SignUp
                     </Button>
                 </div>

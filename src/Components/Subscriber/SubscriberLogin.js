@@ -2,15 +2,17 @@ import React, { useState} from 'react';
 
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Card, CardHeader, CardTitle, CardBody, CardFooter, Button } from 'shards-react';
-import "../styles/UserLogin.css"
+import '../styles/UserLogin.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
+
 import Swal from 'sweetalert2'
 import Axios from 'axios';
 
 function SubscriberLogin({history}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
 
     const submitHandler = e => {
         e.preventDefault();
@@ -59,7 +61,9 @@ function SubscriberLogin({history}) {
                                 }}
                             />
                         </FormGroup>
-                        <Button className="button1" theme="success">Login</Button>
+                        <Button className="button1" theme="success">
+                            Login
+                        </Button>
                     </Form>
                 </CardBody>
                 <CardFooter>
@@ -74,6 +78,4 @@ function SubscriberLogin({history}) {
     );
 }
 
-export default SubscriberLogin
-
-
+export default SubscriberLogin;
