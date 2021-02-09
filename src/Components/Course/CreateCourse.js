@@ -19,7 +19,7 @@ export default function CreateCourse() {
     let history = useHistory();
     const [courseId, setCourseId] = useState('');
     
-    useEffect(() => {
+    useEffect(() => {});
 
 
     const PreviewVedioUpload = () => {
@@ -54,10 +54,6 @@ export default function CreateCourse() {
                     })
                 }
             })
-
-                data: formData
-            });
-
         }
         return (
             <div>
@@ -67,6 +63,7 @@ export default function CreateCourse() {
             </div>
         );
     };
+    
 
     const ImageUpload = () => {
         const [file, setFile] = useState('');
@@ -102,12 +99,6 @@ export default function CreateCourse() {
                 }
             })
         }
-       
-
-
-                data: formData
-            });
-        };
 
 
         const _handleImageChange = e => {
@@ -493,6 +484,7 @@ export default function CreateCourse() {
         // when the submit button (next button in the previous steps) is pressed
         history.push('/course/create');
     }
+    
     return (
         <div>
             {/* <AuthorHeader /> */}
