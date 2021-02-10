@@ -7,8 +7,6 @@ import { Tabs, Tab } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 
-export default function AuthorProfile() {
-
 export default function AuthorProfile({history}) {
     const [imgStatus, setStatus] = useState('Upload Image');
 
