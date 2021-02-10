@@ -40,7 +40,7 @@ export default function SubscriberDashboard({ history }) {
             {
                 setCourseStatus("No Courses")
             }
-        });;
+        });
     }, []);
 
     return (

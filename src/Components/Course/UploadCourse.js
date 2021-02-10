@@ -7,6 +7,7 @@ import '../styles/UploadCourse.css';
 import { Dropdown, Forms } from 'react-bootstrap';
 import { Card, CardTitle, CardImg, CardBody } from 'shards-react';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 export default function UploadCourse() {
     const [title, setTitle] = useState('Course Name');
@@ -169,6 +170,17 @@ export default function UploadCourse() {
                 pathname: '/course/create',
                 state: { id: res.data.courseId }
             });
+        }).catch(error=>{
+            if(error.response.data.message == "Unauthorised."){
+                history.push('/author/login');
+            }
+            else
+            {
+                Swal.fire({
+                    icon : 'error' ,
+                    text : `${error.response.data.message}`
+                })
+            }
         });
 
         //

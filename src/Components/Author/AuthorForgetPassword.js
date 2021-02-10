@@ -1,11 +1,31 @@
 import React, { useState } from 'react';
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Card, CardHeader, CardTitle, CardBody, CardFooter, Button } from 'shards-react';
+import Axios from 'axios';
+import Swal from "sweetalert2"
 
 export default function AuthorForgetPassword() {
 
     const [email, setEmail] = useState('');
-
+    const submitHandler = e => {
+        e.preventDefault();
+        //dispatch(login(email, password));
+        Axios.post("/author/forgetpassword",{
+            email
+        }).then(res=>{
+            
+            Swal.fire({
+                icon : 'success' ,
+                text : `${res.data.message}`
+           })
+        }).catch(error=>{
+            Swal.fire({
+                        icon : 'error' ,
+                        text : `${error.response.data.message}`
+                    })
+        })
+       
+    };
     return (
         <div>
             <Card className="login" theme="info" style={{ maxWidth: '450px' }}>
@@ -13,7 +33,7 @@ export default function AuthorForgetPassword() {
                 {/* <CardImg src="https://place-hold.it/300x200" /> */}
                 <CardBody>
                     <CardTitle className="tex">Author Forget Password</CardTitle>
-                    <Form >
+                    <Form onSubmit = {submitHandler}>
                         <FormGroup>
                             <label htmlFor="email">Email</label>
                             <FormInput
