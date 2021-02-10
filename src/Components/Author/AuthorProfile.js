@@ -7,7 +7,11 @@ import { Tabs, Tab } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 
+export default function AuthorProfile() {
+
 export default function AuthorProfile({history}) {
+    const [imgStatus, setStatus] = useState('Upload Image');
+
     const [firstName, setfirstName] = useState('First Name');
     const [middleName, setmiddleName] = useState('Middle Name');
     const [lastName, setlastName] = useState('Last Name');
@@ -48,6 +52,12 @@ export default function AuthorProfile({history}) {
 
         useEffect(() => {
             axios.post('/author/profileImageView').then(res => {
+                const ext = res.data.url.slice(-2);
+                if (ext == 'NA') {
+                    setStatus('Upload Image');
+                } else {
+                    setStatus('Update Image');
+                }
                 setImagePreview(res.data.url);
             }).catch(error => {
                 if(error.response.data.message == "Unauthorised."){
@@ -111,7 +121,7 @@ export default function AuthorProfile({history}) {
                 <form onSubmit={e => _handleSubmit(e)}>
                     <input className="ProfileImageInputButton" type="file" onChange={e => _handleImageChange(e)} />
                     <Button className="ProfileImageSubmitButton" type="submit" onClick={e => _handleSubmit(e)}>
-                        Upload Image
+                        {imgStatus}
                     </Button>
                 </form>
                 <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>

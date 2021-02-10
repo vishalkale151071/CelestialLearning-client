@@ -10,7 +10,7 @@ import '../styles/UserDashboard.css';
 export default function SubscriberDashboard({ history }) {
     
     const [courses, setCourses] = useState([]);
-
+    const [status,setCourseStatus] = useState('')
     const [name, setName] = useState('');
 
     useEffect(() => {
@@ -38,10 +38,7 @@ export default function SubscriberDashboard({ history }) {
             }
             else
             {
-                Swal.fire({
-                    icon : 'error' ,
-                    text : `${error.response.data.message}`
-                })
+                setCourseStatus("No Courses")
             }
         });
     }, []);
@@ -52,6 +49,7 @@ export default function SubscriberDashboard({ history }) {
             <div className="all">
                 <h1>Welcome {name}</h1>
                 Use the Icon on the top right corner to Go to Profile/ Account Settings/ Log out!
+                {status}
                 <div className="main">
                     {courses.map(course => (
                         <Container className="cc">
