@@ -4,6 +4,7 @@ import AuthorHeader from './AuthorHeader';
 import { Container, Row, Col } from 'shards-react';
 import '../styles/UserDashboard.css';
 import Axios from 'axios';
+import AuthorCourseCarousel from "./AuthorCourseCarousel"
 
 export default function AuthorDashboard() {
     const cardTitles = ['title1', 'title5', 'title4', 'title3', 'title2'];
@@ -28,8 +29,8 @@ export default function AuthorDashboard() {
             <div className="all">
                 <h1>Welcome {name}!</h1>
                 Use the Icon on the top right corner to Go to Profile/ Account Settings/ Log out!
-                <div className="main">
-                    {courses.map(course => (
+                <AuthorCourseCarousel />
+                    {/* {courses.map(course => (
                         <Container className="cc">
                             <Row>
                                 <Col>
@@ -38,8 +39,7 @@ export default function AuthorDashboard() {
                             </Row>
                         </Container>
                     ))}
-                    ;
-                </div>
+                    ; */}
             </div>
         </div>
     );

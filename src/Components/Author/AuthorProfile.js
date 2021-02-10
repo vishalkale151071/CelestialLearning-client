@@ -10,6 +10,8 @@ import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 
 export default function AuthorProfile() {
+    const [imgStatus, setStatus] = useState('Upload Image');
+
     const [firstName, setfirstName] = useState('First Name');
     const [middleName, setmiddleName] = useState('Middle Name');
     const [lastName, setlastName] = useState('Last Name');
@@ -39,6 +41,12 @@ export default function AuthorProfile() {
 
         useEffect(() => {
             axios.post('/author/profileImageView').then(res => {
+                const ext = res.data.url.slice(-2);
+                if (ext == 'NA') {
+                    setStatus('Upload Image');
+                } else {
+                    setStatus('Update Image');
+                }
                 setImagePreview(res.data.url);
             });
         }, []);
@@ -74,7 +82,7 @@ export default function AuthorProfile() {
                 <form onSubmit={e => _handleSubmit(e)}>
                     <input className="ProfileImageInputButton" type="file" onChange={e => _handleImageChange(e)} />
                     <Button className="ProfileImageSubmitButton" type="submit" onClick={e => _handleSubmit(e)}>
-                        Upload Image
+                        {imgStatus}
                     </Button>
                 </form>
                 <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>

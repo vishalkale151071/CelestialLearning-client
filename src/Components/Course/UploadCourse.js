@@ -78,14 +78,14 @@ export default function UploadCourse() {
                             <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
                                 Choose
                             </Dropdown.Toggle>
-                            <input type="text" onChange={e => setCategory(e.target.value)} />
+                            {/* <input type="text" onChange={e => setCategory(e.target.value)} /> */}
                             <Dropdown.Menu>
-                                <Dropdown.Item href="#Development">Development</Dropdown.Item>
-                                <Dropdown.Item href="#Business">Business</Dropdown.Item>
-                                <Dropdown.Item href="#Finance&Accounting">Finance & Accounting</Dropdown.Item>
-                                <Dropdown.Item href="#IT&Software">IT & Software</Dropdown.Item>
-                                <Dropdown.Item href="#Marketing">Marketing</Dropdown.Item>
-                                <Dropdown.Item href="Photography">Photography</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory('dev')}>Development</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory("Business")}>Business</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory("Finance&Accounting")}>Finance & Accounting</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory("IT&Software")}>IT & Software</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory("Marketing")}>Marketing</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory("Photography")}>Photography</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
@@ -162,6 +162,7 @@ export default function UploadCourse() {
     }
 
     function onFormSubmit() {
+        console.log(category)
         axios.post('/author/create-course', { title, description, category, suitableFor, platform, prerequisite }).then(res => {
             console.log(res.data.courseId);
             history.push({
