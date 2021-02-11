@@ -21,6 +21,8 @@ import {
 } from 'shards-react';
 import axios from 'axios';
 export default function AuthorHeader({history}){
+
+
     return (
         <div className="authorheader">
             <Navbar className="nav" expand="md">
