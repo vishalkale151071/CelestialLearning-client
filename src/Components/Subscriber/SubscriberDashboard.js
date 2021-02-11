@@ -4,6 +4,7 @@ import SubscriberHeader from './SubscriberHeader';
 import { Container, Row, Col } from 'shards-react';
 import Axios from 'axios';
 import Swal from 'sweetalert2'
+import SubscriberCourseCarousel from "./SubscriberCourseCarousel"
 
 import '../styles/UserDashboard.css';
 
@@ -50,18 +51,8 @@ export default function SubscriberDashboard({ history }) {
                 <h1>Welcome {name}</h1>
                 Use the Icon on the top right corner to Go to Profile/ Account Settings/ Log out!
                 {status}
-                <div className="main">
-                    {courses.map(course => (
-                        <Container className="cc">
-                            <Row>
-                                <Col>
-                                    <CourseCard course={course} />
-                                </Col>
-                            </Row>
-                        </Container>
-                    ))}
-                    ;
-                </div>
+                
+                    <SubscriberCourseCarousel />
             </div>
         </div>
     );

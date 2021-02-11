@@ -16,6 +16,7 @@
     "hls.js": "^0.14.17",
     "js-cookie": "^2.2.1",
     "mdbreact": "^5.0.1",
+    "ngrok": "^3.4.0",
     "prettier": "^2.2.1",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",

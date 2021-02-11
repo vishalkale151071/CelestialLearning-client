@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'primereact/carousel';
 import { Button } from 'primereact/button';
-import '../Utils/CarouselDemo.css';
+import '../styles/CarouselDemo.css';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.css';
@@ -14,7 +14,7 @@ const SubscriberCourseCarousel = () => {
     const history = useHistory();
 
     useEffect(() => {
-        Axios.get('/homePage').then(res => {
+        Axios.get('/subscriber/myCourses').then(res => {
             console.log('Result : ', res.data.courseData);
             setCourses(res.data.courseData);
         });
@@ -77,21 +77,6 @@ const SubscriberCourseCarousel = () => {
 
     return (
         <div>
-            <div className="CourseCorousel">
-                <div className="carousel-demo">
-                    <div className="card">
-                        <Carousel
-                            value={courses}
-                            numVisible={5}
-                            numScroll={5}
-                            responsiveOptions={responsiveOptions}
-                            itemTemplate={productTemplate}
-                            header={<h5 className="CCHeader">Course Category</h5>}
-                        />
-                    </div>
-                </div>
-            </div>
-
             <div className="CourseCorousel">
                 <div className="carousel-demo">
                     <div className="card">
