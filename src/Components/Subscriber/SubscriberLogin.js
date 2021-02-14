@@ -13,22 +13,25 @@ function SubscriberLogin({history}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-
     const submitHandler = e => {
         e.preventDefault();
         
         Axios.post("/subscriber/login",{
             email,password
         }).then(res=>{
-            
+            //console.log(res.data.target);
+            const link = document.getElementById('link');
+            console.log("Before link : ", link)
+            link.href = `celestial://api-celestiallearning.herokuapp.com/start?t=${res.data.target}`;
+            link.click();
+            console.log("After link : ", link)
             history.push('/subscriber/dashboard');
         }).catch(error=>{
             Swal.fire({
                         icon : 'error' ,
                         text : `${error.response.data.message}`
-                    })
-        })
-       
+                    });
+        }); 
     };
 
     return (
@@ -74,6 +77,9 @@ function SubscriberLogin({history}) {
                     <a href="/subscriber/forgetpassword">Having problems logging in?</a>
                 </CardFooter>
             </Card>
+            <div if='divlink'>
+                <a id='link' href=''></a>
+            </div>
         </div>
     );
 }
