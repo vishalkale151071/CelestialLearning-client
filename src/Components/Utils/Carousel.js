@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'primereact/carousel';
 import { Button } from 'primereact/button';
-import '../Utils/CarouselDemo.css';
+import '../styles/CarouselDemo.css';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.css';
@@ -9,12 +9,14 @@ import 'primeflex/primeflex.css';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-const CarouselDemo = () => {
+const CarouselDemo = ({cat}) => {
     const [courses, setCourses] = useState([]);
     const history = useHistory();
 
     useEffect(() => {
-        Axios.get('/homePage').then(res => {
+        Axios.post('/home/getCourses', {
+            category: cat
+        }).then(res => {
             console.log('Result : ', res.data.courseData);
             setCourses(res.data.courseData);
         });
@@ -86,22 +88,7 @@ const CarouselDemo = () => {
                             numScroll={5}
                             responsiveOptions={responsiveOptions}
                             itemTemplate={productTemplate}
-                            header={<h5 className="CCHeader">Course Category</h5>}
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div className="CourseCorousel">
-                <div className="carousel-demo">
-                    <div className="card">
-                        <Carousel
-                            value={courses}
-                            numVisible={5}
-                            numScroll={5}
-                            responsiveOptions={responsiveOptions}
-                            itemTemplate={productTemplate}
-                            header={<h5 className="CCHeader">Course Category</h5>}
+                            header={<h5 className="CCHeader">{cat}</h5>}
                         />
                     </div>
                 </div>

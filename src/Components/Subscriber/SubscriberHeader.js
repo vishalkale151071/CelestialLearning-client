@@ -30,7 +30,7 @@ import axios from 'axios';
         <div className="subscriberheader">
         <Navbar className="nav" expand="md">
             <NavbarBrand>
-                <img src={logo}  width='90' heigh='90' />
+                <img src={logo}  width='90' heigh='90' onClick={()=>history.push('/')}/>
             </NavbarBrand>
             <NavbarToggler />
 

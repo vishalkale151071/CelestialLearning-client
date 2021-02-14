@@ -8,11 +8,11 @@ import axios from 'axios';
 import CarouselDemo from "../Utils/Carousel"
 
 export default function Home({ history }) {
-
+    const categories = ["IT & Software","Finance & Accounting","Development","Business","Marketing","Photography"]
     const [courses , setCourses] = useState([])
 
     useEffect(() => {
-        axios.get('/homePage').then(res => {
+        axios.get('/home/getCourses').then(res => {
            
             setCourses(res.data.courseData)
 
@@ -27,20 +27,11 @@ export default function Home({ history }) {
             </div>
             <HomeCarousel />
 
-            {/* <div className="main">
-                {courses.map(course => (
-                    <Container className="cc">
-                        <Row>
-                            <Col>
-                                <CourseCard course={course} />
-                            </Col>
-                        </Row>
-                    </Container>
-                ))}
-                
-            </div> */}
             
-            <CarouselDemo />
+            {categories.map((value) => {
+                    return <CarouselDemo cat={value}/>
+                })}
+
             <Footer1 />
         </div>
     );

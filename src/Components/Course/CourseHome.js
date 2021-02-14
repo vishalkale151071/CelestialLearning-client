@@ -47,7 +47,7 @@ export default function CourseHome({history}) {
         window.scrollTo(0, 0)
 
 
-        Axios.post('/subscriber/courseHome',
+        Axios.post('/course/details',
         {
             courseTitle: courseTitle
         }).then(res => {
@@ -96,7 +96,7 @@ export default function CourseHome({history}) {
 		}
         
         
-        Axios.post('/subscriber/payment',{
+        Axios.post('/payment/process',{
             price,
             courseTitle,
         }).then(res=>{
