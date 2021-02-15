@@ -12,7 +12,7 @@ export default function SubscriberForgetPassword() {
     const submitHandler = e => {
         e.preventDefault();
         
-        Axios.post("/subscriber/forgetpassword",{
+        Axios.post("/api/subscriber/forgetpassword",{
             email
         }).then(res=>{
             

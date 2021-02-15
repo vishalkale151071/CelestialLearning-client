@@ -15,7 +15,7 @@ export default function SubscriberSettings({history}) {
     const submitHandler = e => {
         e.preventDefault();
         //dispatch(login(email, password));
-        Axios.post("/subscriber/emailchange",{
+        Axios.post("/api/subscriber/emailchange",{
             new_email: email,
             password: oldPassword
         }).then(res=>{
@@ -59,7 +59,7 @@ export default function SubscriberSettings({history}) {
         }
         else
         {
-            Axios.post("/subscriber/passwordchange",{
+            Axios.post("/api/subscriber/passwordchange",{
                 new_password: newPassword,
                 old_password: oldPassword
             }).then(res=>{

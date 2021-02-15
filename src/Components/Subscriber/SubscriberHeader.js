@@ -69,7 +69,7 @@ import axios from 'axios';
                             <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
                             <Dropdown.Divider />
                             <Button className="logoutbutton" theme="outline-danger" onClick={ () => {
-                                axios.post('/logout').then(res => {
+                                axios.post('/api/logout').then(res => {
                                     console.log(res.data.message);
                                     history.push('/');
                                 }).catch(error => {

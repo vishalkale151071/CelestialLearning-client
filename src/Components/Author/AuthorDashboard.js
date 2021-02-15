@@ -14,7 +14,7 @@ export default function AuthorDashboard({history}) {
     const [name, setName] = useState('');
 
     useEffect(() => {
-        Axios.post('/author/profile').then(res => {
+        Axios.post('/api/author/profile').then(res => {
             setName(res.data.profiledata.firstName);
         }).catch(error => {
             if(error.response.data.message == "Unauthorised."){
@@ -29,7 +29,7 @@ export default function AuthorDashboard({history}) {
             }
         });
 
-        Axios.get('/author/courses').then(res => {
+        Axios.get('/api/author/courses').then(res => {
             console.log('Result : ', res.data.courseData);
             setCourses(res.data.courseData);
         }).catch(error => {

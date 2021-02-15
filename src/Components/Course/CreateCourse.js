@@ -34,7 +34,7 @@ export default function CreateCourse() {
             formData.append('courseId', history.location.state.id); //Inserting course ID maunually    
             axios({
                 method: 'post',
-                url: '/author/uploadPreview',
+                url: '/api/author/uploadPreview',
 
                 data: formData 
             }).then(res=>{
@@ -78,7 +78,7 @@ export default function CreateCourse() {
             formData.append('courseId' , history.location.state.id ) // Inserting course Id manually 
             axios({
                 method: 'post',
-                url: '/author/uploadThumbnail',
+                url: '/api/author/uploadThumbnail',
 
                 data: formData 
             }).then(res=>{
@@ -247,7 +247,7 @@ export default function CreateCourse() {
             formData.append('sectionId', `${sectionId}`);
             axios({
                 method: 'post',
-                url: '/author/add-video',
+                url: '/api/author/add-video',
                 data: formData
             }).then(res=>{
                 Swal.fire({
@@ -325,7 +325,7 @@ export default function CreateCourse() {
         const saveSection = i => {
             setSectionCount(sectionCount + 1);
             axios
-                .post('/author/create-section', {
+                .post('/api/author/create-section', {
                     number: sectionCount,
                     sectionName: name,
                     courseId: `${history.location.state.id}`

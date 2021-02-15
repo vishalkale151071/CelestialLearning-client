@@ -20,7 +20,7 @@ export default function AuthorNewPassword({history}) {
         } 
         else 
         {
-            Axios.post("/author/updatepassword",{
+            Axios.post("/api/author/updatepassword",{
                 new_password:newPassword,
                 confirm_password: confirmNewPassword
             }).then(res=>{

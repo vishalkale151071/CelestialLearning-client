@@ -16,7 +16,7 @@ function SubscriberLogin({history}) {
     const submitHandler = e => {
         e.preventDefault();
         
-        Axios.post("/subscriber/login",{
+        Axios.post("/api/subscriber/login",{
             email,password
         }).then(res=>{
             //console.log(res.data.target);

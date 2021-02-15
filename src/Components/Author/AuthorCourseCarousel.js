@@ -14,7 +14,7 @@ const AuthorCourseCarousel = () => {
     const history = useHistory();
 
     useEffect(() => {
-        Axios.get('/author/courses').then(res => {
+        Axios.get('/api/author/courses').then(res => {
             console.log('Result : ', res.data.courseData);
             setCourses(res.data.courseData);
         });

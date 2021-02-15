@@ -14,7 +14,7 @@ const SubscriberCourseCarousel = () => {
     const history = useHistory();
 
     useEffect(() => {
-        Axios.get('/subscriber/myCourses').then(res => {
+        Axios.get('/api/subscriber/myCourses').then(res => {
             console.log('Result : ', res.data.courseData);
             setCourses(res.data.courseData);
         });

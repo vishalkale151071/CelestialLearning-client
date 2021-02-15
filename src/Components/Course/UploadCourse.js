@@ -164,7 +164,7 @@ export default function UploadCourse() {
 
     function onFormSubmit() {
         console.log(category)
-        axios.post('/author/create-course', { title, description, category, suitableFor, platform, prerequisite }).then(res => {
+        axios.post('/api/author/create-course', { title, description, category, suitableFor, platform, prerequisite }).then(res => {
             console.log(res.data.courseId);
             history.push({
                 pathname: '/course/create',

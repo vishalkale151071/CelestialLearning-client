@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 
 export default function verify(_url, _redirect_url, _token, _history){
     
-    Axios.post(_url,
+    Axios.post(`/api${_url}`,
             {},
             {
                 headers : {

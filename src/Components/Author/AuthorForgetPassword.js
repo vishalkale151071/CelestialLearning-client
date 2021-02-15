@@ -10,7 +10,7 @@ export default function AuthorForgetPassword() {
     const submitHandler = e => {
         e.preventDefault();
         //dispatch(login(email, password));
-        Axios.post("/author/forgetpassword",{
+        Axios.post("/api/author/forgetpassword",{
             email
         }).then(res=>{
             

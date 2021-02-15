@@ -15,7 +15,7 @@ export default function SubscriberDashboard({ history }) {
     const [name, setName] = useState('');
 
     useEffect(() => {
-        Axios.post('/subscriber/profile').then(res => {
+        Axios.post('/api/subscriber/profile').then(res => {
             setName(res.data.profiledata.firstName);
         }).catch(error => {
             if(error.response.data.message == "Unauthorised."){
@@ -30,7 +30,7 @@ export default function SubscriberDashboard({ history }) {
             }
         });
 
-        Axios.get('/subscriber/myCourses').then(res => {
+        Axios.get('/api/subscriber/myCourses').then(res => {
             console.log('Result : ', res.data.courseData);
             setCourses(res.data.courseData);
         }).catch(error => {

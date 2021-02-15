@@ -61,7 +61,7 @@ export default function AuthorHeader({history}){
                             <Dropdown.Item href="/author/mycourses">My Courses</Dropdown.Item>
                             <Dropdown.Divider />
                             <Button className="logoutbutton" theme="outline-danger" onClick={ () => {
-                                axios.post('/logout').then(res => {
+                                axios.post('/api/logout').then(res => {
                                     console.log(res.data.message);
                                     history.push('/');
                                 }).catch(error => {

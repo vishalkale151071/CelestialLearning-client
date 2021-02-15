@@ -20,7 +20,7 @@ export default function SubscriberNewPassword({history}) {
         } 
         else 
         {
-            Axios.post("/subscriber/updatepassword",{
+            Axios.post("/api/subscriber/updatepassword",{
                 new_password:newPassword,
                 confirm_password: confirmNewPassword
             }).then(res=>{

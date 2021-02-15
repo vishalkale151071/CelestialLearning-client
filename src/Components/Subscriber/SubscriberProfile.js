@@ -28,7 +28,7 @@ export default function SubscriberProfile({ history }) {
 
         useEffect(() => {
             axios
-                .post('/subscriber/profileImageView')
+                .post('/api/subscriber/profileImageView')
                 .then(res => {
                     const ext = res.data.url.slice(-2);
                     if (ext == 'NA') {
@@ -59,7 +59,7 @@ export default function SubscriberProfile({ history }) {
             formData.append('image', file);
             axios({
                 method: 'post',
-                url: '/subscriber/profileImageUpdate',
+                url: '/api/subscriber/profileImageUpdate',
                 data: formData
             })
                 .then(res => {
@@ -113,7 +113,7 @@ export default function SubscriberProfile({ history }) {
     };
 
     useEffect(() => {
-        Axios.post('/subscriber/profile')
+        Axios.post('/api/subscriber/profile')
             .then(res => {
                 console.log('Response Invalid: ', res);
                 setUrl(res.data.url);
@@ -179,7 +179,7 @@ export default function SubscriberProfile({ history }) {
                             <Button
                                 theme="info"
                                 onClick={() => {
-                                    Axios.post('/subscriber/update', {
+                                    Axios.post('/api/subscriber/update', {
                                         firstName,
                                         middleName,
                                         lastName,
@@ -224,7 +224,7 @@ export default function SubscriberProfile({ history }) {
                             <Button
                                 theme="info"
                                 onClick={() => {
-                                    Axios.post('/subscriber/update', {
+                                    Axios.post('/api/subscriber/update', {
                                         firstName,
                                         middleName,
                                         lastName,
@@ -273,7 +273,7 @@ export default function SubscriberProfile({ history }) {
                             <Button
                                 theme="info"
                                 onClick={() => {
-                                    Axios.post('/subscriber/update', {
+                                    Axios.post('/api/subscriber/update', {
                                         firstName,
                                         middleName,
                                         lastName,

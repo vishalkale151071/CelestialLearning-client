@@ -16,7 +16,7 @@ export default function CourseView() {
     const [playerUrl , setUrl] = useState('')
     
     useEffect(() => {
-        axios.post('/author/course/sections' , {
+        axios.post('/api/author/course/sections' , {
             courseId : history.location.state.id
 
         }).then(res => {

@@ -13,7 +13,7 @@ function AuthorLogin({ history }) {
 
     const submitHandler = e => {
         e.preventDefault();
-        Axios.post("/author/login",{
+        Axios.post("/api/author/login",{
             email,password
         }).then(res=>{
             

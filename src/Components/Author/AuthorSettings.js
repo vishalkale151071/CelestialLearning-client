@@ -15,7 +15,7 @@ export default function AuthorSettings({history}) {
     const submitHandler = e => {
         e.preventDefault();
        
-        Axios.post("/author/emailchange",{
+        Axios.post("/api/author/emailchange",{
             new_email: email,
             password: oldPassword
         }).then(res=>{
@@ -59,7 +59,7 @@ export default function AuthorSettings({history}) {
         }
         else
         {
-            Axios.post("/author/passwordchange",{
+            Axios.post("/api/author/passwordchange",{
                 new_password: newPassword,
                 old_password: oldPassword
             }).then(res=>{

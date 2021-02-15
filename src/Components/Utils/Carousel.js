@@ -14,7 +14,7 @@ const CarouselDemo = ({cat}) => {
     const history = useHistory();
 
     useEffect(() => {
-        Axios.post('/home/getCourses', {
+        Axios.post('/api/home/getCourses', {
             category: cat
         }).then(res => {
             console.log('Result : ', res.data.courseData);

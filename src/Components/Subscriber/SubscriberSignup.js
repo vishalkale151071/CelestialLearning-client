@@ -24,7 +24,7 @@ function SubscriberSignup() {
                            })
         } else {
             
-            Axios.post("/subscriber/register",{
+            Axios.post("/api/subscriber/register",{
                 username: name,
                 email,
                 password,

@@ -27,7 +27,7 @@ import 'shards-ui/dist/css/shards.min.css';
                            })
         } else {
             
-            Axios.post("/author/register",{
+            Axios.post("/api/author/register",{
                 username: name,
                 email,
                 password,
