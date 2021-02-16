@@ -5,8 +5,6 @@ import { Form, FormInput, FormGroup } from 'shards-react';
 import { Button } from 'shards-react';
 import { Tabs, Tab } from 'react-bootstrap';
 import Axios from 'axios';
-import { Upload, message } from 'antd';
-import Avatar from 'react-avatar';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
@@ -31,7 +29,7 @@ export default function SubscriberProfile({ history }) {
                 .post('/subscriber/profileImageView')
                 .then(res => {
                     const ext = res.data.url.slice(-2);
-                    if (ext == 'NA') {
+                    if (ext === 'NA') {
                         setStatus('Upload Image');
                     } else {
                         setStatus('Update Image');
@@ -40,7 +38,7 @@ export default function SubscriberProfile({ history }) {
 
                 })
                 .catch(error => {
-                    if (error.response.data.message == 'Unauthorised.') {
+                    if (error.response.data.message === 'Unauthorised.') {
                         history.push('/subscriber/login');
                     } else {
                         Swal.fire({
@@ -69,7 +67,7 @@ export default function SubscriberProfile({ history }) {
                     });
                 })
                 .catch(error => {
-                    if (error.response.data.message == 'Unauthorised.') {
+                    if (error.response.data.message === 'Unauthorised.') {
                         history.push('/subscriber/login');
                     } else {
                         Swal.fire({
@@ -196,7 +194,7 @@ export default function SubscriberProfile({ history }) {
                                             });
                                         })
                                         .catch(error => {
-                                            if (error.response.data.message == 'Unauthorised.') {
+                                            if (error.response.data.message === 'Unauthorised.') {
                                                 history.push('/subscriber/login');
                                             } else {
                                                 Swal.fire({
@@ -239,7 +237,7 @@ export default function SubscriberProfile({ history }) {
                                         text : `${res.data.message}`
                                         })
                                     }).catch(error => {
-                                        if(error.response.data.message == "Unauthorised."){
+                                        if(error.response.data.message === "Unauthorised."){
                                             history.push('/subscriber/login');
                                         }
                                         else
@@ -288,7 +286,7 @@ export default function SubscriberProfile({ history }) {
                                             text : `${res.data.message}`
                                         })
                                     }).catch(error => {
-                                        if(error.response.data.message == "Unauthorised."){
+                                        if(error.response.data.message === "Unauthorised."){
                                             history.push('/subscriber/login');
                                         }
                                         else

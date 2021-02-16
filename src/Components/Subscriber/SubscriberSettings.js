@@ -25,10 +25,10 @@ export default function SubscriberSettings({history}) {
                 text : `${res.data.message}`
            })
         }).catch(error=>{
-            if(error.response.data.message == "Unauthorised."){
+            if(error.response.data.message === "Unauthorised."){
                 history.push('/subscriber/login');
             }
-            else if(error.response.data.message=="Current email address entered.")
+            else if(error.response.data.message==="Current email address entered.")
             {
                 Swal.fire({
                     icon : 'info' ,
@@ -69,7 +69,7 @@ export default function SubscriberSettings({history}) {
                     text : `${res.data.message}`
                })
             }).catch(error=>{
-                if(error.response.data.message == "Unauthorised."){
+                if(error.response.data.message === "Unauthorised."){
                     history.push('/subscriber/login');
                 }
                 else

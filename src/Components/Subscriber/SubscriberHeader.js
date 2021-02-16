@@ -23,9 +23,13 @@ import {
 } from 'shards-react';
 import CategoriesDropdown from "../Utils/CategoriesDropdown"
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useHistory } from 'react-router-dom';
 
 
- export default function SubscriberHeader({ history }){
+
+ export default function SubscriberHeader(){
+    let history = useHistory();
     return (
         <div className="subscriberheader">
         <Navbar className="nav" expand="md">
@@ -71,6 +75,8 @@ import axios from 'axios';
                             <Button className="logoutbutton" theme="outline-danger" onClick={ () => {
                                 axios.post('/logout').then(res => {
                                     console.log(res.data.message);
+                                    Cookies.remove('u');
+
                                     history.push('/');
                                 }).catch(error => {
                                     console.log(error);

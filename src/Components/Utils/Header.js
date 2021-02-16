@@ -7,6 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import logo from '../assets/CL.png';
 import { Button } from 'shards-react';
 import CategoriesDropdown from './CategoriesDropdown';
+import Axios from 'axios'
 import {
     Navbar,
     NavbarToggler,
@@ -20,6 +21,7 @@ import {
     FormInput,
     Collapse
 } from 'shards-react';
+import Search from '@material-ui/icons/Search';
 
 export var type = "";
 
@@ -32,7 +34,13 @@ export const Header = () => {
     const signupHandleClick = () => {
         history.push('/subscriber/signup');
     };
-   
+    async function search(key)
+    {
+        //console.warn(key);
+        Axios.get('http://localhost:5000/home/search?param='+key).then(res=>{
+            console.log(res.data.results);   
+        })
+    }
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
@@ -54,7 +62,7 @@ export const Header = () => {
                                 <SearchIcon />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <FormInput className="border-0" placeholder="Search..." />
+                        <FormInput className="border-0" placeholder="Search..." onChange = {(e)=> search(e.target.value)} />
                     </InputGroup>
                 </Nav>
 

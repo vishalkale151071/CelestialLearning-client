@@ -31,7 +31,7 @@ export default function AuthorProfile({history}) {
             setqualification(res.data.profiledata.qualification);
             setBiography(res.data.profiledata.biography);
         }).catch(error => {
-            if(error.response.data.message == "Unauthorised."){
+            if(error.response.data.message === "Unauthorised."){
                 history.push('/author/login');
             }
             else
@@ -51,14 +51,14 @@ export default function AuthorProfile({history}) {
         useEffect(() => {
             axios.post('/author/profileImageView').then(res => {
                 const ext = res.data.url.slice(-2);
-                if (ext == 'NA') {
+                if (ext === 'NA') {
                     setStatus('Upload Image');
                 } else {
                     setStatus('Update Image');
                 }
                 setImagePreview(res.data.url);
             }).catch(error => {
-                if(error.response.data.message == "Unauthorised."){
+                if(error.response.data.message === "Unauthorised."){
                     history.push('/author/login');
                 }
                 else
@@ -88,7 +88,7 @@ export default function AuthorProfile({history}) {
                 })
             }).catch(error=>{
 
-                if(error.response.data.message == "Unauthorised."){
+                if(error.response.data.message === "Unauthorised."){
                     history.push('/author/login');
                 }
                 else
@@ -203,7 +203,7 @@ export default function AuthorProfile({history}) {
                                                 text : `${res.data.message}`
                                             })
                                         }).catch(error => {
-                                            if(error.response.data.message == "Unauthorised."){
+                                            if(error.response.data.message === "Unauthorised."){
                                                 history.push('/author/login');
                                             }
                                             else
@@ -262,7 +262,7 @@ export default function AuthorProfile({history}) {
                                                 text : `${res.data.message}`
                                             })
                                         }).catch(error => {
-                                            if(error.response.data.message == "Unauthorised."){
+                                            if(error.response.data.message === "Unauthorised."){
                                                 history.push('/author/login');
                                             }
                                             else
@@ -321,7 +321,7 @@ export default function AuthorProfile({history}) {
                                                 text : `${res.data.message}`
                                             })
                                         }).catch(error => {
-                                            if(error.response.data.message == "Unauthorised."){
+                                            if(error.response.data.message === "Unauthorised."){
                                                 history.push('/author/login');
                                             }
                                             else

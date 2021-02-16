@@ -8,6 +8,8 @@ import 'shards-ui/dist/css/shards.min.css';
 
 import Swal from 'sweetalert2'
 import Axios from 'axios';
+import Cookies from 'js-cookie';
+
 
 function SubscriberLogin({history}) {
     const [email, setEmail] = useState('');
@@ -20,7 +22,8 @@ function SubscriberLogin({history}) {
         Axios.post("/subscriber/login",{
             email,password
         }).then(res=>{
-            
+            Cookies.set('u', 's');
+
             history.push('/subscriber/dashboard');
         }).catch(error=>{
             Swal.fire({

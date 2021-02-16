@@ -1,29 +1,33 @@
 .vidPlayer{
     position: absolute;
-    width: 30cm;
-    height: 20cm;
-    margin-top: 1cm;
-    margin-left: 7.2cm;
+    width: 67%;
+    height: 23%;
+    margin-top: 3.4%;
+    margin-left: 24%;
     box-shadow: black 1px 0.7px 15px;
 
 }
 
 .vidPlayerdiv{
     position: absolute;
-    width: 30cm;
-    height: 20cm;
-    margin-top: 1cm;
-    margin-left: 7cm;
+    width: 67%;
+    height: 23%;
+    margin-top: 2.4%;
+    margin-left: 17%;
 
 }
 
 .crvCollapse{
-    max-width: 14cm;
-    height: 16.8cm;
+    max-width: 31.5%;
+    height: 50%;
     margin-top: 3.3cm;
     box-shadow: black 1px 0.7px 15px;
 }
 
 .crvTitle{
     margin-left: 7.5cm;
+}
+
+.crvpanel{
+    max-width: 99%;
 }

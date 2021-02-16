@@ -4,8 +4,8 @@ import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
 import { Form, FormInput, FormGroup, FormTextarea, Button } from 'shards-react';
 import '../styles/UploadCourse.css';
-import { Dropdown, Forms } from 'react-bootstrap';
-import { Card, CardTitle, CardImg, CardBody } from 'shards-react';
+import { Dropdown} from 'react-bootstrap';
+import { Card, CardTitle,CardBody } from 'shards-react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 
@@ -16,7 +16,7 @@ export default function UploadCourse() {
     const [suitableFor, setSuitableFor] = useState('');
     const [platform, setPlatform] = useState('');
     const [prerequisite, setPrerequisite] = useState('');
-
+    const [cat,setCat] = useState('Choose a Category');
     // setup the step content
     let history = useHistory();
     const step1Content = (
@@ -171,7 +171,7 @@ export default function UploadCourse() {
                 state: { id: res.data.courseId }
             });
         }).catch(error=>{
-            if(error.response.data.message == "Unauthorised."){
+            if(error.response.data.message === "Unauthorised."){
                 history.push('/author/login');
             }
             else

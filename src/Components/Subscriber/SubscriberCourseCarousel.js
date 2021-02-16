@@ -12,16 +12,19 @@ import { useHistory } from 'react-router-dom';
 const SubscriberCourseCarousel = () => {
     const [courses, setCourses] = useState([]);
     const history = useHistory();
+    const [courseID,setcourseID] = useState('')
 
     useEffect(() => {
         Axios.get('/subscriber/myCourses').then(res => {
             console.log('Result : ', res.data.courseData);
+            setcourseID(res.data.courseData.courseId)
+            console.log("ID:", courseID)
             setCourses(res.data.courseData);
         });
     }, []);
 
     const submit = title => {
-        history.push(`/course/${title}`);
+        history.push(`/course/view/${title}`);
     };
     const responsiveOptions = [
         {
@@ -62,7 +65,7 @@ const SubscriberCourseCarousel = () => {
                         <h6 className="p-mt-0 p-mb-3">Rs. {courses.price}</h6>
                         <div className="car-buttons p-mt-5">
                             <Button
-                                icon="pi pi-shopping-cart"
+                                icon="pi pi-play"
                                 onClick={() => submit(courses.courseName)}
                                 className="p-button p-button-rounded p-mr-2"
                             />
