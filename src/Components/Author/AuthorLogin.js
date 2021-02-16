@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 import Swal from 'sweetalert2'
 import Axios from 'axios';
+import Cookies from 'js-cookie';
+
 
 function AuthorLogin({ history }) {
     const [email, setEmail] = useState('');
@@ -16,7 +18,8 @@ function AuthorLogin({ history }) {
         Axios.post("/author/login",{
             email,password
         }).then(res=>{
-            
+            Cookies.set('u', 'a');
+
             history.push('/author/dashboard');
         }).catch(error=>{
             Swal.fire({

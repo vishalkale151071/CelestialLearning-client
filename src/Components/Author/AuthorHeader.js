@@ -20,9 +20,11 @@ import {
     Collapse
 } from 'shards-react';
 import axios from 'axios';
-export default function AuthorHeader({history}){
+import Cookies from 'js-cookie';
+import { useHistory } from 'react-router-dom';
 
-
+export default function AuthorHeader() {
+    const history = useHistory();
     return (
         <div className="authorheader">
             <Navbar className="nav" expand="md">
@@ -60,22 +62,28 @@ export default function AuthorHeader({history}){
                             <Dropdown.Item href="/author/settings">Account Settings</Dropdown.Item>
                             <Dropdown.Item href="/author/mycourses">My Courses</Dropdown.Item>
                             <Dropdown.Divider />
-                            <Button className="logoutbutton" theme="outline-danger" onClick={ () => {
-                                axios.post('/logout').then(res => {
-                                    console.log(res.data.message);
-                                    history.push('/');
-                                }).catch(error => {
-                                    console.log(error);
-                                });
-                            } }>Logout
+                            <Button
+                                className="logoutbutton"
+                                theme="outline-danger"
+                                onClick={() => {
+                                    axios
+                                        .post('/logout')
+                                        .then(res => {
+                                            console.log(res.data.message);
+                                            Cookies.remove('u');
+                                            history.push('/');
+                                        })
+                                        .catch(error => {
+                                            console.log(error);
+                                        });
+                                }}
+                            >
+                                Logout
                             </Button>
-                                
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
             </Navbar>
         </div>
     );
-};
-
-
+}

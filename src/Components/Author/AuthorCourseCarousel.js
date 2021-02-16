@@ -15,8 +15,8 @@ const AuthorCourseCarousel = () => {
 
     useEffect(() => {
         Axios.get('/author/courses').then(res => {
-            console.log('Result : ', res.data.courseData);
-            setCourses(res.data.courseData);
+            console.log('Result : ', res.data.completeCourseData);
+            setCourses(res.data.completeCourseData);
         });
     }, []);
 

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
-import { Form, FormInput, FormGroup, FormTextarea, Button } from 'shards-react';
+import { Form, FormInput, FormGroup, Button } from 'shards-react';
 import '../styles/CreateCourse.css';
-import { Card, CardTitle, CardImg, CardBody } from 'shards-react';
+import { Card, CardTitle, CardBody } from 'shards-react';
 import { Image } from 'react-bootstrap';
 import 'antd/dist/antd.css';
 import { message } from 'antd';
@@ -43,7 +43,7 @@ export default function CreateCourse() {
                     text : `${res.data.message}`
                 })
             }).catch(error=>{
-                if(error.response.data.message == "Unauthorised."){
+                if(error.response.data.message === "Unauthorised."){
                     history.push('/author/login');
                 }
                 else
@@ -87,7 +87,7 @@ export default function CreateCourse() {
                     text : `${res.data.message}`
                 })
             }).catch(error=>{
-                if(error.response.data.message == "Unauthorised."){
+                if(error.response.data.message === "Unauthorised."){
                     history.push('/author/login');
                 }
                 else
@@ -255,7 +255,7 @@ export default function CreateCourse() {
                     text : `${res.data.message}`
                 })
             }).catch(error=>{
-                if(error.response.data.message == "Unauthorised."){
+                if(error.response.data.message === "Unauthorised."){
                     history.push('/author/login');
                 }
                 else
@@ -340,7 +340,7 @@ export default function CreateCourse() {
                     setSections(values);
                 })
                 .catch(error => {
-                    if(error.response.data.message == "Unauthorised."){
+                    if(error.response.data.message === "Unauthorised."){
                         history.push('/author/login');
                     }
                     else

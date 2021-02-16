@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CourseCard from '../Utils/CourseCard';
 import SubscriberHeader from './SubscriberHeader';
-import { Container, Row, Col } from 'shards-react';
 import Axios from 'axios';
 import Swal from 'sweetalert2'
 import SubscriberCourseCarousel from "./SubscriberCourseCarousel"
@@ -9,7 +8,8 @@ import SubscriberCourseCarousel from "./SubscriberCourseCarousel"
 import '../styles/UserDashboard.css';
 
 export default function SubscriberDashboard({ history }) {
-    
+    const [courseID,setcourseID] = useState('')
+
     const [courses, setCourses] = useState([]);
     const [status,setCourseStatus] = useState('')
     const [name, setName] = useState('');
@@ -18,7 +18,7 @@ export default function SubscriberDashboard({ history }) {
         Axios.post('/subscriber/profile').then(res => {
             setName(res.data.profiledata.firstName);
         }).catch(error => {
-            if(error.response.data.message == "Unauthorised."){
+            if(error.response.data.message === "Unauthorised."){
                 history.push('/subscriber/login');
             }
             else
@@ -32,9 +32,11 @@ export default function SubscriberDashboard({ history }) {
 
         Axios.get('/subscriber/myCourses').then(res => {
             console.log('Result : ', res.data.courseData);
+            setcourseID(res.data.courseData.courseId)
+            console.log("ID:", courseID)
             setCourses(res.data.courseData);
         }).catch(error => {
-            if(error.response.data.message == "Unauthorised."){
+            if(error.response.data.message === "Unauthorised."){
                 history.push('/subscriber/login');
             }
             else
