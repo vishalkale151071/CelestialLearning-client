@@ -37,9 +37,13 @@ export const Header = () => {
     async function search(key)
     {
         //console.warn(key);
-        Axios.get('http://localhost:5000/home/search?param='+key).then(res=>{
-            console.log(res.data.results);   
-        })
+        if(key)
+        {
+            Axios.get('http://localhost:5000/home/search?param='+key).then(res=>{
+            console.log(res.data.resultData);   
+            })
+        }
+        
     }
     return (
         <Navbar className="nav" expand="md">

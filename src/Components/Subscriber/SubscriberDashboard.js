@@ -30,20 +30,21 @@ export default function SubscriberDashboard({ history }) {
             }
         });
 
-        Axios.get('/subscriber/myCourses').then(res => {
-            console.log('Result : ', res.data.courseData);
-            setcourseID(res.data.courseData.courseId)
-            console.log("ID:", courseID)
-            setCourses(res.data.courseData);
-        }).catch(error => {
-            if(error.response.data.message === "Unauthorised."){
-                history.push('/subscriber/login');
-            }
-            else
-            {
-                setCourseStatus("No Courses")
-            }
-        });
+        // Axios.get('/subscriber/myCourses').then(res => {
+        //     console.log('Result : ', res.data.courseData);
+        //     console.log("efdef",res.data.courseData[0].courseId)
+        //     setcourseID(res.data.courseData.courseId)
+        //     console.log("ID:", courseID)
+        //     setCourses(res.data.courseData);
+        // }).catch(error => {
+        //     if(error.response.data.message === "Unauthorised."){
+        //         history.push('/subscriber/login');
+        //     }
+        //     else
+        //     {
+        //         setCourseStatus("No Courses")
+        //     }
+        // });
     }, []);
 
     return (
