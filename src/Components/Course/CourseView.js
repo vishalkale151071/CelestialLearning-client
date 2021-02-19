@@ -7,6 +7,7 @@ import HLSSource from '../Utils/HLSSource';
 import { Player, ControlBar, ForwardControl, ReplayControl } from 'video-react';
 import { Collapse } from 'antd';
 import { Scrollbars } from 'rc-scrollbars';
+import { useParams } from "react-router";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -15,16 +16,20 @@ export default function CourseView() {
     let history = useHistory();
     const [sections, setSections] = useState([]);
     const [playerUrl, setUrl] = useState('');
+    const { title } = useParams();
 
     useEffect(() => {
-        axios
+         axios
             .post('/author/course/sections', {
-                courseId: '602a9e331eb9b8315bae64f9'
+                title
             })
             .then(res => {
-                res.data.sections.forEach((value, index) => {
-                    setSections(oldArray => [...oldArray, { sectionName: value.sectionName, sectionVedios: value.video }]);
-                });
+                 res.data.sectionData.forEach((value, index) => {
+                    
+                     setSections(oldArray => [...oldArray, { sectionName: value.sectionName, sectionVedios: value.video }]);
+                 });
+
+                
             })
             .catch(error => {
                 if (error.response.data.message === 'Unauthorised.') {
@@ -36,11 +41,11 @@ export default function CourseView() {
                     });
                 }
             });
-    });
-
+    },[]);
+    console.log(sections);
     const Section = ({ section }) => {
         const { Panel } = Collapse;
-
+        
         return (
             <Collapse>
                 <Panel header={section.sectionName}>
@@ -49,7 +54,6 @@ export default function CourseView() {
                             key={vedio.videoName}
                             onClick={() => {
                                 setUrl(`${vedio.videoURL}`);
-                                console.log('url : ', playerUrl);
                             }}
                         >
                             {vedio.videoName}
@@ -64,13 +68,13 @@ export default function CourseView() {
             <SubscriberHeader history={history} />
             <div className="vidPlayerdiv">
                 <h1 className="crvTitle">Title</h1>
-
+                    
                 {/* If you want to use MP4 file, give a src prop to Player tag and remove HLSSoure tag || If you want to play m3u8 file, keep the HLSSource tag just change the url */}
-                <Player className="vidPlayer" src={playerUrl}>
-                    {/* <HLSSource
+                <Player className="vidPlayer">
+                    <HLSSource
                         isVideoChild
-                        src="https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8"
-                    /> */}
+                        src="https://celestiallearning.s3.amazonaws.com/v0/video.m3u8"//"https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8"
+                    />
                     <ControlBar className="ctrlbar" autoHide={true}>
                         <ReplayControl seconds={10} order={2.2} />
                         <ForwardControl seconds={10} order={3.2} />
@@ -78,11 +82,13 @@ export default function CourseView() {
                 </Player>
             </div>
             <div className="crvCollapse">
+                <Collapse className="CoHoCollaps">
                     <Scrollbars style={{ width: 525, height: 630 }}>
                         {sections.map(section => (
                             <Section section={section} key={section.sectionName} />
                         ))}
                     </Scrollbars>
+                </Collapse> 
             </div>
         </div>
     );
