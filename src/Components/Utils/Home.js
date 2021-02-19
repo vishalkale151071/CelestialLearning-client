@@ -22,11 +22,11 @@ export default function Home({ history }) {
             return <Header />;
         }
     }
-    useEffect(() => {
-        axios.get('/home/getCourses').then(res => {
-            setCourses(res.data.courseData);
-        });
-    }, []);
+    // useEffect(() => {
+    //     axios.get('/home/getCourses').then(res => {
+    //         setCourses(res.data.courseData);
+    //     });
+    // }, []);
 
     return (
         <div className="home">
