@@ -1,33 +1,38 @@
-.vidPlayer{
+.vidPlayer {
     position: absolute;
     width: 67%;
     height: 23%;
     margin-top: 3.4%;
     margin-left: 24%;
     box-shadow: black 1px 0.7px 15px;
+    margin-bottom: 1cm;
 
 }
 
-.vidPlayerdiv{
+.vidPlayerdiv {
     position: absolute;
     width: 67%;
     height: 23%;
-    margin-top: 2.4%;
-    margin-left: 17%;
-
+    margin-top: 1.7%;
+    margin-left: 15%;
+    margin-bottom: 1cm;
 }
 
-.crvCollapse{
-    max-width: 31.5%;
-    height: 50%;
+.crvCollapse {
+    max-width: 30%;
+    height: 100%;
     margin-top: 3.3cm;
     box-shadow: black 1px 0.7px 15px;
 }
 
-.crvTitle{
+.crvTitle {
     margin-left: 7.5cm;
 }
 
-.crvpanel{
+.crvpanel {
     max-width: 99%;
+}
+
+.crvbutgt{
+    margin-left: 15cm;
 }
