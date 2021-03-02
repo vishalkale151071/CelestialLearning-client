@@ -9,6 +9,7 @@ import CarouselDemo from '../Utils/Carousel';
 import SubscriberHeader from '../Subscriber/SubscriberHeader';
 import Cookies from 'js-cookie';
 import AuthorHeader from '../Author/AuthorHeader';
+import SearchList from "./SearchList"
 
 export default function Home({ history }) {
     const categories = ['IT & Software', 'Finance & Accounting', 'Development', 'Business', 'Marketing', 'Photography'];
@@ -27,11 +28,12 @@ export default function Home({ history }) {
     //         setCourses(res.data.courseData);
     //     });
     // }, []);
-
+    
     return (
         <div className="home">
             <div className="header">
                 <Headerfunc />
+                
             </div>
             <HomeCarousel />
 
