@@ -86,6 +86,7 @@ export default function CourseView() {
                     </ControlBar>
                 </Player>
                 <Button className="crvbutgt" onClick={getTime}>Get Current Time</Button>
+
             </div>
             <div className="crvCollapse">
                 <Scrollbars style={{ width: 525, height: 630 }}>
