@@ -2,8 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Question from './questions';
 const CreateTest = ({ history }) =>{
-    
+
     const [questions, setQuestions] = useState(5);
+    const [courseList, setCourseList] = useState([]);
+    const [sectionList, setSectionList] = useState([]);
     const numbers = [];
     const enumeOptions = {
         "1": "A",
@@ -13,13 +15,21 @@ const CreateTest = ({ history }) =>{
         "5": "E",
         "6": "F",
     }
-
+   
     for(let i=1;i<=questions;i++){
         numbers.push(i)
     }
-    useEffect( () => {
 
-    }, [questions]);
+    useEffect( () => {
+        axios.get(
+            '/assessment/courseList'
+        ).then((res) => {
+            setCourseList(res.data['courseList']);
+            console.log("got the data.")
+        }).catch((err) => {
+            console.log(err)
+        });
+    }, []);
     
     function updateQuestions(){
         const q = document.getElementById('questions').value;
@@ -65,6 +75,21 @@ const CreateTest = ({ history }) =>{
         });
     }
 
+    function setSections(){
+        const course = document.getElementById('courseName').value;
+        axios.post(
+            '/assessment/sectionList',
+            {
+                "courseName": course
+            }
+        ).then((res) => {
+            setSectionList(res.data['sectionList']);
+            console.log("got the sections");
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
     return(
         <div key="test-form">
             <label>Questions : </label>
@@ -83,9 +108,19 @@ const CreateTest = ({ history }) =>{
             </select>
             <form id="questionForm">
                 <label htmlFor='courseName'>Course Name : </label>
-                <input type='text' id='courseName'/> <br></br>
+                <select id='courseName' onChange={ setSections }>
+                    {courseList.map((item) => (
+                        <option value={item}>{item}</option>
+                    ))}
+                </select><br></br>
                 <label htmlFor='sectionName'>Section Name : </label>
-                <input type='text' id='sectionName'/>
+                <select id='sectionName'>
+                    {
+                        sectionList.map((section) => (
+                            <option value={section}>{section}</option>
+                        ))
+                    }
+                </select>
                 {numbers.map((number) => (<Question key={'q'+number.toString()} number={number}></Question>))}
                 <button type="button" onClick={ sendQuestions }>Submit</button>
             </form>
