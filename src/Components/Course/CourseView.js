@@ -94,6 +94,7 @@ export default function CourseView() {
                         <ForwardControl seconds={10} order={3.2} />
                     </ControlBar>
                 </Player>
+
             </div>
             <div className="crvCollapse">
                 <Scrollbars style={{ width: 525, height: 630 }}>
