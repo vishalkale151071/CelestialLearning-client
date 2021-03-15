@@ -13,14 +13,14 @@ import { Slider } from 'antd';
 import axios from 'axios';
 import { Upload } from 'antd';
 
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export default function CreateCourse() {
     let history = useHistory();
     const [courseId, setCourseId] = useState('');
-    
-    useEffect(() => {});
+    const [price,setPrice] = useState('')
 
+    useEffect(() => {});
 
     const PreviewVedioUpload = () => {
         const [vedioFile, setVedioFile] = useState(null);
@@ -31,29 +31,29 @@ export default function CreateCourse() {
             const formData = new FormData();
             formData.append('image', vedioFile);
 
-            formData.append('courseId', history.location.state.id); //Inserting course ID maunually    
+            formData.append('courseId', history.location.state.id); //Inserting course ID maunually
             axios({
                 method: 'post',
                 url: '/author/uploadPreview',
 
-                data: formData 
-            }).then(res=>{
-                Swal.fire({
-                    icon : 'success' ,
-                    text : `${res.data.message}`
-                })
-            }).catch(error=>{
-                if(error.response.data.message === "Unauthorised."){
-                    history.push('/author/login');
-                }
-                else
-                {
-                    Swal.fire({
-                        icon : 'error' ,
-                        text : `${error.response.data.message}`
-                    })
-                }
+                data: formData
             })
+                .then(res => {
+                    Swal.fire({
+                        icon: 'success',
+                        text: `${res.data.message}`
+                    });
+                })
+                .catch(error => {
+                    if (error.response.data.message === 'Unauthorised.') {
+                        history.push('/author/login');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
+                    }
+                });
         }
         return (
             <div>
@@ -63,7 +63,6 @@ export default function CreateCourse() {
             </div>
         );
     };
-    
 
     const ImageUpload = () => {
         const [file, setFile] = useState('');
@@ -74,32 +73,30 @@ export default function CreateCourse() {
             const formData = new FormData();
             formData.append('image', file);
 
-
-            formData.append('courseId' , history.location.state.id ) // Inserting course Id manually 
+            formData.append('courseId', history.location.state.id); // Inserting course Id manually
             axios({
                 method: 'post',
                 url: '/author/uploadThumbnail',
 
-                data: formData 
-            }).then(res=>{
-                Swal.fire({
-                    icon : 'success' ,
-                    text : `${res.data.message}`
-                })
-            }).catch(error=>{
-                if(error.response.data.message === "Unauthorised."){
-                    history.push('/author/login');
-                }
-                else
-                {
-                    Swal.fire({
-                        icon : 'error' ,
-                        text : `${error.response.data.message}`
-                    })
-                }
+                data: formData
             })
-        }
-
+                .then(res => {
+                    Swal.fire({
+                        icon: 'success',
+                        text: `${res.data.message}`
+                    });
+                })
+                .catch(error => {
+                    if (error.response.data.message === 'Unauthorised.') {
+                        history.push('/author/login');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
+                    }
+                });
+        };
 
         const _handleImageChange = e => {
             e.preventDefault();
@@ -188,26 +185,6 @@ export default function CreateCourse() {
         }
     };
 
-    // Price Slider
-    class PriceSlider extends React.Component {
-        state = {
-            disabled: false
-        };
-
-        handleDisabledChange = disabled => {
-            this.setState({ disabled });
-        };
-
-        render() {
-            const { disabled } = this.state;
-            return (
-                <>
-                    <Slider min={500} max={5000} range defaultValue={[700, 1500]} disabled={disabled} />
-                </>
-            );
-        }
-    }
-
     function Section({ sectionId }) {
         const [section, createSection] = useState(true);
         const [sectionName, setSectionName] = useState('');
@@ -249,23 +226,23 @@ export default function CreateCourse() {
                 method: 'post',
                 url: '/author/add-video',
                 data: formData
-            }).then(res=>{
-                Swal.fire({
-                    icon : 'success' ,
-                    text : `${res.data.message}`
-                })
-            }).catch(error=>{
-                if(error.response.data.message === "Unauthorised."){
-                    history.push('/author/login');
-                }
-                else
-                {
+            })
+                .then(res => {
                     Swal.fire({
-                        icon : 'error' ,
-                        text : `${error.response.data.message}`
-                    })
-                }
-            });
+                        icon: 'success',
+                        text: `${res.data.message}`
+                    });
+                })
+                .catch(error => {
+                    if (error.response.data.message === 'Unauthorised.') {
+                        history.push('/author/login');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
+                    }
+                });
         }
 
         return (
@@ -340,15 +317,13 @@ export default function CreateCourse() {
                     setSections(values);
                 })
                 .catch(error => {
-                    if(error.response.data.message === "Unauthorised."){
+                    if (error.response.data.message === 'Unauthorised.') {
                         history.push('/author/login');
-                    }
-                    else
-                    {
+                    } else {
                         Swal.fire({
-                            icon : 'error' ,
-                            text : `${error.response.data.message}`
-                        })
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
                     }
                 });
         };
@@ -435,8 +410,14 @@ export default function CreateCourse() {
             <Card className="createcard" style={{ maxWidth: '1500px' }}>
                 <CardBody>
                     <div className="priceRange">
-                        What price range would to like to set for your course
-                        <PriceSlider />
+                        <Form>
+                            <label className="labelstep2" htmlFor="name">
+                                What price would to like to set for your course
+                            </label>
+                            <FormGroup>
+                                <FormInput onChange={e => setPrice(e.target.value)} type="text"></FormInput>
+                            </FormGroup>
+                        </Form>
                     </div>
                     <Form>
                         <label className="labelstep2" htmlFor="name">
@@ -479,12 +460,10 @@ export default function CreateCourse() {
     }
 
     function onFormSubmit() {
-        // handle the submit logic here
-        // This function will be executed at the last step
-        // when the submit button (next button in the previous steps) is pressed
+        
         history.push('/course/create');
     }
-    
+
     return (
         <div>
             {/* <AuthorHeader /> */}

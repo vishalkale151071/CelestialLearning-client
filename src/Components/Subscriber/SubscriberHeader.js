@@ -60,6 +60,7 @@ export default function SubscriberHeader() {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
+                            <Dropdown.Item href="/subscriber/dashboard">Dashboard</Dropdown.Item>
                                 <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
                                 <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
                                 <Dropdown.Divider />
