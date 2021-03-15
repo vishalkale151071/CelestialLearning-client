@@ -31,6 +31,7 @@ import AuthorForgetVerify from './Components/Author/AuthorForgetVerify';
 import AuthorNewPassword from './Components/Author/AuthorNewPassword';
 import AuthorEmailVerify from './Components/Author/AuthorEmailVerify';
 import CreateTest from './Components/Tests/createTest';
+import TestPreview from './Components/Tests/testPreview';
 
 function App() {
     return (
@@ -68,6 +69,7 @@ function App() {
                         <Route path="/course/:courseTitle" exact component={CourseHome} />
                         <Route path="/course/view/:title" exact component={CourseView} />
                         <Route path="/create-test" exact component= { CreateTest } />
+                        <Route path="/test-preview" exact component={ TestPreview } />
                     </Switch>
                 </Router>
             </Router>

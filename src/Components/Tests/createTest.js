@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Question from './questions';
-const CreateTest = () =>{
+const CreateTest = ({ history }) =>{
     
     const [questions, setQuestions] = useState(5);
     const numbers = [];
@@ -59,7 +59,7 @@ const CreateTest = () =>{
             "/assessment/createQuiz",
             reqBody
         ).then(res => {
-            console.log("Result : ", res);
+            history.push('/test-preview');
         }).catch(err => {
             console.log("Error : ", err);
         });
