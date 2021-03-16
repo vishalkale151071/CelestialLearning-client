@@ -58,6 +58,7 @@ export default function AuthorHeader() {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
+                        <Dropdown.Item href="/author/dashboard">Dashboard</Dropdown.Item>
                             <Dropdown.Item href="/author/profile">Profile</Dropdown.Item>
                             <Dropdown.Item href="/author/settings">Account Settings</Dropdown.Item>
                             <Dropdown.Item href="/author/mycourses">My Courses</Dropdown.Item>

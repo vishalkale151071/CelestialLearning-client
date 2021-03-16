@@ -10,13 +10,16 @@ import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 const AuthorCourseCarousel = () => {
-    const [courses, setCourses] = useState([]);
+    const [completeCourses, setCompleteCourses] = useState([]);
+    const [incompleteCourses, setIncompleteCourses] = useState([]);
+
     const history = useHistory();
 
     useEffect(() => {
         Axios.get('/author/courses').then(res => {
-            console.log('Result : ', res.data.completeCourseData);
-            setCourses(res.data.completeCourseData);
+            console.log('Result : ', res.data);
+            setCompleteCourses(res.data.completeCourseData);
+            setIncompleteCourses(res.data.incompleteCourseData);
         });
     }, []);
 
@@ -81,18 +84,31 @@ const AuthorCourseCarousel = () => {
                 <div className="carousel-demo">
                     <div className="card">
                         <Carousel
-                            value={courses}
+                            value={completeCourses}
                             numVisible={5}
                             numScroll={5}
                             responsiveOptions={responsiveOptions}
                             itemTemplate={productTemplate}
-                            header={<h5 className="CCHeader">Course Category</h5>}
+                            header={<h5 className="CCHeader">Complete Courses</h5>}
                         />
                     </div>
                 </div>
             </div>
 
-                
+            <div className="CourseCorousel">
+                <div className="carousel-demo">
+                    <div className="card">
+                        <Carousel
+                            value={incompleteCourses}
+                            numVisible={5}
+                            numScroll={5}
+                            responsiveOptions={responsiveOptions}
+                            itemTemplate={productTemplate}
+                            header={<h5 className="CCHeader">Incomplete Courses</h5>}
+                        />
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

@@ -10,25 +10,24 @@ import { Scrollbars } from 'rc-scrollbars';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { render } from '@testing-library/react';
+
+//var newUrl = 'https://celestiallearning.s3.amazonaws.com/restaurant-management-system/gets-started-with-home-page/lecture-3.m3u8';
 
 export default function CourseView() {
     let history = useHistory();
     const [sections, setSections] = useState([]);
     const [playerUrl, setUrl] = useState('');
-    const playerInput = useRef(null)
+    const playerInput = useRef(null);
     const { title } = useParams();
-    
-    const getTime = () =>{
-        console.log("Current Tme:",playerInput.current.video.props.player.currentTime) //.current.video.props.player.currentTime
-    }
-    
+
     useEffect(() => {
         axios
             .post('/author/course/sections', {
                 title
             })
             .then(res => {
-                console.log(res.data.sectionData);
+                //console.log(res.data.sectionData);
                 res.data.sectionData.forEach((value, index) => {
                     setSections(oldArray => [...oldArray, { sectionName: value.sectionName, sectionVedios: value.video }]);
                 });
@@ -43,29 +42,42 @@ export default function CourseView() {
                     });
                 }
             });
+        setSections([]);
+        // const interval = setInterval(() => {
+        //     if (!playerInput.current.video.props.player.paused) {
+        //         console.log('Current Tme:', playerInput.current.video.props.player.currentTime); //.current.video.props.player.currentTime
+        //     }
+        // }, 1000);
     }, []);
-    console.log(sections);
+
+    //console.log(sections);
     const Section = ({ section }) => {
         const { Panel } = Collapse;
 
         return (
             <Collapse className="CrvCollpse">
-                <Panel header={section.sectionName} className="CrVPanel">
+                <Panel key={section.sectionName} header={section.sectionName} className="CrVPanel">
                     {section.sectionVedios.map(vedio => (
-                        <p><Button
-                            key={vedio.videoName}
-                            onClick={() => {
-                                setUrl(`${vedio.videoURL}`);
-                                console.log(playerUrl)
-                            }}
-                        >
-                            {vedio.videoName}
-                        </Button></p>
+                        <p>
+                            <Button
+                                key={vedio.videoName}
+                                onClick={() => {
+                                    //newUrl = vedio.videoURL;
+                                    setUrl(vedio.videoURL);
+                                    console.log(playerUrl);
+                                    //console.log('newURL:', newUrl);
+                                    //console.log(typeof(newUrl))
+                                }}
+                            >
+                                {vedio.videoName}
+                            </Button>
+                        </p>
                     ))}
                 </Panel>
             </Collapse>
         );
     };
+
     return (
         <div>
             <SubscriberHeader history={history} />
@@ -73,19 +85,15 @@ export default function CourseView() {
                 <h1 className="crvTitle">Title</h1>
 
                 {/* If you want to use MP4 file, give a src prop to Player tag and remove HLSSoure tag || If you want to play m3u8 file, keep the HLSSource tag just change the url */}
-                <Player  className="vidPlayer" src={playerUrl} ref={playerInput}>
-                    {/* <HLSSource
-                        isVideoChild
-                        
-                    /> */}
-                          <BigPlayButton position="center" />
+                <Player className="vidPlayer" ref={playerInput}>
+                    <HLSSource key={playerUrl} autoPlay={false} isVideoChild src={playerUrl} />
+                    <BigPlayButton position="center" />
 
                     <ControlBar className="ctrlbar" autoHide={true}>
                         <ReplayControl seconds={10} order={2.2} />
                         <ForwardControl seconds={10} order={3.2} />
                     </ControlBar>
                 </Player>
-                <Button className="crvbutgt" onClick={getTime}>Get Current Time</Button>
 
             </div>
             <div className="crvCollapse">

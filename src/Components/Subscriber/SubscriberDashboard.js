@@ -4,11 +4,13 @@ import SubscriberHeader from './SubscriberHeader';
 import Axios from 'axios';
 import Swal from 'sweetalert2'
 import SubscriberCourseCarousel from "./SubscriberCourseCarousel"
+import Recharts from "../Utils/Recharts"
 
 import '../styles/UserDashboard.css';
 
 export default function SubscriberDashboard({ history }) {
     const [courseID,setcourseID] = useState('')
+    const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}];
 
     const [courses, setCourses] = useState([]);
     const [status,setCourseStatus] = useState('')
