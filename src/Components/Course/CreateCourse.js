@@ -57,9 +57,9 @@ export default function CreateCourse() {
         }
         return (
             <div>
-                <input type="file" onChange={e => handelFileChange(e)} />
+                <input className="crcoPrch" type="file" onChange={e => handelFileChange(e)} />
                 <br />
-                <button onClick={handleSubmit}>Upload</button>
+                <Button className="crcoPrup" onClick={handleSubmit} theme='success'>Upload</Button>
             </div>
         );
     };
@@ -111,16 +111,16 @@ export default function CreateCourse() {
         return (
             <div>
                 <form onSubmit={e => _handleSubmit(e)}>
-                    <input type="file" onChange={e => _handleImageChange(e)} />
-                    <button type="submit" onClick={e => _handleSubmit(e)}>
+                    <input className="crcochbut" type="file" onChange={e => _handleImageChange(e)} />
+                    <Button className="crcoUpbut" theme='success' type="submit" onClick={e => _handleSubmit(e)}>
                         Upload Image
-                    </button>
+                    </Button>
                 </form>
                 <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
                     {imagePreviewUrl ? (
-                        <img style={{ width: '100%', height: '100%' }} src={imagePreviewUrl} />
+                        <img className='crcoimgpr' style={{ width: '100%', height: '100%' }} src={imagePreviewUrl} />
                     ) : (
-                        <div>Please select an Image for Preview</div>
+                        <div >Please select an Image for Preview</div>
                     )}
                 </div>
             </div>

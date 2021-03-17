@@ -110,3 +110,29 @@
     margin-top: 1cm;
     margin-left: 5cm;
 }
+
+
+.crcochbut{
+position: absolute;
+margin-top: 1%;
+}
+
+.crcoUpbut{
+position:absolute;
+margin-top: 4%;
+}
+
+.crcoPrup{
+position: absolute;
+margin-top: 1%;
+
+}
+
+.crcoPrch{
+position: absolute;
+}
+
+.crcoimgpr{
+    position: absolute;
+    margin-left: 2%;
+}
