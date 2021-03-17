@@ -89,7 +89,7 @@ const SubscriberCourseCarousel = () => {
                             numScroll={5}
                             responsiveOptions={responsiveOptions}
                             itemTemplate={productTemplate}
-                            header={<h5 className="CCHeader">Course Category</h5>}
+                            
                         />
                     </div>
                 </div>

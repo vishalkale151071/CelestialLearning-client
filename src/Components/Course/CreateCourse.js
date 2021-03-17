@@ -5,7 +5,7 @@ import 'react-step-progress/dist/index.css';
 import { Form, FormInput, FormGroup, Button } from 'shards-react';
 import '../styles/CreateCourse.css';
 import { Card, CardTitle, CardBody } from 'shards-react';
-import { Image } from 'react-bootstrap';
+import { Image,Spinner } from 'react-bootstrap';
 import 'antd/dist/antd.css';
 import { message } from 'antd';
 import ImgCrop from 'antd-img-crop';
@@ -19,15 +19,19 @@ export default function CreateCourse() {
     let history = useHistory();
     const [courseId, setCourseId] = useState('');
     const [price,setPrice] = useState('')
+   
 
     useEffect(() => {});
 
     const PreviewVedioUpload = () => {
         const [vedioFile, setVedioFile] = useState(null);
+        const [loading,setLoading] = useState(false)
         function handelFileChange(e) {
             setVedioFile(e.target.files[0]);
         }
         function handleSubmit() {
+            setLoading(true)
+            
             const formData = new FormData();
             formData.append('image', vedioFile);
 
@@ -39,11 +43,13 @@ export default function CreateCourse() {
                 data: formData
             })
                 .then(res => {
+                    setLoading(false)
                     Swal.fire({
                         icon: 'success',
                         text: `${res.data.message}`
                     });
                 })
+                
                 .catch(error => {
                     if (error.response.data.message === 'Unauthorised.') {
                         history.push('/author/login');
@@ -55,11 +61,18 @@ export default function CreateCourse() {
                     }
                 });
         }
+     
         return (
             <div>
-                <input className="crcoPrch" type="file" onChange={e => handelFileChange(e)} />
+                
+                <input className="crcoPrch"  type="file" onChange={e => handelFileChange(e)} />
                 <br />
-                <Button className="crcoPrup" onClick={handleSubmit} theme='success'>Upload</Button>
+                <Button className="crcoPrup" onClick={handleSubmit} disabled = {loading}>
+                    {loading && <Spinner animation="border" variant="info" /> }
+                    Upload
+                </Button>
+                
+
             </div>
         );
     };
@@ -188,6 +201,7 @@ export default function CreateCourse() {
     function Section({ sectionId }) {
         const [section, createSection] = useState(true);
         const [sectionName, setSectionName] = useState('');
+        const [loading,setLoading] = useState(false)
 
         console.log('$$$$$$$$$$$$ Secid : ', sectionId);
 
@@ -218,6 +232,7 @@ export default function CreateCourse() {
 
         function saveLecture(i) {
             const values = [...fields];
+            setLoading(true)
             const formData = new FormData();
             formData.append('image', values[i].lectureFile);
             formData.append('vedioName', `${values[i].lectureName}`);
@@ -228,6 +243,7 @@ export default function CreateCourse() {
                 data: formData
             })
                 .then(res => {
+                    setLoading(false)
                     Swal.fire({
                         icon: 'success',
                         text: `${res.data.message}`
@@ -269,6 +285,7 @@ export default function CreateCourse() {
                                         onChange={e => handleFileChange(idx, e)}
                                     />
                                     <Button theme="success" className="CrCoSaveLectureBut" type="button" onClick={() => saveLecture(idx)}>
+                                        {loading && <Spinner animation="border" variant="info" /> }
                                         Save Lecture
                                     </Button>
                                 </div>
