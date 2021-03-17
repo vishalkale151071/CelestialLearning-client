@@ -54,7 +54,7 @@ export default function SubscriberDashboard({ history }) {
             <SubscriberHeader history={history} />
             <div className="all">
                 <h1>Welcome {name}</h1>
-                Use the Icon on the top right corner to Go to Profile/ Account Settings/ Log out!
+                
                 {status}
                 
                     <SubscriberCourseCarousel />

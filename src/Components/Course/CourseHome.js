@@ -88,7 +88,7 @@ export default function CourseHome({ history }) {
         return (
             <Collapse>
                 <Panel header={section.sectionName} key={section.sectionNumber}>
-                    {}
+                    
                 </Panel>
             </Collapse>
         );
@@ -220,7 +220,7 @@ export default function CourseHome({ history }) {
                 </div>
                 <h3 className="ContentsHeading">Contents</h3>
                 <Collapse className="CoHoCollaps">
-                    <Scrollbars style={{ width: 525, height: 630 }}>
+                    <Scrollbars style={{ width: 525, height: 300 }}>
                         {sectionData.map(section => (
                             <Section section={section} key={section.sectionName} />
                         ))}

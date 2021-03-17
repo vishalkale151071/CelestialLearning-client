@@ -35,7 +35,7 @@ export default function CategoryCourses() {
     return (
         <div>
             <Headerfunc />
-            <h4> This will show Courses of Category:{category}</h4>
+        
             <CarouselDemo cat={category} />
         </div>
     )

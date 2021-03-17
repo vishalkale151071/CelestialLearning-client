@@ -30,7 +30,8 @@ import SubscriberEmailVerify from './Components/Subscriber/SubscriberEmailVerify
 import AuthorForgetVerify from './Components/Author/AuthorForgetVerify';
 import AuthorNewPassword from './Components/Author/AuthorNewPassword';
 import AuthorEmailVerify from './Components/Author/AuthorEmailVerify';
-import Demo from './Components/jwplayer/demo';
+import CreateTest from './Components/Tests/createTest';
+import TestPreview from './Components/Tests/testPreview';
 import CategoryCourses from './Components/Utils/CategoryCourses';
 import Recharts from './Components/Utils/Recharts';
 
@@ -70,8 +71,9 @@ function App() {
                         <Route path="/course/:courseTitle" exact component={CourseHome} />
                         <Route path="/course/view/:title" exact component={CourseView} />
                         <Route path="/courses/:category" exact component={CategoryCourses} />
-
-                        <Route path="/jwplayer/demo" exact component={Demo} />
+                        <Route path="/create-test" exact component= { CreateTest } />
+                        <Route path="/test-preview" exact component={ TestPreview } />
+                        
                         <Route path="/recharts" exact component={Recharts} />
 
                     </Switch>
