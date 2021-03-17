@@ -69,7 +69,7 @@ function App() {
                         <Route path="/course/:courseTitle" exact component={CourseHome} />
                         <Route path="/course/view/:title" exact component={CourseView} />
                         <Route path="/create-test" exact component= { CreateTest } />
-                        <Route path="/test-preview" exact component={ TestPreview } />
+                        <Route path="/test-preview/:courseName/:sectionName" exact component={ TestPreview } />
                     </Switch>
                 </Router>
             </Router>

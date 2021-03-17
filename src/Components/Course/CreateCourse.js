@@ -436,7 +436,9 @@ export default function CreateCourse() {
                 <CardBody>
                     <div className="priceRange">
                         What price range would to like to set for your course
-                        <PriceSlider />
+                        <FormGroup>
+                            <FormInput type="text"></FormInput>
+                        </FormGroup>
                     </div>
                     <Form>
                         <label className="labelstep2" htmlFor="name">

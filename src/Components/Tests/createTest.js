@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import Question from './questions';
 const CreateTest = ({ history }) =>{
 
@@ -22,7 +23,7 @@ const CreateTest = ({ history }) =>{
 
     useEffect( () => {
         axios.get(
-            '/assessment/courseList'
+            'assessment/courseList'
         ).then((res) => {
             setCourseList(res.data['courseList']);
             console.log("got the data.")
@@ -66,12 +67,20 @@ const CreateTest = ({ history }) =>{
         }
 
         await axios.post(
-            "/assessment/createQuiz",
+            "/assessment/createQuiz/",
             reqBody
         ).then(res => {
-            history.push('/test-preview');
+            Swal.fire({
+                icon: 'error',
+                text: res.data.message
+            });
+            history.push('/test-preview/'+courseName+'/'+sectionName);
         }).catch(err => {
-            console.log("Error : ", err);
+            Swal.fire({
+                icon: 'error',
+                text: err.response.data.message
+            });
+            history.push('/test-preview/'+courseName+'/'+sectionName);
         });
     }
 
@@ -92,20 +101,6 @@ const CreateTest = ({ history }) =>{
 
     return(
         <div key="test-form">
-            <label>Questions : </label>
-            <select id="questions" onChange={updateQuestions}>
-                <option value='5'>5</option>
-                <option value='6'>6</option>
-                <option value='7'>7</option>
-                <option value='8'>8</option>
-                <option value='9'>9</option>
-                <option value='10'>10</option>
-                <option value='11'>11</option>
-                <option value='12'>12</option>
-                <option value='13'>13</option>
-                <option value='14'>14</option>
-                <option value='15'>15</option>
-            </select>
             <form id="questionForm">
                 <label htmlFor='courseName'>Course Name : </label>
                 <select id='courseName' onChange={ setSections }>
@@ -120,7 +115,21 @@ const CreateTest = ({ history }) =>{
                             <option value={section}>{section}</option>
                         ))
                     }
-                </select>
+                </select><br></br>
+                <label>Questions : </label>
+                <select id="questions" onChange={updateQuestions}>
+                    <option value='5'>5</option>
+                    <option value='6'>6</option>
+                    <option value='7'>7</option>
+                    <option value='8'>8</option>
+                    <option value='9'>9</option>
+                    <option value='10'>10</option>
+                    <option value='11'>11</option>
+                    <option value='12'>12</option>
+                    <option value='13'>13</option>
+                    <option value='14'>14</option>
+                    <option value='15'>15</option>
+                </select><br></br>
                 {numbers.map((number) => (<Question key={'q'+number.toString()} number={number}></Question>))}
                 <button type="button" onClick={ sendQuestions }>Submit</button>
             </form>
