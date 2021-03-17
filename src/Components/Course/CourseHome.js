@@ -61,6 +61,8 @@ export default function CourseHome({ history }) {
             setCoursePreview(res.data.coursePreview);
             res.data.sectionData.forEach((value, index) => {
                 setSections(oldArray => [...oldArray, { sectionName: value.sectionName, sectionNumber: value.sectionNumber }]);
+                console.log(res.data)
+
             });
         });
     }, []);
