@@ -34,8 +34,11 @@ const TestPreview = () => {
     }
     function getQuestions()
     {
+        console.log("i am here")
         const course = document.getElementById('courseName').value;
         const section = document.getElementById('sectionName').value;
+        console.log(course)
+        console.log(section)
         axios.post(
             '/assessment/attemptTest',
             {
