@@ -74,6 +74,7 @@ function App() {
                         <Route path="/create-test" exact component= { CreateTest } />
                         <Route path="/test-preview" exact component={ TestPreview } />
                         
+
                         <Route path="/recharts" exact component={Recharts} />
 
                     </Switch>
