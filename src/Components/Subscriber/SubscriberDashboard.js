@@ -5,13 +5,14 @@ import Axios from 'axios';
 import Swal from 'sweetalert2'
 import SubscriberCourseCarousel from "./SubscriberCourseCarousel"
 import Recharts from "../Utils/Recharts"
-
+import Zoom from "../LiveSession/Zoom"
 import '../styles/UserDashboard.css';
 
 export default function SubscriberDashboard({ history }) {
     const [courseID,setcourseID] = useState('')
     const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}];
-
+    
+    const [joinMeeting, setJoinMeeting] = useState(false);
     const [courses, setCourses] = useState([]);
     const [status,setCourseStatus] = useState('')
     const [name, setName] = useState('');
@@ -52,13 +53,18 @@ export default function SubscriberDashboard({ history }) {
     return (
         <div>
             <SubscriberHeader history={history} />
-            <div className="all">
-                <h1>Welcome {name}</h1>
-                
-                {status}
-                
-                    <SubscriberCourseCarousel />
-            </div>
+            {joinMeeting ? (<Zoom/>):
+            
+            
+                <div className="all">
+                    <h1>Welcome {name}</h1>
+                    <button style={{border: '1px solid #fff'}} onClick={() => setJoinMeeting(true)}>Join Meeting</button>
+                    {status}
+                    
+                        <SubscriberCourseCarousel />
+                </div>
+            }
+            
         </div>
     );
 }
