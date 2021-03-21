@@ -1,79 +1,85 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router';
 import Swal from 'sweetalert2';
-const TestPreview = () => {
-    let history = useHistory();
+import Test from './test';
+import '../styles/tests.css';
+
+const TestPreview = ({ history }) => {
+    const { courseName, sectionName } = useParams();
     const [courseList, setCourseList] = useState([]);
     const [sectionList, setSectionList] = useState([]);
-    const [questionList,setQuestionList] = useState([]);
-    useEffect(() => {
+    
+    useEffect(() => {    
         axios.get(
             '/assessment/courseList'
         ).then((res) => {
             setCourseList(res.data['courseList']);
-            console.log("got the data.")
         }).catch((err) => {
-            console.log(err)
+            Swal.fire({
+                icon: 'error',
+                text: err.response.data.message
+            })
         });
-    }, []);
 
-    function setSections(){
-        const course = document.getElementById('courseName').value;
         axios.post(
             '/assessment/sectionList',
             {
-                "courseName": course
+                "courseName": courseList[0]
             }
         ).then((res) => {
             setSectionList(res.data['sectionList']);
             console.log("got the sections");
         }).catch((err) => {
-            console.log(err)
+            Swal.fire({
+                icon: 'error',
+                text: err.response.data.message
+            })
+        })
+    }, []);
+
+    function setSections(){
+        const crs = document.getElementById('courseName').value;
+        axios.post(
+            '/assessment/sectionList',
+            {
+                "courseName": crs
+            }
+        ).then((res) => {
+            setSectionList(res.data['sectionList']);
+            console.log("got the sections");
+        }).catch((err) => {
+            Swal.fire({
+                icon: 'error',
+                text: err.response.data.message
+            })
         })
     }
-    function getQuestions()
-    {
-        console.log("i am here")
-        const course = document.getElementById('courseName').value;
-        const section = document.getElementById('sectionName').value;
-        console.log(course)
-        console.log(section)
-        axios.post(
-            '/assessment/attemptTest',
-            {
-                "courseName" : course,
-                "sectionName" : section
-            }).then((res)=>{
-                setQuestionList(res.data['testData']);
-                console.log(res.data)
-            }).catch((err)=>{
-                if (err.response.data.message === 'Unauthorised.') {
-                    history.push('/author/login');
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        text: `${err.response.data.message}`
-                    });
-                }
-            })
-
+    
+    function updateTest(){
+        let course = document.getElementById('courseName').value;
+        let section = document.getElementById('sectionName').value;
+        history.push('/test-preview/'+course+'/'+section);
     }
 
     return(
         <div>
             <label htmlFor='courseName'>Course Name : </label>
-            <select id='courseName' onChange={ setSections }>
-                {courseList.map((course) => (
-                    <option value={course}>{course}</option>
+            <select id='courseName' defaultValue={courseName} onChange={ setSections }>
+                {courseList.map((crs) => (
+                    <option value={crs}>{crs}</option>
                 ))}
             </select><br></br>
             <label htmlFor='sectionName'>Section Name : </label>
-            <select id='sectionName' onChange = {getQuestions}>
+            <select id='sectionName' defaultValue={sectionName}>
                     {sectionList.map((section) => (
                         <option value={section}>{section}</option>
                     ))}
-            </select>
+            </select><br></br>
+            <button type='button' onClick={ updateTest }>Find</button>
+            <div>
+                <Test course={courseName} section={sectionName}></Test>
+            </div>
         </div>
     );
 }

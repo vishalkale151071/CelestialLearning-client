@@ -24,11 +24,11 @@ function generateSignature(apiKey, apiSecret, meetingNumber, role) {
 
 var apiKey = '5W1c0P6RS5mRzJvdjIgqDQ'
 var apiSecret = 'Dp3orf9HuSX5TQ2PPzQOwLkGBEfY2HB3aHo5'
-var meetingNumber = 99309749790
+var meetingNumber = 96523655531
 var leaveUrl = 'http://localhost:3000/subscriber/dashboard'
 var userName = 'WebSDK'
 var userEmail = 'saumyasinha38@gmail.com'
-var passWord = '4ftDER'
+var passWord = 'Ypn64h'
 var signature = "";
 generateSignature(apiKey, apiSecret, meetingNumber, 0).then((res) => {
     signature = res;
@@ -76,7 +76,7 @@ const Zoom = () =>{
           });
 
       }
-    return <div className="App">Zoom</div>;
+    return <div>Zoom</div>;
 }
 
 export default Zoom

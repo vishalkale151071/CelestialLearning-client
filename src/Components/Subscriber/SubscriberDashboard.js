@@ -5,7 +5,7 @@ import Axios from 'axios';
 import Swal from 'sweetalert2'
 import SubscriberCourseCarousel from "./SubscriberCourseCarousel"
 import Recharts from "../Utils/Recharts"
-import Zoom from "../LiveSession/Zoom"
+//import Zoom from "../LiveSession/Zoom"
 import '../styles/UserDashboard.css';
 
 export default function SubscriberDashboard({ history }) {
@@ -53,7 +53,7 @@ export default function SubscriberDashboard({ history }) {
     return (
         <div>
             <SubscriberHeader history={history} />
-            {joinMeeting ? (<Zoom/>):
+            {/* {joinMeeting ? (<Zoom id="" password = ""/>):
             
             
                 <div className="all">
@@ -63,8 +63,17 @@ export default function SubscriberDashboard({ history }) {
                     
                         <SubscriberCourseCarousel />
                 </div>
-            }
+            } */}
+           
             
+            {<div className="all">
+                <h1>Welcome {name}</h1>
+                
+                {status}
+                
+                    <SubscriberCourseCarousel />
+            </div>}
+        
         </div>
     );
 }

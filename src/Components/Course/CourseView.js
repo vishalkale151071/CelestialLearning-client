@@ -33,14 +33,14 @@ export default function CourseView() {
                 });
             })
             .catch(error => {
-                if (error.response.data.message === 'Unauthorised.') {
-                    history.push('/author/login');
-                } else {
+                // if (error.response.data.message === 'Unauthorised.') {
+                //     history.push('/author/login');
+                // } else {
                     Swal.fire({
                         icon: 'error',
                         text: `${error.response.data.message}`
                     });
-                }
+                //}
             });
         setSections([]);
         // const interval = setInterval(() => {

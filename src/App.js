@@ -34,6 +34,8 @@ import CreateTest from './Components/Tests/createTest';
 import TestPreview from './Components/Tests/testPreview';
 import CategoryCourses from './Components/Utils/CategoryCourses';
 import Recharts from './Components/Utils/Recharts';
+import AuthorLiveSession from './Components/Author/AuthorLiveSession';
+import { Zoom } from './Components/LiveSession/Zoom';
 
 function App() {
     return (
@@ -65,17 +67,16 @@ function App() {
                         <Route path="/author/forgetverify/:token" exact component={AuthorForgetVerify} />
                         <Route path="/author/forgetpasswordupdate" exact component={AuthorNewPassword} />
                         <Route path="/author/verify1/:token" exact component={AuthorEmailVerify} />
-
+                        <Route path = "/author/liveSession" exact component = {AuthorLiveSession}/>
                         <Route path="/author/uploadcourse" exact component={UploadCourse} />
                         <Route path="/course/create" exact component={CreateCourse} />
                         <Route path="/course/:courseTitle" exact component={CourseHome} />
                         <Route path="/course/view/:title" exact component={CourseView} />
                         <Route path="/courses/:category" exact component={CategoryCourses} />
                         <Route path="/create-test" exact component= { CreateTest } />
-                        <Route path="/test-preview" exact component={ TestPreview } />
-                        
-
-                        <Route path="/recharts" exact component={Recharts} />
+                        <Route path="/test-preview/:courseName/:sectionName" exact component={ TestPreview } />
+                       
+                        <Route path="/author/recharts" exact component={Recharts} />
 
                     </Switch>
                 </Router>

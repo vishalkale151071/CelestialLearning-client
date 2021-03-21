@@ -63,6 +63,7 @@ export default function SubscriberHeader() {
                             <Dropdown.Item href="/subscriber/dashboard">Dashboard</Dropdown.Item>
                                 <Dropdown.Item href="/subscriber/profile">Profile</Dropdown.Item>
                                 <Dropdown.Item href="/subscriber/settings">Account Settings</Dropdown.Item>
+                                <Dropdown.Item href="/subscriber/recharts">Performance</Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Button
                                     className="logoutbutton"
