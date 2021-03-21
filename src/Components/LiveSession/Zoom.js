@@ -15,6 +15,7 @@ function generateSignature(apiKey, apiSecret, meetingNumber, role) {
     });
 }
 
+
 var apiKey = '5W1c0P6RS5mRzJvdjIgqDQ';
 var apiSecret = 'Dp3orf9HuSX5TQ2PPzQOwLkGBEfY2HB3aHo5';
 var meetingNumber = 98881552973;

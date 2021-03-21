@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import Question from './questions';
 const CreateTest = ({ history }) =>{
 
@@ -69,9 +70,17 @@ const CreateTest = ({ history }) =>{
             "/assessment/createQuiz/",
             reqBody
         ).then(res => {
-            history.push('/test-preview');
+            Swal.fire({
+                icon: 'error',
+                text: res.data.message
+            });
+            history.push('/test-preview/'+courseName+'/'+sectionName);
         }).catch(err => {
-            console.log("Error : ", err.response.data);
+            Swal.fire({
+                icon: 'error',
+                text: err.response.data.message
+            });
+            history.push('/test-preview/'+courseName+'/'+sectionName);
         });
     }
 

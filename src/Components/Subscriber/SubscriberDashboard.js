@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CourseCard from '../Utils/CourseCard';
 import SubscriberHeader from './SubscriberHeader';
 import Axios from 'axios';
+
 import Swal from 'sweetalert2';
 import SubscriberCourseCarousel from './SubscriberCourseCarousel';
 import Recharts from '../Utils/Recharts';
@@ -53,6 +54,7 @@ export default function SubscriberDashboard({ history }) {
     return (
         <div>
             <SubscriberHeader history={history} />
+
             {joinMeeting ? (
                 <Zoom />
             ) : (
@@ -65,6 +67,7 @@ export default function SubscriberDashboard({ history }) {
 
                     <SubscriberCourseCarousel />
                 </div>
+
             )}
         </div>
     );

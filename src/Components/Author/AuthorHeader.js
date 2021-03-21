@@ -61,7 +61,8 @@ export default function AuthorHeader() {
                         <Dropdown.Item href="/author/dashboard">Dashboard</Dropdown.Item>
                             <Dropdown.Item href="/author/profile">Profile</Dropdown.Item>
                             <Dropdown.Item href="/author/settings">Account Settings</Dropdown.Item>
-                            <Dropdown.Item href="/author/mycourses">My Courses</Dropdown.Item>
+                            <Dropdown.Item href="/author/recharts">Performance</Dropdown.Item>
+                            <Dropdown.Item href="/author/liveSession">Want to go live?</Dropdown.Item>
                             <Dropdown.Divider />
                             <Button
                                 className="logoutbutton"
