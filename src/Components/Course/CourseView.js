@@ -12,6 +12,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { render } from '@testing-library/react';
 
+
 //var newUrl = 'https://celestiallearning.s3.amazonaws.com/restaurant-management-system/gets-started-with-home-page/lecture-3.m3u8';
 
 export default function CourseView() {
