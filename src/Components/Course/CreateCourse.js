@@ -18,9 +18,7 @@ import Swal from 'sweetalert2';
 export default function CreateCourse() {
     let history = useHistory();
     const [courseId, setCourseId] = useState('');
-    const [price,setPrice] = useState('')
-   
-
+    
     useEffect(() => {});
 
     const PreviewVedioUpload = () => {
@@ -139,64 +137,9 @@ export default function CreateCourse() {
             </div>
         );
     };
+   
+    
 
-    // Course Thumbnail
-    const CourseThumbnail = () => {
-        const [fileList, setFileList] = useState([]);
-
-        const onChange = ({ fileList: newFileList }) => {
-            setFileList(newFileList);
-        };
-
-        const onPreview = async file => {
-            let src = file.url;
-            if (!src) {
-                src = await new Promise(resolve => {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file.originFileObj);
-                    reader.onload = () => resolve(reader.result);
-                });
-            }
-            const image = new Image();
-            image.src = src;
-            const imgWindow = window.open(src);
-            imgWindow.document.write(image.outerHTML);
-        };
-
-        return (
-            <ImgCrop rotate>
-                <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    listType="picture-card"
-                    fileList={fileList}
-                    onChange={onChange}
-                    onPreview={onPreview}
-                >
-                    {fileList.length < 1 && '+ Upload'}
-                </Upload>
-            </ImgCrop>
-        );
-    };
-
-    // Preview Video
-    const previewprops = {
-        name: 'file',
-        action: 'author/uploadThumbnailPreview',
-        headers: {
-            authorization: 'authorization-text'
-        },
-        onChange(info) {
-            if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
-            if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-            } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-                console.log('error ; ', info);
-            }
-        }
-    };
 
     function Section({ sectionId }) {
         const [section, createSection] = useState(true);
@@ -421,31 +364,67 @@ export default function CreateCourse() {
             </Card>
         </div>
     );
-
-    const step3Content = (
-        <div>
+    
+    const PriceUpload = () =>{
+        
+        const [price,setPrice] = useState(0)
+        const [coupon,setCoupon] = useState('')
+        function submitHandler()
+        {
+            axios({
+                method: 'post',
+                url: '/author/priceUpload',
+                price,
+                coupon,
+                courseId : history.location.state.id
+            })
+                .then(res => {
+                    Swal.fire({
+                        icon: 'success',
+                        text: `${res.data.message}`
+                    });
+                }).catch(error => {
+                    if (error.response.data.message === 'Unauthorised.') {
+                        history.push('/author/login');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
+                    }
+                });
+        }
+        return(
             <Card className="createcard" style={{ maxWidth: '1500px' }}>
                 <CardBody>
                     <div className="priceRange">
-                        <Form>
+                        
                             <label className="labelstep2" htmlFor="name">
-                                What price would to like to set for your course
+                                What price would you like to set for your course?
                             </label>
-                            <FormGroup>
+                            
                                 <FormInput onChange={e => setPrice(e.target.value)} type="text"></FormInput>
-                            </FormGroup>
-                        </Form>
+                           
+                        
+                            <label className="labelstep2" htmlFor="name">
+                                Would you like to add any coupons?:(Yes/No)
+                            </label>
+                            
+                                <FormInput type="text" onChange = {e => setCoupon(e.target.value)}></FormInput>
+                            
+                       
+                            <Button className="crcoUpbut" theme='success' type="submit" onClick={submitHandler}>
+                                Upload
+                            </Button>    
                     </div>
-                    <Form>
-                        <label className="labelstep2" htmlFor="name">
-                            Would you like to add any coupons?:
-                        </label>
-                        <FormGroup>
-                            <FormInput type="text"></FormInput>
-                        </FormGroup>
-                    </Form>
                 </CardBody>
             </Card>
+
+        )
+    }
+    const step3Content = (
+        <div>
+            <PriceUpload/>
         </div>
     );
 
@@ -459,22 +438,7 @@ export default function CreateCourse() {
         </div>
     );
 
-    // setup step validators, will be called before proceeding to the next step
-    function step1Validator() {
-        // return a boolean
-    }
-
-    function step2Validator() {
-        // return a boolean
-    }
-
-    function step3Validator() {
-        // return a boolean
-    }
-
-    function step4Validator() {
-        // return a boolean
-    }
+    
 
     function onFormSubmit() {
         
