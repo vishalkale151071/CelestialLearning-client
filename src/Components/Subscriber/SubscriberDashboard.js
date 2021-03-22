@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import CourseCard from '../Utils/CourseCard';
 import SubscriberHeader from './SubscriberHeader';
 import Axios from 'axios';
-
 import Swal from 'sweetalert2';
 import SubscriberCourseCarousel from './SubscriberCourseCarousel';
 import Recharts from '../Utils/Recharts';
 import '../styles/UserDashboard.css';
-import Zoom from "../LiveSession/Zoom"
+import Zoom from '../LiveSession/Zoom';
+import Blink from 'react-blink-text';
+import SubscriberLiveCarousal from './SubscriberLiveCarousel'
 
 export default function SubscriberDashboard({ history }) {
     const [courseID, setcourseID] = useState('');
@@ -34,26 +35,24 @@ export default function SubscriberDashboard({ history }) {
                 }
             });
 
-        // Axios.get('/subscriber/myCourses').then(res => {
-        //     console.log('Result : ', res.data.courseData);
-        //     console.log("efdef",res.data.courseData[0].courseId)
-        //     setcourseID(res.data.courseData.courseId)
-        //     console.log("ID:", courseID)
-        //     setCourses(res.data.courseData);
-        // }).catch(error => {
-        //     if(error.response.data.message === "Unauthorised."){
-        //         history.push('/subscriber/login');
-        //     }
-        //     else
-        //     {
-        //         setCourseStatus("No Courses")
-        //     }
-        // });
+        
     }, []);
 
+    const Liveses = () => {
+        if (joinMeeting) {
+            return (
+                <div>
+                </div>
+            );
+        } else {
+            return <div></div>;
+        }
+    };
     return (
         <div>
             <SubscriberHeader history={history} />
+            <Liveses />
+            <Blink color="red" text="Live Session !" fontSize="20" />
 
             {joinMeeting ? (
                 <Zoom />
@@ -66,8 +65,8 @@ export default function SubscriberDashboard({ history }) {
                     {status}
 
                     <SubscriberCourseCarousel />
+                    <SubscriberLiveCarousal />
                 </div>
-
             )}
         </div>
     );
