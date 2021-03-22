@@ -69,6 +69,7 @@ function App() {
                         <Route path="/author/verify1/:token" exact component={AuthorEmailVerify} />
                         <Route path = "/author/liveSession" exact component = {AuthorLiveSession}/>
                         <Route path="/author/uploadcourse" exact component={UploadCourse} />
+                        
                         <Route path="/course/create" exact component={CreateCourse} />
                         <Route path="/course/:courseTitle" exact component={CourseHome} />
                         <Route path="/course/view/:title" exact component={CourseView} />
