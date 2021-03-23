@@ -10,20 +10,19 @@ import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const SubscriberLiveCarousel = () => {
+const AuthorLiveCarousel = () => {
     const history = useHistory();
     const [liveSession, setLive] = useState([]);
-
     
     useEffect(async () => {
-        await Axios.post('/subscriber/getMeeting')
-            .then(res => {
-                
+        await Axios.post('/author/getLive')
+            .then(res => {   
+                console.log('LIVE:', res.data.message);
                 setLive(res.data.message)
             })
             .catch(error => {
                 if (error.response.data.message === 'Unauthorised.') {
-                    history.push('/subscriber/login');
+                    history.push('/author/login');
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -105,4 +104,4 @@ const SubscriberLiveCarousel = () => {
     );
 };
 
-export default SubscriberLiveCarousel;
+export default AuthorLiveCarousel;
