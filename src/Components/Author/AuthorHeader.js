@@ -19,8 +19,12 @@ import {
     FormInput,
     Collapse
 } from 'shards-react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useHistory } from 'react-router-dom';
 
-export const AuthorHeader = () => {
+export default function AuthorHeader() {
+    const history = useHistory();
     return (
         <div className="authorheader">
             <Navbar className="nav" expand="md">
@@ -54,11 +58,28 @@ export const AuthorHeader = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
+                        <Dropdown.Item href="/author/dashboard">Dashboard</Dropdown.Item>
                             <Dropdown.Item href="/author/profile">Profile</Dropdown.Item>
                             <Dropdown.Item href="/author/settings">Account Settings</Dropdown.Item>
-                            <Dropdown.Item href="/author/mycourses">My Courses</Dropdown.Item>
+                            <Dropdown.Item href="/author/recharts">Performance</Dropdown.Item>
+                            <Dropdown.Item href="/author/liveSession">Want to go live?</Dropdown.Item>
                             <Dropdown.Divider />
-                            <Button className="logoutbutton" theme="outline-danger" href="/">
+                            <Button
+                                className="logoutbutton"
+                                theme="outline-danger"
+                                onClick={() => {
+                                    axios
+                                        .post('/logout')
+                                        .then(res => {
+                                            console.log(res.data.message);
+                                            Cookies.remove('u');
+                                            history.push('/');
+                                        })
+                                        .catch(error => {
+                                            console.log(error);
+                                        });
+                                }}
+                            >
                                 Logout
                             </Button>
                         </Dropdown.Menu>
@@ -67,6 +88,4 @@ export const AuthorHeader = () => {
             </Navbar>
         </div>
     );
-};
-
-export default AuthorHeader;
+}

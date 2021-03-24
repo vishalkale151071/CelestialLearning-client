@@ -4,9 +4,10 @@ import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
 import { Form, FormInput, FormGroup, FormTextarea, Button } from 'shards-react';
 import '../styles/UploadCourse.css';
-import { Dropdown, Forms } from 'react-bootstrap';
-import { Card, CardTitle, CardImg, CardBody } from 'shards-react';
+import { Dropdown} from 'react-bootstrap';
+import { Card, CardTitle,CardBody } from 'shards-react';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 export default function UploadCourse() {
     const [title, setTitle] = useState('Course Name');
@@ -15,7 +16,7 @@ export default function UploadCourse() {
     const [suitableFor, setSuitableFor] = useState('');
     const [platform, setPlatform] = useState('');
     const [prerequisite, setPrerequisite] = useState('');
-
+    const [cat,setCat] = useState('Choose a Category');
     // setup the step content
     let history = useHistory();
     const step1Content = (
@@ -78,14 +79,14 @@ export default function UploadCourse() {
                             <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
                                 Choose
                             </Dropdown.Toggle>
-                            <input type="text" onChange={e => setCategory(e.target.value)} />
+                            {/* <input type="text" onChange={e => setCategory(e.target.value)} /> */}
                             <Dropdown.Menu>
-                                <Dropdown.Item href="#Development">Development</Dropdown.Item>
-                                <Dropdown.Item href="#Business">Business</Dropdown.Item>
-                                <Dropdown.Item href="#Finance&Accounting">Finance & Accounting</Dropdown.Item>
-                                <Dropdown.Item href="#IT&Software">IT & Software</Dropdown.Item>
-                                <Dropdown.Item href="#Marketing">Marketing</Dropdown.Item>
-                                <Dropdown.Item href="Photography">Photography</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory('Development')}>Development</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory("Business")}>Business</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory("Finance & Accounting")}>Finance & Accounting</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory("IT & Software")}>IT & Software</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory("Marketing")}>Marketing</Dropdown.Item>
+                                <Dropdown.Item onClick={e=>setCategory("Photography")}>Photography</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
@@ -162,12 +163,24 @@ export default function UploadCourse() {
     }
 
     function onFormSubmit() {
+        console.log(category)
         axios.post('/author/create-course', { title, description, category, suitableFor, platform, prerequisite }).then(res => {
             console.log(res.data.courseId);
             history.push({
                 pathname: '/course/create',
                 state: { id: res.data.courseId }
             });
+        }).catch(error=>{
+            if(error.response.data.message === "Unauthorised."){
+                history.push('/author/login');
+            }
+            else
+            {
+                Swal.fire({
+                    icon : 'error' ,
+                    text : `${error.response.data.message}`
+                })
+            }
         });
 
         //

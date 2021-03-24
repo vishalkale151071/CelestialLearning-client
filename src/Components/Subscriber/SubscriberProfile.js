@@ -5,14 +5,12 @@ import { Form, FormInput, FormGroup } from 'shards-react';
 import { Button } from 'shards-react';
 import { Tabs, Tab } from 'react-bootstrap';
 import Axios from 'axios';
-import { Upload, message } from 'antd';
-import Avatar from 'react-avatar';
-
+import Swal from 'sweetalert2';
 import axios from 'axios';
 
-export default function SubscriberProfile() {
+export default function SubscriberProfile({ history }) {
     const [url, setUrl] = useState('');
-
+    const [imgStatus, setStatus] = useState('Upload Image');
     const [firstName, setfirstName] = useState('First Name');
     const [middleName, setmiddleName] = useState('Middle Name');
     const [lastName, setlastName] = useState('Last Name');
@@ -27,9 +25,28 @@ export default function SubscriberProfile() {
         const [imagePreviewUrl, setImagePreview] = useState('');
 
         useEffect(() => {
-            axios.post('/subscriber/profileImageView').then(res => {
-                setImagePreview(res.data.url);
-            });
+            axios
+                .post('/subscriber/profileImageView')
+                .then(res => {
+                    const ext = res.data.url.slice(-2);
+                    if (ext === 'NA') {
+                        setStatus('Upload Image');
+                    } else {
+                        setStatus('Update Image');
+                    }
+                    setImagePreview(res.data.url);
+
+                })
+                .catch(error => {
+                    if (error.response.data.message === 'Unauthorised.') {
+                        history.push('/subscriber/login');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
+                    }
+                });
         }, []);
 
         const _handleSubmit = e => {
@@ -42,7 +59,23 @@ export default function SubscriberProfile() {
                 method: 'post',
                 url: '/subscriber/profileImageUpdate',
                 data: formData
-            });
+            })
+                .then(res => {
+                    Swal.fire({
+                        icon: 'success',
+                        text: `${res.data.message}`
+                    });
+                })
+                .catch(error => {
+                    if (error.response.data.message === 'Unauthorised.') {
+                        history.push('/subscriber/login');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
+                    }
+                });
         };
 
         const _handleImageChange = e => {
@@ -63,7 +96,7 @@ export default function SubscriberProfile() {
                 <form onSubmit={e => _handleSubmit(e)}>
                     <input className="ProfileImageInputButton" type="file" onChange={e => _handleImageChange(e)} />
                     <Button className="ProfileImageSubmitButton" type="submit" onClick={e => _handleSubmit(e)}>
-                        Upload Image
+                        {imgStatus}
                     </Button>
                 </form>
                 <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
@@ -78,23 +111,46 @@ export default function SubscriberProfile() {
     };
 
     useEffect(() => {
-        Axios.post('/subscriber/profile').then(res => {
-            setUrl(res.data.url);
-            console.log('Project : ', res.data);
-            setfirstName(res.data.profiledata.firstName);
-            setmiddleName(res.data.profiledata.middleName);
-            setlastName(res.data.profiledata.lastName);
-            setphNum(res.data.profiledata.phNum);
-            setlinkedInURL(res.data.profiledata.linkedInURL);
-            settwitterURL(res.data.profiledata.twitterURL);
-            sethigherEducation(res.data.profiledata.higherEducation);
-            setareaOfInterest(res.data.profiledata.areaOfInterest);
-        });
+        Axios.post('/subscriber/profile')
+            .then(res => {
+                console.log('Response Invalid: ', res);
+                setUrl(res.data.url);
+                console.log('Project : ', res.data);
+                const {
+                    firstName,
+                    middleName,
+                    lastName,
+                    phNum,
+                    linkedInURL,
+                    twitterURL,
+                    higherEducation,
+                    areaOfInterest
+                } = res.data.profiledata;
+
+                setfirstName(firstName);
+                setmiddleName(middleName);
+                setlastName(lastName);
+                setphNum(phNum);
+                setlinkedInURL(linkedInURL);
+                settwitterURL(twitterURL);
+                sethigherEducation(higherEducation);
+                setareaOfInterest(areaOfInterest);
+            })
+            .catch(error => {
+                if (error.response.data.message == 'Unauthorised.') {
+                    history.push('/subscriber/login');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: `${error.response.data.message}`
+                    });
+                }
+            });
     }, []);
 
     return (
         <div>
-            <SubscriberHeader />
+            <SubscriberHeader history={history} />
             <div>
                 <Tabs id="profileTab" className="profiletab">
                     <Tab eventKey="personal" title="Personal Details">
@@ -130,7 +186,23 @@ export default function SubscriberProfile() {
                                         twitterURL,
                                         higherEducation,
                                         areaOfInterest
-                                    }).then(res => {});
+                                    })
+                                        .then(res => {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                text: `${res.data.message}`
+                                            });
+                                        })
+                                        .catch(error => {
+                                            if (error.response.data.message === 'Unauthorised.') {
+                                                history.push('/subscriber/login');
+                                            } else {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    text: `${error.response.data.message}`
+                                                });
+                                            }
+                                        });
                                 }}
                             >
                                 Update
@@ -159,7 +231,23 @@ export default function SubscriberProfile() {
                                         twitterURL,
                                         higherEducation,
                                         areaOfInterest
-                                    }).then(res => {});
+                                    }).then(res => {
+                                        Swal.fire({
+                                        icon : 'success' ,
+                                        text : `${res.data.message}`
+                                        })
+                                    }).catch(error => {
+                                        if(error.response.data.message === "Unauthorised."){
+                                            history.push('/subscriber/login');
+                                        }
+                                        else
+                                        {
+                                            Swal.fire({
+                                                icon : 'error' ,
+                                                text : `${error.response.data.message}`
+                                            })
+                                        }
+                                    });;
                                 }}
                             >
                                 Update
@@ -192,7 +280,23 @@ export default function SubscriberProfile() {
                                         twitterURL,
                                         higherEducation,
                                         areaOfInterest
-                                    }).then(res => {});
+                                    }).then(res => {
+                                        Swal.fire({
+                                            icon : 'success' ,
+                                            text : `${res.data.message}`
+                                        })
+                                    }).catch(error => {
+                                        if(error.response.data.message === "Unauthorised."){
+                                            history.push('/subscriber/login');
+                                        }
+                                        else
+                                        {
+                                            Swal.fire({
+                                                icon : 'error' ,
+                                                text : `${error.response.data.message}`
+                                            })
+                                        }
+                                    });;
                                 }}
                             >
                                 Update

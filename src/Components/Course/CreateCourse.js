@@ -2,197 +2,149 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
-import { Form, FormInput, FormGroup, FormTextarea, Button } from 'shards-react';
+import { Form, FormInput, FormGroup, Button } from 'shards-react';
 import '../styles/CreateCourse.css';
-import { Card, CardTitle, CardImg, CardBody } from 'shards-react';
-import { Image } from 'react-bootstrap';
+import { Card, CardTitle, CardBody } from 'shards-react';
+import { Image,Spinner } from 'react-bootstrap';
 import 'antd/dist/antd.css';
 import { message } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
-import { Slider, Switch } from 'antd';
+import { Slider } from 'antd';
 import axios from 'axios';
 import { Upload } from 'antd';
+
+import Swal from 'sweetalert2';
 
 export default function CreateCourse() {
     let history = useHistory();
     const [courseId, setCourseId] = useState('');
-
-    useEffect(() => {
-
-         // console.log("History : " , history.location.state.id)
-        //   if(history.location.state === undefined){
-        //       history.push('/author/uploadcourse')
-        //   }else{
-        //     setCourseId(history.location.state.id)
-        //   }
-
-        
-
-    }, []);
+    
+    useEffect(() => {});
 
     const PreviewVedioUpload = () => {
-        const [vedioFile , setVedioFile] = useState(null)
+        const [vedioFile, setVedioFile] = useState(null);
+        const [loading,setLoading] = useState(false)
         function handelFileChange(e) {
-            setVedioFile(e.target.files[0])
+            setVedioFile(e.target.files[0]);
         }
         function handleSubmit() {
-            const formData = new FormData()
+            setLoading(true)
+            
+            const formData = new FormData();
             formData.append('image', vedioFile);
-            formData.append('courseId', '60040871ca5848206b593c66'); //Inserting course ID maunually    
+
+            formData.append('courseId', history.location.state.id); //Inserting course ID maunually
             axios({
                 method: 'post',
                 url: '/author/uploadPreview',
-                data: formData 
+
+                data: formData
             })
+                .then(res => {
+                    setLoading(false)
+                    Swal.fire({
+                        icon: 'success',
+                        text: `${res.data.message}`
+                    });
+                })
+                
+                .catch(error => {
+                    if (error.response.data.message === 'Unauthorised.') {
+                        history.push('/author/login');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
+                    }
+                });
         }
-        return(
+     
+        return (
             <div>
-                <input type = 'file' onChange = {e => handelFileChange(e)}/>
+                
+                <input className="crcoPrch"  type="file" onChange={e => handelFileChange(e)} />
                 <br />
-                <button onClick = {handleSubmit}>Upload</button>
+                <Button className="crcoPrup" onClick={handleSubmit} disabled = {loading}>
+                    {loading && <Spinner animation="border" variant="info" /> }
+                    Upload
+                </Button>
+                
+
             </div>
-        )
-    }
+        );
+    };
 
     const ImageUpload = () => {
-
-        const [file , setFile] = useState('')
-        const [imagePreviewUrl , setImagePreview] = useState('')
-        const _handleSubmit = (e) => {
-
+        const [file, setFile] = useState('');
+        const [imagePreviewUrl, setImagePreview] = useState('');
+        const _handleSubmit = e => {
             e.preventDefault();
             console.log('handle uploading-', file);
             const formData = new FormData();
             formData.append('image', file);
 
-            formData.append('courseId' , '60040871ca5848206b593c66' ) // Inserting course Id manually 
+            formData.append('courseId', history.location.state.id); // Inserting course Id manually
             axios({
                 method: 'post',
                 url: '/author/uploadThumbnail',
-                data: formData 
-            })
-        }
-       
 
+                data: formData
+            })
+                .then(res => {
+                    Swal.fire({
+                        icon: 'success',
+                        text: `${res.data.message}`
+                    });
+                })
+                .catch(error => {
+                    if (error.response.data.message === 'Unauthorised.') {
+                        history.push('/author/login');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
+                    }
+                });
+        };
 
         const _handleImageChange = e => {
-
             e.preventDefault();
             let reader = new FileReader();
             let file = e.target.files[0];
             reader.onloadend = () => {
-
-                setFile(file)
-                setImagePreview(reader.result)
-            }
-            reader.readAsDataURL(file)
-        }
-        return(
-                <div >
-                <form onSubmit={(e)=>_handleSubmit(e)}>
-                <input  
-                    type="file" 
-                    onChange={(e)=>_handleImageChange(e)} 
-
-                    />
-                <button    
-                    type="submit" 
-                    onClick={(e)=>_handleSubmit(e)}>Upload Image</button>
-
+                setFile(file);
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        };
+        return (
+            <div>
+                <form onSubmit={e => _handleSubmit(e)}>
+                    <input className="crcochbut" type="file" onChange={e => _handleImageChange(e)} />
+                    <Button className="crcoUpbut" theme='success' type="submit" onClick={e => _handleSubmit(e)}>
+                        Upload Image
+                    </Button>
                 </form>
                 <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
                     {imagePreviewUrl ? (
-                        <img style={{ width: '100%', height: '100%' }} src={imagePreviewUrl} />
+                        <img className='crcoimgpr' style={{ width: '100%', height: '100%' }} src={imagePreviewUrl} />
                     ) : (
-                        <div>Please select an Image for Preview</div>
+                        <div >Please select an Image for Preview</div>
                     )}
                 </div>
             </div>
         );
     };
+   
+    
 
-    // Course Thumbnail
-    const CourseThumbnail = () => {
-        const [fileList, setFileList] = useState([]);
-
-        const onChange = ({ fileList: newFileList }) => {
-            setFileList(newFileList);
-        };
-
-        const onPreview = async file => {
-            let src = file.url;
-            if (!src) {
-                src = await new Promise(resolve => {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file.originFileObj);
-                    reader.onload = () => resolve(reader.result);
-                });
-            }
-            const image = new Image();
-            image.src = src;
-            const imgWindow = window.open(src);
-            imgWindow.document.write(image.outerHTML);
-        };
-
-        return (
-            <ImgCrop rotate>
-                <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    listType="picture-card"
-                    fileList={fileList}
-                    onChange={onChange}
-                    onPreview={onPreview}
-                >
-                    {fileList.length < 1 && '+ Upload'}
-                </Upload>
-            </ImgCrop>
-        );
-    };
-
-    // Preview Video
-    const previewprops = {
-        name: 'file',
-        action: 'author/uploadThumbnailPreview',
-        headers: {
-            authorization: 'authorization-text'
-        },
-        onChange(info) {
-            if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
-            if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-            } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-                console.log('error ; ', info);
-            }
-        }
-    };
-
-    // Price Slider
-    class PriceSlider extends React.Component {
-        state = {
-            disabled: false
-        };
-
-        handleDisabledChange = disabled => {
-            this.setState({ disabled });
-        };
-
-        render() {
-            const { disabled } = this.state;
-            return (
-                <>
-                    <Slider min={500} max={5000} range defaultValue={[700, 1500]} disabled={disabled} />
-                </>
-            );
-        }
-    }
 
     function Section({ sectionId }) {
         const [section, createSection] = useState(true);
         const [sectionName, setSectionName] = useState('');
+        const [loading,setLoading] = useState(false)
 
         console.log('$$$$$$$$$$$$ Secid : ', sectionId);
 
@@ -223,6 +175,7 @@ export default function CreateCourse() {
 
         function saveLecture(i) {
             const values = [...fields];
+            setLoading(true)
             const formData = new FormData();
             formData.append('image', values[i].lectureFile);
             formData.append('vedioName', `${values[i].lectureName}`);
@@ -231,7 +184,24 @@ export default function CreateCourse() {
                 method: 'post',
                 url: '/author/add-video',
                 data: formData
-            });
+            })
+                .then(res => {
+                    setLoading(false)
+                    Swal.fire({
+                        icon: 'success',
+                        text: `${res.data.message}`
+                    });
+                })
+                .catch(error => {
+                    if (error.response.data.message === 'Unauthorised.') {
+                        history.push('/author/login');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
+                    }
+                });
         }
 
         return (
@@ -258,6 +228,7 @@ export default function CreateCourse() {
                                         onChange={e => handleFileChange(idx, e)}
                                     />
                                     <Button theme="success" className="CrCoSaveLectureBut" type="button" onClick={() => saveLecture(idx)}>
+                                        {loading && <Spinner animation="border" variant="info" /> }
                                         Save Lecture
                                     </Button>
                                 </div>
@@ -305,8 +276,15 @@ export default function CreateCourse() {
                     values[i].sectionId = `${res.data.sectionId}`;
                     setSections(values);
                 })
-                .catch(err => {
-                    console.log('Error : ', err);
+                .catch(error => {
+                    if (error.response.data.message === 'Unauthorised.') {
+                        history.push('/author/login');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
+                    }
                 });
         };
         const addSection = () => {
@@ -377,8 +355,6 @@ export default function CreateCourse() {
                             <h4>Preview</h4>
 
                             <PreviewVedioUpload />
-                          
-
                         </div>
                         <Form>
                             <FormGroup></FormGroup>
@@ -388,25 +364,67 @@ export default function CreateCourse() {
             </Card>
         </div>
     );
-
-    const step3Content = (
-        <div>
+    
+    const PriceUpload = () =>{
+        
+        const [price,setPrice] = useState(0)
+        const [coupon,setCoupon] = useState('')
+        function submitHandler()
+        {
+            axios({
+                method: 'post',
+                url: '/author/priceUpload',
+                price,
+                coupon,
+                courseId : history.location.state.id
+            })
+                .then(res => {
+                    Swal.fire({
+                        icon: 'success',
+                        text: `${res.data.message}`
+                    });
+                }).catch(error => {
+                    if (error.response.data.message === 'Unauthorised.') {
+                        history.push('/author/login');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: `${error.response.data.message}`
+                        });
+                    }
+                });
+        }
+        return(
             <Card className="createcard" style={{ maxWidth: '1500px' }}>
                 <CardBody>
                     <div className="priceRange">
-                        What price range would to like to set for your course
-                        <PriceSlider />
+                        
+                            <label className="labelstep2" htmlFor="name">
+                                What price would you like to set for your course?
+                            </label>
+                            
+                                <FormInput onChange={e => setPrice(e.target.value)} type="text"></FormInput>
+                           
+                        
+                            <label className="labelstep2" htmlFor="name">
+                                Would you like to add any coupons?:(Yes/No)
+                            </label>
+                            
+                                <FormInput type="text" onChange = {e => setCoupon(e.target.value)}></FormInput>
+                            
+                       
+                            <Button className="crcoUpbut" theme='success' type="submit" onClick={submitHandler}>
+                                Upload
+                            </Button>    
                     </div>
-                    <Form>
-                        <label className="labelstep2" htmlFor="name">
-                            Would you like to add any coupons?:
-                        </label>
-                        <FormGroup>
-                            <FormInput type="text"></FormInput>
-                        </FormGroup>
-                    </Form>
                 </CardBody>
             </Card>
+
+        )
+    }
+    const step3Content = (
+        <div>
+            <PriceUpload/>
         </div>
     );
 
@@ -420,29 +438,13 @@ export default function CreateCourse() {
         </div>
     );
 
-    // setup step validators, will be called before proceeding to the next step
-    function step1Validator() {
-        // return a boolean
-    }
-
-    function step2Validator() {
-        // return a boolean
-    }
-
-    function step3Validator() {
-        // return a boolean
-    }
-
-    function step4Validator() {
-        // return a boolean
-    }
+    
 
     function onFormSubmit() {
-        // handle the submit logic here
-        // This function will be executed at the last step
-        // when the submit button (next button in the previous steps) is pressed
+        
         history.push('/course/create');
     }
+
     return (
         <div>
             {/* <AuthorHeader /> */}

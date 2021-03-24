@@ -1,0 +1,27 @@
+.question{
+    border: solid black 1px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.options{
+    border: solid black 1px;
+    padding: 10px;
+}
+
+.option{
+    padding: 10px;
+
+}
+
+.option input{
+    width: 75%;
+}
+
+.question input{
+    width: 80%;
+}
+
+.answer{
+    margin: 10px;
+}

@@ -1,40 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import login from "../../actions/authorActions"
+import React, { useState} from 'react';
 import { Form, FormInput, FormGroup } from 'shards-react';
 import { Card, CardHeader, CardTitle, CardBody, CardFooter, Button } from 'shards-react';
 import "../styles/UserLogin.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 import Swal from 'sweetalert2'
+import Axios from 'axios';
+import Cookies from 'js-cookie';
+
 
 function AuthorLogin({ history }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const dispatch = useDispatch();
-
-    const authorLogin = useSelector(state => state.authorLogin);
-    const {  error, authorInfo } = authorLogin;
-
-    useEffect(() => {
-        if (authorInfo) {
-            history.push('/author/dashboard');
-        }
-        if(error){
-             Swal.fire({
-                  icon : 'error' ,
-                  text : `${error}`
-             })
-        }
-    }, [history, authorInfo]);
-
-
     const submitHandler = e => {
         e.preventDefault();
-        dispatch(login(email, password));
-        
+        Axios.post("/author/login",{
+            email,password
+        }).then(res=>{
+            Cookies.set('u', 'a');
+
+            history.push('/author/dashboard');
+        }).catch(error=>{
+            Swal.fire({
+                        icon : 'error' ,
+                        text : `${error.response.data.message}`
+                    })
+        })
+       
     };
+
     return (
         <div className="loginclass">
             <Card className="login" theme="info" style={{ maxWidth: '450px' }}>

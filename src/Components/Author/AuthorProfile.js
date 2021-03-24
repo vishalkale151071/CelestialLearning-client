@@ -5,11 +5,11 @@ import { Form, FormInput, FormGroup } from 'shards-react';
 import { Button } from 'shards-react';
 import { Tabs, Tab } from 'react-bootstrap';
 import axios from 'axios';
-import { Upload, message } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-import ImgCrop from 'antd-img-crop';
+import Swal from 'sweetalert2'
 
-export default function AuthorProfile() {
+export default function AuthorProfile({history}) {
+    const [imgStatus, setStatus] = useState('Upload Image');
+
     const [firstName, setfirstName] = useState('First Name');
     const [middleName, setmiddleName] = useState('Middle Name');
     const [lastName, setlastName] = useState('Last Name');
@@ -21,7 +21,7 @@ export default function AuthorProfile() {
 
     useEffect(() => {
         axios.post('/author/profile').then(res => {
-            //console.log("Project : " , res.data)
+            
             setfirstName(res.data.profiledata.firstName);
             setmiddleName(res.data.profiledata.middleName);
             setlastName(res.data.profiledata.lastName);
@@ -30,6 +30,17 @@ export default function AuthorProfile() {
             settwitterURL(res.data.profiledata.twitterURL);
             setqualification(res.data.profiledata.qualification);
             setBiography(res.data.profiledata.biography);
+        }).catch(error => {
+            if(error.response.data.message === "Unauthorised."){
+                history.push('/author/login');
+            }
+            else
+            {
+                Swal.fire({
+                    icon : 'error' ,
+                    text : `${error.response.data.message}`
+                })
+            }
         });
     }, []);
 
@@ -39,7 +50,24 @@ export default function AuthorProfile() {
 
         useEffect(() => {
             axios.post('/author/profileImageView').then(res => {
+                const ext = res.data.url.slice(-2);
+                if (ext === 'NA') {
+                    setStatus('Upload Image');
+                } else {
+                    setStatus('Update Image');
+                }
                 setImagePreview(res.data.url);
+            }).catch(error => {
+                if(error.response.data.message === "Unauthorised."){
+                    history.push('/author/login');
+                }
+                else
+                {
+                    Swal.fire({
+                        icon : 'error' ,
+                        text : `${error.response.data.message}`
+                    })
+                }
             });
         }, []);
 
@@ -53,6 +81,23 @@ export default function AuthorProfile() {
                 method: 'post',
                 url: '/author/profileImageUpdate',
                 data: formData
+            }).then(res=>{
+                Swal.fire({
+                    icon : 'success' ,
+                    text : `${res.data.message}`
+                })
+            }).catch(error=>{
+
+                if(error.response.data.message === "Unauthorised."){
+                    history.push('/author/login');
+                }
+                else
+                {
+                    Swal.fire({
+                        icon : 'error' ,
+                        text : `${error.response.data.message}`
+                    })
+                }
             });
         };
 
@@ -74,7 +119,7 @@ export default function AuthorProfile() {
                 <form onSubmit={e => _handleSubmit(e)}>
                     <input className="ProfileImageInputButton" type="file" onChange={e => _handleImageChange(e)} />
                     <Button className="ProfileImageSubmitButton" type="submit" onClick={e => _handleSubmit(e)}>
-                        Upload Image
+                        {imgStatus}
                     </Button>
                 </form>
                 <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
@@ -90,7 +135,7 @@ export default function AuthorProfile() {
 
     return (
         <div>
-            <AuthorHeader />
+            <AuthorHeader history={history}/>
             <div className="profiletab">
                 <Tabs id="profileTab">
                     <Tab eventKey="personal" title="Personal Details">
@@ -152,7 +197,23 @@ export default function AuthorProfile() {
                                             qualification,
                                             biography
                                         })
-                                        .then(res => {});
+                                        .then(res => {
+                                            Swal.fire({
+                                                icon : 'success' ,
+                                                text : `${res.data.message}`
+                                            })
+                                        }).catch(error => {
+                                            if(error.response.data.message === "Unauthorised."){
+                                                history.push('/author/login');
+                                            }
+                                            else
+                                            {
+                                                Swal.fire({
+                                                    icon : 'error' ,
+                                                    text : `${error.response.data.message}`
+                                                })
+                                            }
+                                        });
                                 }}
                             >
                                 Update
@@ -195,7 +256,23 @@ export default function AuthorProfile() {
                                             qualification,
                                             biography
                                         })
-                                        .then(res => {});
+                                        .then(res => {
+                                            Swal.fire({
+                                                icon : 'success' ,
+                                                text : `${res.data.message}`
+                                            })
+                                        }).catch(error => {
+                                            if(error.response.data.message === "Unauthorised."){
+                                                history.push('/author/login');
+                                            }
+                                            else
+                                            {
+                                                Swal.fire({
+                                                    icon : 'error' ,
+                                                    text : `${error.response.data.message}`
+                                                })
+                                            }
+                                        });
                                 }}
                             >
                                 Update
@@ -238,7 +315,23 @@ export default function AuthorProfile() {
                                             qualification,
                                             biography
                                         })
-                                        .then(res => {});
+                                        .then(res => {
+                                            Swal.fire({
+                                                icon : 'success' ,
+                                                text : `${res.data.message}`
+                                            })
+                                        }).catch(error => {
+                                            if(error.response.data.message === "Unauthorised."){
+                                                history.push('/author/login');
+                                            }
+                                            else
+                                            {
+                                                Swal.fire({
+                                                    icon : 'error' ,
+                                                    text : `${error.response.data.message}`
+                                                })
+                                            }
+                                        });;
                                 }}
                             >
                                 Update

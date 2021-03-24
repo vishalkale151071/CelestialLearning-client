@@ -1,54 +1,55 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import '../styles/CourseHome.css';
 import { useParams } from 'react-router';
 import Header from '../Utils/Header';
-import { Card, CardHeader, CardTitle, CardBody, CardFooter, CardImg, Button, Container, Row, Col } from 'shards-react';
-import razorpayLogo from '../assets/razorpay.png'
+import { Card, CardTitle, CardBody, CardFooter, CardImg, Button, Container, Row, Col } from 'shards-react';
+import razorpayLogo from '../assets/razorpay.png';
 import Footer1 from '../Utils/Footer';
 import { Collapse } from 'antd';
-import { Divider } from 'semantic-ui-react';
 import HLSSource from '../Utils/HLSSource';
 import Axios from 'axios';
 import { Scrollbars } from 'rc-scrollbars';
 import { Player, ControlBar, ForwardControl, ReplayControl } from 'video-react';
+import Swal from 'sweetalert2';
+import Cookies from 'js-cookie';
+import SubscriberHeader from '../Subscriber/SubscriberHeader';
+import AuthorHeader from "../Author/AuthorHeader"
 
 function loadScript(src) {
-	return new Promise((resolve) => {
-		const script = document.createElement('script')
-		script.src = src
-		script.onload = () => {
-			resolve(true)
-		}
-		script.onerror = () => {
-			resolve(false)
-		}
-		document.body.appendChild(script)
-	})
+    return new Promise(resolve => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = () => {
+            resolve(true);
+        };
+        script.onerror = () => {
+            resolve(false);
+        };
+        document.body.appendChild(script);
+    });
 }
-const __DEV__ = document.domain === 'localhost'
-export default function CourseHome() {
-    
-    const [title,setTitle] = useState('');
-    const [price,setPrice] = useState(0);
-    const [suitableFor,setSuitableFor] = useState('');
-    const [description,setDescription] = useState('');
-    const [prerequisite,setPrerequisite] = useState([]);
-    const [authorName,setAuthorName] = useState('');
-    const [category,setCategory] = useState('');
-    const [courseThumbnail,setCourseThumbnail] = useState('');
-    const [coursePreview,setCoursePreview] = useState('');
-    const [sectionData , setSections] = useState([])        
+const __DEV__ = document.domain === 'localhost';
+export default function CourseHome({ history }) {
+    const [title, setTitle] = useState('');
+    const [price, setPrice] = useState(0);
+    const [suitableFor, setSuitableFor] = useState('');
+    const [description, setDescription] = useState('');
+    const [prerequisite, setPrerequisite] = useState([]);
+    const [authorName, setAuthorName] = useState('');
+    const [category, setCategory] = useState('');
+    const [courseThumbnail, setCourseThumbnail] = useState('');
+    const [coursePreview, setCoursePreview] = useState('');
+    const [sectionData, setSections] = useState([]);
 
     let { courseTitle } = useParams();
-    console.log(courseTitle)
-    useEffect(() => {
 
-        Axios.post('/subscriber/courseHome',
-        {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+
+        Axios.post('/course/details', {
             courseTitle: courseTitle
         }).then(res => {
-            console.log('Project : ', res.data);
             setTitle(res.data.title);
             setPrice(res.data.price);
             setSuitableFor(res.data.suitableFor);
@@ -58,90 +59,109 @@ export default function CourseHome() {
             setCategory(res.data.category);
             setCourseThumbnail(res.data.courseThumbnail);
             setCoursePreview(res.data.coursePreview);
-            res.data.sectionData.forEach((value , index) => {
-                setSections(oldArray => [...oldArray, {sectionName : value.sectionName , sectionNumber : value.sectionNumber}])
-            })
-        }); 
+            res.data.sectionData.forEach((value, index) => {
+                setSections(oldArray => [...oldArray, { sectionName: value.sectionName, sectionNumber: value.sectionNumber }]);
+                console.log(res.data)
+
+            });
+        });
     }, []);
-    
+
     const { Panel } = Collapse;
     let itemList = [];
-    
-    prerequisite.map((item,index)=>{
-        itemList.push( <li key={index}>{item}</li>)
-      })
-    
-    const Section = ({section}) => {
+
+    function Headerfunc() {
+        if (Cookies.get('u') === 's') {
+            return <SubscriberHeader />;
+        } else if (Cookies.get('u') === 'a') {
+            return <AuthorHeader />;
+        } else {
+            return <Header />;
+        }
+    }
+
+    prerequisite.map((item, index) => {
+        itemList.push(<li key={index}>{item}</li>);
+    });
+
+    const Section = ({ section }) => {
         const { Panel } = Collapse;
 
-        return(
-            
+        return (
             <Collapse>
-                 <Panel header = {section.sectionName} key = {section.sectionNumber} >
-                {   
-                }
+                <Panel header={section.sectionName} key={section.sectionNumber}>
+                    
                 </Panel>
             </Collapse>
-        )
-    } 
+        );
+    };
     async function DisplayRazorpay() {
-		const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+        const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
 
-		if (!res) {
-			alert('Razorpay SDK failed to load. Are you online?')
-			return
-		}
-        // const data = await fetch('http://localhost:5000/subscriber/payment', { method: 'POST' }).then((t) =>
-		// 	t.json()
-		// )
-        Axios.post('/subscriber/payment',
-        {
-            price
-        }).then(res=>{
-            console.log(res);
-            const options = {
-                key: __DEV__ ? 'rzp_test_3LqDzu8J6aTI9F' : 'PRODUCTION_KEY',
-                currency: res.data.currency,//data.currency,
-                amount: res.data.price,
-                order_id: res.data.id,//data.id,
-                name: 'Payment for course ${title}',
-                description: `Course buy`,
-                image: razorpayLogo,
-                handler: function (response) {
-                    alert(response.razorpay_payment_id)
-                    alert(response.razorpay_order_id)
-                    alert(response.razorpay_signature)
-                },
-                prefill: {
-                    name : 'Saumya Sinha',
-                    email: 'saumyasinha38@gmail.com',
-                    contact: 9899999999
-                }
-            }
-            const paymentObject = new window.Razorpay(options)
-            paymentObject.open()
+        if (!res) {
+            alert('Razorpay SDK failed to load. Are you online?');
+            return;
+        }
+
+        Axios.post('/payment/process', {
+            price,
+            courseTitle
         })
-            
-		
-	}   
+            .then(res => {
+                console.log(res.data);
+                const options = {
+                    key: __DEV__ ? 'rzp_test_3LqDzu8J6aTI9F' : 'PRODUCTION_KEY',
+                    currency: res.data.currency, //data.currency,
+                    amount: res.data.price,
+                    order_id: res.data.id, //data.id,
+                    name: `Payment for course ${title}`,
+                    description: `Course buy`,
+                    image: razorpayLogo
+
+                    // handler: function (response) {
+                    //     alert(response.razorpay_payment_id)
+                    //     alert(response.razorpay_order_id)
+                    //     alert(response.razorpay_signature)
+                    // },
+                    // prefill: {
+                    //     name : res.data.name,
+                    //     email: res.data.email,
+                    //     contact: res.data.contact
+                    // }
+                };
+                const paymentObject = new window.Razorpay(options);
+                paymentObject.open();
+            })
+            .catch(error => {
+                if (error.response.data.message === 'Unauthorised.') {
+                    Swal.fire({
+                        icon: 'error',
+                        text: `Your session has been expired. Kindly login again to continue.`
+                    });
+                    history.push('/subscriber/login');
+                }
+            });
+    }
     return (
         <div>
-            <Header />
+            <Headerfunc />
             <div className="topCard">
                 <Card className="tpCard" style={{ maxWidth: '1800px' }}>
                     <CardImg className="crdImg" src={courseThumbnail} />
                     <CardBody>
                         <CardTitle className="crhmCT">{title}</CardTitle>
                         <div className="SmallDesc">
-                            <p><h6>Price: {price}</h6></p>
+                            <p>
+                                <h6>Price: {price}</h6>
+                            </p>
                             <p>Author: {authorName}</p>
                             <p>Category: {category}</p>
                             <p>Language: English</p>
                         </div>
-                        <Button className="crhmBT" >
-                            View
+
+                        <Button className="WishlistButton" onClick={DisplayRazorpay}>
+                            Buy Now
                         </Button>
-                        <Button className="WishlistButton" onClick = {DisplayRazorpay}>Buy Now</Button>
                         <Button className="ShareButton">Share</Button>
                     </CardBody>
                 </Card>
@@ -158,10 +178,7 @@ export default function CourseHome() {
                             </div>
                             <h2 className="H2Heading">Course Preview:</h2>
                             <div className="CRHMVidPlayerDiv">
-                                <Player className="CRHMvidPlayer"
-                                
-                                    src = {coursePreview}
-                                >
+                                <Player className="CRHMvidPlayer" src={coursePreview}>
                                     {/* <HLSSource
                                         isVideoChild
                                         src="https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8"
@@ -198,21 +215,19 @@ export default function CourseHome() {
                                 </Container>
                             </div>
                             <h2 className="H2Heading">PreRequisites:</h2>
-                            <div className="PrereqText">
-                                {itemList}
-                            </div>
+                            <div className="PrereqText">{itemList}</div>
                         </CardBody>
                         <CardFooter></CardFooter>
                     </Card>
                 </div>
                 <h3 className="ContentsHeading">Contents</h3>
-                 <Collapse className="CoHoCollaps">
-                    <Scrollbars style={{ width: 525, height: 630 }}>
-                        {
-                            sectionData.map(section => <Section section = {section} key={section.sectionName}/>) 
-                        }     
+                <Collapse className="CoHoCollaps">
+                    <Scrollbars style={{ width: 525, height: 300 }}>
+                        {sectionData.map(section => (
+                            <Section section={section} key={section.sectionName} />
+                        ))}
                     </Scrollbars>
-                </Collapse>
+                </Collapse> 
             </div>
 
             <div>

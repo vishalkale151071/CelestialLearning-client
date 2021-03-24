@@ -5,60 +5,41 @@ import HomeCarousel from './HomeCarousel';
 import Footer1 from './Footer';
 import { Container, Row, Col } from 'shards-react';
 import axios from 'axios';
+import CarouselDemo from '../Utils/Carousel';
+import SubscriberHeader from '../Subscriber/SubscriberHeader';
+import Cookies from 'js-cookie';
+import AuthorHeader from '../Author/AuthorHeader';
+import SearchList from "./SearchList"
 
 export default function Home({ history }) {
-
-    const [courses , setCourses] = useState([])
-
-    useEffect(() => {
-        axios.get('/homePage').then(res => {
-            console.log("Result : " , res.data.courseData  )
-            setCourses(res.data.courseData)
-
-        })
-
-    }, [])
-
+    const categories = ['IT & Software', 'Finance & Accounting', 'Development', 'Business', 'Marketing', 'Photography'];
+    const [courses, setCourses] = useState([]);
+    function Headerfunc() {
+        if (Cookies.get('u') === 's') {
+            return <SubscriberHeader />;
+        } else if (Cookies.get('u') === 'a') {
+            return <AuthorHeader />;
+        } else {
+            return <Header />;
+        }
+    }
+    // useEffect(() => {
+    //     axios.get('/home/getCourses').then(res => {
+    //         setCourses(res.data.courseData);
+    //     });
+    // }, []);
+    
     return (
         <div className="home">
             <div className="header">
-                <Header />
+                <Headerfunc />
+                
             </div>
             <HomeCarousel />
 
-            <div className="main">
-                {courses.map(course => (
-                    <Container className="cc">
-                        <Row>
-                            <Col>
-                                <CourseCard course={course} />
-                            </Col>
-                        </Row>
-                    </Container>
-                ))}
-                
-            </div>
-            <div className="main2">
-                <Container className="dr-example-container">
-                    <Row>
-                        {/* <Col>
-                            <CourseCard title="title6"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title7"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title8"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title9"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title10"/>
-                        </Col> */}
-                    </Row>
-                </Container>
-            </div>
+            {categories.map(value => {
+                return <CarouselDemo cat={value} />;
+            })}
 
             <Footer1 />
         </div>

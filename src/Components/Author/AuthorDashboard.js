@@ -1,51 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import CourseCard from '../Utils/CourseCard';
 import AuthorHeader from './AuthorHeader';
-import { Container, Row, Col } from 'shards-react';
 import '../styles/UserDashboard.css';
 import Axios from 'axios';
+import AuthorCourseCarousel from './AuthorCourseCarousel';
+import Swal from 'sweetalert2';
+import AuthorLiveCarousel from './AuthorLiveCarousel'
 
-export default function AuthorDashboard() {
-    const cardTitles = ['title1', 'title5', 'title4', 'title3', 'title2'];
-
+export default function AuthorDashboard({ history }) {
     const [name, setName] = useState('');
 
     useEffect(() => {
-        Axios.post('/author/profile').then(res => {
-            setName(res.data.profiledata.firstName);
-        });
+        Axios.post('/author/profile')
+            .then(res => {
+                setName(res.data.profiledata.firstName);
+            })
+            .catch(error => {
+                if (error.response.data.message === 'Unauthorised.') {
+                    history.push('/author/login');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: `${error.response.data.message}`
+                    });
+                }
+            });
     }, []);
 
     return (
         <div>
-            <AuthorHeader />
+            <AuthorHeader history={history} />
             <div className="all">
                 <h1>Welcome {name}!</h1>
                 Use the Icon on the top right corner to Go to Profile/ Account Settings/ Log out!
-                <div className="main">
-                    {cardTitles.map(title => (
-                        <Container className="cc">
-                            <Row>
-                                <Col>
-                                    <CourseCard title={title} />
-                                </Col>
-                                {/* <Col>
-                            <CourseCard title="title2"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title3"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title4"/>
-                        </Col>
-                        <Col>
-                            <CourseCard title="title5"/>
-                        </Col> */}
-                            </Row>
-                        </Container>
-                    ))}
-                    ;
-                </div>
+                <AuthorCourseCarousel />
+                <AuthorLiveCarousel/>
             </div>
         </div>
     );

@@ -2,7 +2,7 @@
      background-color: whitesmoke;
 }
 button{
-     margin-left: 10px;
+     margin-left: auto;
 }
 .signupButton{
      margin-left: 10px;
@@ -12,6 +12,7 @@ button{
 }
 
 .headersearch{
+     margin-top: -4%;
      border: 2px solid gray;
      border-radius: 10px;
 
