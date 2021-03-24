@@ -24,6 +24,9 @@ const SubscriberCourseCarousel = () => {
     const submit = title => {
         history.push(`/course/view/${title}`);
     };
+    const submitFeedback = title => {
+        history.push(`/course/feedback/${title}`);
+    }
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -67,7 +70,11 @@ const SubscriberCourseCarousel = () => {
                                 onClick={() => submit(courses.courseName)}
                                 className="p-button p-button-rounded p-mr-2"
                             />
-                            <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
+                            <Button 
+                                icon="pi pi-star" 
+                                onClick = {() => submitFeedback(courses.courseName)} 
+                                className="p-button-success p-button-rounded p-mr-2" 
+                            />
                             <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
                     </div>

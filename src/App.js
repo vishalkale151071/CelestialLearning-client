@@ -36,6 +36,7 @@ import CategoryCourses from './Components/Utils/CategoryCourses';
 import Recharts from './Components/Utils/Recharts';
 import AuthorLiveSession from './Components/Author/AuthorLiveSession';
 import { Zoom } from './Components/LiveSession/Zoom';
+import CourseFeedback from './Components/Course/CourseFeedback';
 
 function App() {
     return (
@@ -73,6 +74,7 @@ function App() {
                         <Route path="/course/create" exact component={CreateCourse} />
                         <Route path="/course/:courseTitle" exact component={CourseHome} />
                         <Route path="/course/view/:title" exact component={CourseView} />
+                        <Route path="/course/feedback/:title" exact component={CourseFeedback} />
                         <Route path="/courses/:category" exact component={CategoryCourses} />
                         <Route path="/create-test" exact component= { CreateTest } />
                         <Route path="/test-preview/:courseName/:sectionName" exact component={ TestPreview } />
