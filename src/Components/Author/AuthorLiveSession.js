@@ -8,6 +8,7 @@ import '../styles/AuthorLiveSession.css';
 import Axios from 'axios';
 import DatePicker from 'react-datepicker';
 import { Dropdown} from 'react-bootstrap';
+import Swal from 'sweetalert2'
 
 
 const AuthorLiveSession = ({ history }) => {
@@ -36,7 +37,10 @@ const AuthorLiveSession = ({ history }) => {
             meetingId,password,meetingName,courseName:SessionCourse,dateOfConduction:startDate
         })
             .then(res => {
-                console.log('zoom success')
+                Swal.fire({
+                    icon: 'success',
+                    text: `${res.data.message}`
+                });
             })
             .catch(err => {
                 console.log(err);
