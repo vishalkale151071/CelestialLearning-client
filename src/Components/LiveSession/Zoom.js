@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 // import { ZoomMtg } from "@zoomus/websdk";
 import '../styles/Zoom.css';
-
+import React, { Component } from 'react'
 const crypto = require('crypto'); // crypto comes with Node.js
 
 function generateSignature(apiKey, apiSecret, meetingNumber, role) {
@@ -15,19 +15,32 @@ function generateSignature(apiKey, apiSecret, meetingNumber, role) {
     });
 }
 
-
-var apiKey = '5W1c0P6RS5mRzJvdjIgqDQ';
-var apiSecret = 'Dp3orf9HuSX5TQ2PPzQOwLkGBEfY2HB3aHo5';
-var meetingNumber = 98881552973;
-var leaveUrl = 'http://localhost:3000/subscriber/dashboard';
-var userName = 'WebSDK';
-var userEmail = 'saumyasinha38@gmail.com';
-var passWord = '0Udq3y';
-var signature = '';
-generateSignature(apiKey, apiSecret, meetingNumber, 0).then(res => {
+var apiKey = ''
+var apiSecret =''
+var meetingNumber = 0
+var leaveUrl = ''
+var userName = ''
+var userEmail = ''
+var passWord = ''
+var signature = ''
+function data(meetingId,password)
+{
+     apiKey = '5W1c0P6RS5mRzJvdjIgqDQ';
+     apiSecret = 'Dp3orf9HuSX5TQ2PPzQOwLkGBEfY2HB3aHo5';
+     meetingNumber = parseInt(meetingId);
+     leaveUrl = 'http://localhost:3000/subscriber/dashboard';
+     userName = 'WebSDK';
+     userEmail = 'saumyasinha38@gmail.com';
+     passWord = password;
+     signature = '';
+}
+ 
+const Zoom = (props) => {
+  
+   data(props.title,props.password)
+   generateSignature(apiKey, apiSecret, meetingNumber, 0).then(res => {
     signature = res;
-});
-const Zoom = () => {
+    });
     useEffect(() => {
         const { ZoomMtg } = require('@zoomus/websdk');
         showZoomDIv();

@@ -7,13 +7,17 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import Axios from 'axios';
+import Zoom from '../LiveSession/Zoom';
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const SubscriberLiveCarousel = () => {
     const history = useHistory();
     const [liveSession, setLive] = useState([]);
-
+    const [joinMeeting, setJoinMeeting] = useState(false);
+    const [meetingName,setMeetingName] = useState("");
+    const [meetingId,setMeetingId] = useState(0);
+    const [password,setPassword] = useState("")
     
     useEffect(async () => {
         await Axios.post('/subscriber/getMeeting')
@@ -34,6 +38,13 @@ const SubscriberLiveCarousel = () => {
         
     }, []);
     
+    const submitHandler = (meetingId,password) => {
+       
+        setMeetingId(meetingId)
+        setPassword(password)
+        setJoinMeeting(true)
+       
+    }
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -71,14 +82,16 @@ const SubscriberLiveCarousel = () => {
                             <h4 className="p-mb-1">{liveSession.meetingName}</h4>
                         </div>
                         <h6 className="p-mt-0 p-mb-3">{liveSession.meetingId}</h6>
+                        <h6 className="p-mt-0 p-mb-3">{liveSession.courseName}</h6>
+                        <h6 className="p-mt-0 p-mb-3">{liveSession.password}</h6>
                         <div className="car-buttons p-mt-5">
                             {/* <Button
                                 icon="pi pi-play"
                                 onClick={() => submit(Live.courseName)}
                                 className="p-button p-button-rounded p-mr-2"
                             /> */}
-                            <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
-                            <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
+                            <Button icon="pi pi-video" className="p-button-success p-button-rounded p-mr-2" onClick={() => submitHandler(liveSession.meetingId,liveSession.password) } />
+                            
                         </div>
                     </div>
                 </div>
@@ -87,20 +100,27 @@ const SubscriberLiveCarousel = () => {
     };
     return (
         <div>
-            <div className="CourseCorousel">
-                <div className="carousel-demo">
-                    <div className="card">
-                        <Carousel
-                            value={liveSession}
-                            numVisible={5}
-                            numScroll={5}
-                            responsiveOptions={responsiveOptions}
-                            itemTemplate={productTemplate}
-                            header={<h5 className="CCHeader">Live Sessions</h5>}
-                        />
+            {joinMeeting ? (
+                <Zoom title = {meetingId} password = {password}/>
+            ) : (
+                
+            <div>
+                <div className="CourseCorousel">
+                    <div className="carousel-demo">
+                        <div className="card">
+                            <Carousel
+                                value={liveSession}
+                                numVisible={5}
+                                numScroll={5}
+                                responsiveOptions={responsiveOptions}
+                                itemTemplate={productTemplate}
+                                header={<h5 className="CCHeader">Live Sessions</h5>}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
+            )}
         </div>
     );
 };

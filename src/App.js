@@ -57,6 +57,7 @@ function App() {
                         <Route path="/subscriber/forgetverify/:token" exact component={SubscriberForgetVerify} />
                         <Route path="/subscriber/forgetpasswordupdate" exact component={SubscriberNewPassword} />
                         <Route path="/subscriber/verify1/:token" exact component={SubscriberEmailVerify} />
+                        <Route path="/subscriber/recharts" exact component={Recharts} />
 
                         <Route path="/author/login" exact component={AuthorLogin} />
                         <Route path="/author/signup" exact component={AuthorSignup} />
@@ -70,6 +71,7 @@ function App() {
                         <Route path="/author/verify1/:token" exact component={AuthorEmailVerify} />
                         <Route path = "/author/liveSession" exact component = {AuthorLiveSession}/>
                         <Route path="/author/uploadcourse" exact component={UploadCourse} />
+                        <Route path="/author/recharts" exact component={Recharts} />
                         
                         <Route path="/course/create" exact component={CreateCourse} />
                         <Route path="/course/:courseTitle" exact component={CourseHome} />
@@ -79,7 +81,7 @@ function App() {
                         <Route path="/create-test" exact component= { CreateTest } />
                         <Route path="/test-preview/:courseName/:sectionName" exact component={ TestPreview } />
                        
-                        <Route path="/author/recharts" exact component={Recharts} />
+                        
 
                     </Switch>
                 </Router>
