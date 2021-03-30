@@ -31,7 +31,7 @@ export default function AuthorDashboard({ history }) {
             <AuthorHeader history={history} />
             <div className="all">
                 <h1>Welcome {name}!</h1>
-                Use the Icon on the top right corner to Go to Profile/ Account Settings/ Log out!
+                
                 <AuthorCourseCarousel />
                 <AuthorLiveCarousel/>
             </div>

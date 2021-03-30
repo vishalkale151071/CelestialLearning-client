@@ -37,6 +37,10 @@ import Recharts from './Components/Utils/Recharts';
 import AuthorLiveSession from './Components/Author/AuthorLiveSession';
 import { Zoom } from './Components/LiveSession/Zoom';
 import CourseFeedback from './Components/Course/CourseFeedback';
+import AdminLogin from './Components/Admin/AdminLogin';
+import AdminDashboard from './Components/Admin/AdminDashboard';
+import AdminReview from './Components/Admin/AdminReview';
+import AuthorOTP from './Components/Author/AuthorOTP';
 
 function App() {
     return (
@@ -46,6 +50,10 @@ function App() {
                 <Router>
                     <Switch>
                         <Route path="/" exact component={Home} />
+
+                        <Route path="/admin/login" exact component={AdminLogin} />
+                        <Route path="/admin/dashboard" exact component={AdminDashboard} />
+                        <Route path="/admin/review/:id" exact component={AdminReview} />
 
                         <Route path="/subscriber/login" exact component={SubscriberLogin} />
                         <Route path="/subscriber/signup/" exact component={SubscriberSignup} />
@@ -66,6 +74,7 @@ function App() {
                         <Route path="/author/settings/" exact component={AuthorSettings} />
                         <Route path="/author/forgetpassword/" exact component={AuthorForgetPassword} />
                         <Route path="/author/verify/:token" exact component={AuthorVerify} />
+                        <Route path="/author/otpverify/:id" exact component={AuthorOTP} />
                         <Route path="/author/forgetverify/:token" exact component={AuthorForgetVerify} />
                         <Route path="/author/forgetpasswordupdate" exact component={AuthorNewPassword} />
                         <Route path="/author/verify1/:token" exact component={AuthorEmailVerify} />
