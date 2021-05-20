@@ -74,6 +74,8 @@ function SubscriberLogin({history}) {
                     <br />
                     <a href="/author/login">Are you an Author?</a>
                     <br />
+                    <a href = "/admin/login">Are you an admin?</a>
+                    <br />
                     <a href="/subscriber/forgetpassword">Having problems logging in?</a>
                 </CardFooter>
             </Card>

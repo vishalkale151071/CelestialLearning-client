@@ -4,6 +4,7 @@ import '../styles/UserDashboard.css';
 import Axios from 'axios';
 import AuthorCourseCarousel from './AuthorCourseCarousel';
 import Swal from 'sweetalert2';
+import AuthorLiveCarousel from './AuthorLiveCarousel'
 
 export default function AuthorDashboard({ history }) {
     const [name, setName] = useState('');
@@ -30,8 +31,9 @@ export default function AuthorDashboard({ history }) {
             <AuthorHeader history={history} />
             <div className="all">
                 <h1>Welcome {name}!</h1>
-                Use the Icon on the top right corner to Go to Profile/ Account Settings/ Log out!
+                
                 <AuthorCourseCarousel />
+                <AuthorLiveCarousel/>
             </div>
         </div>
     );
