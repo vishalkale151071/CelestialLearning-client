@@ -324,9 +324,7 @@ export default function CreateCourse() {
                 <CardBody>
                     <div className="step2">
                         <Form>
-                            <label className="labelstep2" htmlFor="name">
-                                Section Name:
-                            </label>
+                            
                         </Form>
                     </div>
                     <SectionContainer />
@@ -420,7 +418,9 @@ export default function CreateCourse() {
         <div>
             <Card className="createcard" style={{ maxWidth: '1500px' }}>
                 <CardBody>
-                    <div className="previewCourse">Please Confirm all the data before submitting your course for preview</div>
+                    <div className="previewCourse">
+                        <h3>Thats it !!! Click on submit for preview . Your course will be live !!</h3>
+                    </div>
                 </CardBody>
             </Card>
         </div>

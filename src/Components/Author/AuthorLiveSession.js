@@ -54,19 +54,20 @@ const AuthorLiveSession = ({ history }) => {
                 <div>
                     Please Choose a course for Live Session:
                     <Dropdown className="createdropdown">
-                            <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
+                            <Dropdown.Toggle variant="outline-primary" id="sesscourse">
                                 Choose
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {courseList.map((course)=>(
-                                <Dropdown.Item key={course} onClick={e=>setSessionCourse(course)}>{course}</Dropdown.Item>
+                                <Dropdown.Item key={course} onClick={(e)=>{
+                                    setSessionCourse(course)
+                                    document.getElementById("sesscourse").innerHTML = 'kksmcsackm'
+                                }}>{course}</Dropdown.Item>
                                 ))}
                             </Dropdown.Menu>
                         </Dropdown>
                 </div>
             )
-
-            
         }
         else{
             return(
@@ -127,8 +128,17 @@ const AuthorLiveSession = ({ history }) => {
                                 Choose
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <Dropdown.Item onClick={e=>setSessionType("Public")}>Public</Dropdown.Item>
-                                <Dropdown.Item onClick={e=>setSessionType("Private")}>Private</Dropdown.Item>
+                                <Dropdown.Item onClick={(e)=>{
+                                    setSessionType("Public")
+                                    document.getElementById("dropdown-basic").innerHTML = 'Public';
+
+                                }}>Public</Dropdown.Item>
+
+                                <Dropdown.Item onClick={(e)=>{
+                                    setSessionType("Private") 
+                                    document.getElementById("dropdown-basic").innerHTML = 'Private';
+                                    
+                                }}>Private</Dropdown.Item>
                                 
                             </Dropdown.Menu>
                         </Dropdown>

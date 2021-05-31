@@ -50,6 +50,7 @@ export default function CourseFeedback() {
 
     //console.log(sections);
     return (
+
         <div>
             <Card className="adminreview" theme="info" style={{ maxWidth: '450px' }}>
                 <CardHeader></CardHeader>

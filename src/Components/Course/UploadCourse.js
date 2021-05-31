@@ -12,7 +12,7 @@ import Swal from 'sweetalert2'
 export default function UploadCourse() {
     const [title, setTitle] = useState('Course Name');
     const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState('Choose123');
     const [suitableFor, setSuitableFor] = useState('');
     const [platform, setPlatform] = useState('');
     const [prerequisite, setPrerequisite] = useState('');
@@ -24,6 +24,7 @@ export default function UploadCourse() {
             <Card className="uploadcard" style={{ maxWidth: '1500px' }}>
                 <CardBody>
                     <CardTitle className="institle">Instructions</CardTitle>
+
                     <p><h5>1. Choose a suitable name for your course according to the content of the course.</h5></p>
                     <p><h5>2. Categorize your course accordingly.</h5></p>
                     <p><h5>3. Write a descriptions such that it will give breif idea to the viewers.</h5></p>
@@ -84,12 +85,39 @@ export default function UploadCourse() {
                             </Dropdown.Toggle>
                             {/* <input type="text" onChange={e => setCategory(e.target.value)} /> */}
                             <Dropdown.Menu>
-                                <Dropdown.Item onClick={e=>setCategory('Development')}>Development</Dropdown.Item>
-                                <Dropdown.Item onClick={e=>setCategory("Business")}>Business</Dropdown.Item>
-                                <Dropdown.Item onClick={e=>setCategory("Finance & Accounting")}>Finance & Accounting</Dropdown.Item>
-                                <Dropdown.Item onClick={e=>setCategory("IT & Software")}>IT & Software</Dropdown.Item>
-                                <Dropdown.Item onClick={e=>setCategory("Marketing")}>Marketing</Dropdown.Item>
-                                <Dropdown.Item onClick={e=>setCategory("Photography")}>Photography</Dropdown.Item>
+                                <Dropdown.Item onClick={
+                                    (e)=>{
+                                        
+                                        setCategory('Development')
+                                        document.getElementById("dropdown-basic").innerHTML = 'Development'
+                                    }
+
+                                }>Development</Dropdown.Item>
+
+                                <Dropdown.Item onClick={(e)=>{setCategory("Business")
+                                    document.getElementById("dropdown-basic").innerHTML = 'Business' 
+                                    
+                                                        }}>Business</Dropdown.Item>
+
+                                <Dropdown.Item onClick={(e)=>{
+                                    setCategory("Finance & Accounting")
+                                    document.getElementById("dropdown-basic").innerHTML = 'Finance & Accounting'
+                                    }}>Finance & Accounting</Dropdown.Item>
+
+                                <Dropdown.Item onClick={(e)=>{
+                                    setCategory("IT & Software")
+                                    document.getElementById("dropdown-basic").innerHTML = 'IT & Software'
+                                    }}>IT & Software</Dropdown.Item>
+
+                                <Dropdown.Item onClick={(e)=>{
+                                    setCategory("Marketing")
+                                    document.getElementById("dropdown-basic").innerHTML = 'Marketing'
+                                    }}>Marketing</Dropdown.Item>
+
+                                <Dropdown.Item onClick={(e)=>{setCategory("Photography")
+                                    document.getElementById("dropdown-basic").innerHTML = 'Photography'
+                            
+                                }}>Photography</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
@@ -118,7 +146,7 @@ export default function UploadCourse() {
                         </FormGroup>
                         <FormGroup>
                             <label className="labelstep4" htmlFor="platform">
-                                Platform?
+                                Platform(Web or Android)?
                             </label>
                             <FormInput
                                 type="text"

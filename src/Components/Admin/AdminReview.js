@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+
 import { useHistory } from 'react-router-dom';
 import '../styles/AdminReview.css';
 import { useParams } from 'react-router';
@@ -8,6 +9,7 @@ import '../styles/UserLogin.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'shards-ui/dist/css/shards.min.css';
 import Swal from 'sweetalert2';
+
 import Axios from 'axios';
 import { Dropdown} from 'react-bootstrap';
 
@@ -35,6 +37,7 @@ export default function AdminReview() {
                     icon: 'success',
                     text: `${res.data.message}`
                 });
+
             })
             .catch(error => {
                 Swal.fire({

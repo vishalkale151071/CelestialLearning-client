@@ -1,4 +1,10 @@
 .all{
+
     margin-left: 1cm;
     margin-top: 1cm;
-}
+} 
+.welcome{
+    font-family: "Times New Roman" ,
+    "Lucida Console", 
+    "Courier New", monospace;
+}   

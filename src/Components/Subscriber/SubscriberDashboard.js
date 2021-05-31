@@ -18,8 +18,9 @@ export default function SubscriberDashboard({ history }) {
     const [courses, setCourses] = useState([]);
     const [status, setCourseStatus] = useState('');
     const [name, setName] = useState('');
+    const[noOfSessions , setNo] = useState(0)
 
-    useEffect(() => {
+    useEffect(() => { 
         Axios.post('/subscriber/profile')
             .then(res => {
                 setName(res.data.profiledata.firstName);
@@ -34,6 +35,26 @@ export default function SubscriberDashboard({ history }) {
                     });
                 }
             });
+
+             Axios.post('/subscriber/getMeeting')
+            .then(res => {
+                
+                console.log("Live ; " , res.data.message.length)
+                setNo(res.data.message.length)
+                
+            })     
+            .catch(error => {
+                if (error.response.data.message === 'Unauthorised.') {
+                    history.push('/subscriber/login');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: `${error.response.data.message}`
+                    });
+                }
+            }); 
+
+
 
         
     }, []);
@@ -51,12 +72,14 @@ export default function SubscriberDashboard({ history }) {
     return (
         <div>
             <SubscriberHeader history={history} />
-          
-            <Blink color="red" text="Live Session !" fontSize="20" />
+
+            {noOfSessions > 0 && (<Blink color="red" text="Live Session !" fontSize="20" /> ) }
+              
 
             
-                <div className="all">
-                    <h1>Welcome {name}</h1>
+                <div className="all ">
+                    <h1 className="welcome">Welcome {name}</h1>
+
                    
                     {status}
 

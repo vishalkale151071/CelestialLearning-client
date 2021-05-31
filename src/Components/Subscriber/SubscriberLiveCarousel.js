@@ -19,12 +19,13 @@ const SubscriberLiveCarousel = () => {
     const [meetingId,setMeetingId] = useState(0);
     const [password,setPassword] = useState("")
     
-    useEffect(async () => {
+    useEffect(async () => { 
+
         await Axios.post('/subscriber/getMeeting')
             .then(res => {
                 
                 setLive(res.data.message)
-            })
+            })     
             .catch(error => {
                 if (error.response.data.message === 'Unauthorised.') {
                     history.push('/subscriber/login');
@@ -34,7 +35,8 @@ const SubscriberLiveCarousel = () => {
                         text: `${error.response.data.message}`
                     });
                 }
-            });
+            }); 
+            
         
     }, []);
     
