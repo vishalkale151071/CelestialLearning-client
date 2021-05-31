@@ -69,10 +69,10 @@ export const Header = () => {
                 
             </Collapse>
             <div className="right">
-                <Button outline theme="info" onClick={loginHandleClick}>
+                <Button  theme="light" onClick={loginHandleClick}>
                     LogIn
                 </Button>
-                <Button className="signupButton" outline theme="info" onClick={signupHandleClick}>
+                <Button className="signupButton"  theme="light"  onClick={signupHandleClick}>
                     SignUp
                 </Button>
             </div>

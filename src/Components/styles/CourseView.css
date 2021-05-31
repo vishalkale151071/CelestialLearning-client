@@ -6,7 +6,6 @@
     margin-left: 24%;
     box-shadow: black 1px 0.7px 15px;
     margin-bottom: 1cm;
-
 }
 
 .vidPlayerdiv {
@@ -19,6 +18,7 @@
 }
 
 .crvCollapse {
+    min-width: 30%;
     max-width: 30%;
     height: 100%;
     margin-top: 3.3cm;
@@ -26,13 +26,22 @@
 }
 
 .crvTitle {
-    margin-left: 7.5cm;
+    margin-left: 15%;
 }
 
-.crvpanel {
-    max-width: 99%;
-}
-
-.crvbutgt{
+.crvbutgt {
     margin-left: 15cm;
+}
+
+.ListSection {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.CrVPanel {
+    max-width: 5cm;
+}
+
+.ant-collapse-icon-position-left {
+    max-width: 90%;
 }
