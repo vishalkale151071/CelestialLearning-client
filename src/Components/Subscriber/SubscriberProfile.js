@@ -92,16 +92,16 @@ export default function SubscriberProfile({ history }) {
         };
 
         return (
-            <div>
+            <div className="imgsection">
                 <form onSubmit={e => _handleSubmit(e)}>
                     <input className="ProfileImageInputButton" type="file" onChange={e => _handleImageChange(e)} />
                     <Button className="ProfileImageSubmitButton" type="submit" onClick={e => _handleSubmit(e)}>
                         {imgStatus}
                     </Button>
                 </form>
-                <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
+                <div className="proimgsec">
                     {imagePreviewUrl ? (
-                        <img style={{ width: '100%', height: '100%' }} src={imagePreviewUrl} />
+                        <img class="proimg" src={imagePreviewUrl} />
                     ) : (
                         <div>Please select an Image for Preview</div>
                     )}
@@ -157,6 +157,7 @@ export default function SubscriberProfile({ history }) {
                         <div className="ProfilePic">
                             <ImageUpload />
                         </div>
+                        <div className="personalform">
                         <Form className="subform">
                             <FormGroup>
                                 <label htmlFor="#firstName">First Name</label>
@@ -208,6 +209,7 @@ export default function SubscriberProfile({ history }) {
                                 Update
                             </Button>
                         </Form>
+                        </div>
                     </Tab>
                     <Tab eventKey="social" title="Social Media Handles">
                         <Form className="subform">

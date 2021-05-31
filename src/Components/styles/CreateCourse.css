@@ -29,110 +29,123 @@
     width: 3cm;
 }
 
-.stepbar{
+.stepbar {
     margin-top: 2cm;
 }
 
-.createheading{
+.createheading {
     position: absolute;
     margin: auto;
     margin-left: 45%;
 }
 
-.createcard{
+.createcard {
     margin: auto;
     margin-top: 1cm;
     min-height: 14.8cm;
 }
 
-.thumbnailUpload{
+.thumbnailUpload {
     margin-top: 1cm;
 }
 
-.previewUpload{
-    margin-top: 1cm;
+.previewUpload {
+    margin-top: -20%;
+    margin-left: 70%;
 }
 
-.sectionIp{
+.sectionIp {
     width: 10cm;
     margin-top: 5px;
     margin-bottom: 1cm;
 }
 
-.videoIp{
+.videoIp {
     width: 10cm;
 }
 
-
-
-.sectionForm{
+.sectionForm {
     margin-left: 10px;
     margin-top: 10px;
 }
 
-.CrCoCard{
+.CrCoCard {
     margin-top: 20px;
     margin-bottom: 10px;
     border: black solid 1px;
-
 }
 
-.CrCoSaveLectureBut{
+.CrCoSaveLectureBut {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.CrCoAddLectureBut{
+.CrCoAddLectureBut {
     margin-right: 10px;
     margin-top: 1cm;
 }
-.CrCoShowStateBut{
-    margin-top: 1cm ;
+.CrCoShowStateBut {
+    margin-top: 1cm;
 }
 
-.CrCoSaveSecBut{
+.CrCoSaveSecBut {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.CrCoAddSectionBtn{
+.CrCoAddSectionBtn {
     margin-top: 1cm;
 }
 
-.ThumbnailIpButton{
+.ThumbnailIpButton {
     position: absolute;
     margin-left: -3cm;
     margin-top: 1cm;
 }
 
-.ThumbnailSubmitButton{
+.ThumbnailSubmitButton {
     position: absolute;
     margin-top: 1cm;
     margin-left: 5cm;
 }
 
-
-.crcochbut{
-position: absolute;
-margin-top: 1%;
+.crcochbut {
+    position: absolute;
+    margin-top: 1%;
 }
 
-.crcoUpbut{
-position:absolute;
-margin-top: 4%;
+.crcoUpbut {
+    position: absolute;
+    margin-top: 4%;
 }
 
-.crcoPrup{
-position: absolute;
-margin-top: 1%;
-
+.crcoPrup {
+    position: absolute;
+    margin-top: 1%;
 }
 
-.crcoPrch{
-position: absolute;
+.crcoPrch {
+    position: absolute;
 }
 
-.crcoimgpr{
-    
-    margin-left: 2%;
+.ImgSec {
+    text-align: 'center';
+    height: '100px';
+    width: '100px';
+    border: '5px solid gray';
+}
+
+.thumbnail {
+    margin-left: -100%;
+    margin-top: 15%;
+}
+
+.previewtext {
+    margin-left: 50%;
+}
+
+.titlethumbnail{
+    margin-left: 50%;
+    margin-top: -5%;
+    margin-bottom: 8%;
 }

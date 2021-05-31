@@ -5,7 +5,7 @@ import 'react-step-progress/dist/index.css';
 import { Form, FormInput, FormGroup, Button } from 'shards-react';
 import '../styles/CreateCourse.css';
 import { Card, CardTitle, CardBody } from 'shards-react';
-import { Image,Spinner } from 'react-bootstrap';
+import { Image, Spinner } from 'react-bootstrap';
 import 'antd/dist/antd.css';
 import { message } from 'antd';
 import ImgCrop from 'antd-img-crop';
@@ -18,18 +18,18 @@ import Swal from 'sweetalert2';
 export default function CreateCourse() {
     let history = useHistory();
     const [courseId, setCourseId] = useState('');
-    
+
     useEffect(() => {});
 
     const PreviewVedioUpload = () => {
         const [vedioFile, setVedioFile] = useState(null);
-        const [loading,setLoading] = useState(false)
+        const [loading, setLoading] = useState(false);
         function handelFileChange(e) {
             setVedioFile(e.target.files[0]);
         }
         function handleSubmit() {
-            setLoading(true)
-            
+            setLoading(true);
+
             const formData = new FormData();
             formData.append('image', vedioFile);
 
@@ -41,13 +41,13 @@ export default function CreateCourse() {
                 data: formData
             })
                 .then(res => {
-                    setLoading(false)
+                    setLoading(false);
                     Swal.fire({
                         icon: 'success',
                         text: `${res.data.message}`
                     });
                 })
-                
+
                 .catch(error => {
                     if (error.response.data.message === 'Unauthorised.') {
                         history.push('/author/login');
@@ -59,18 +59,15 @@ export default function CreateCourse() {
                     }
                 });
         }
-     
+
         return (
             <div>
-                
-                <input className="crcoPrch"  type="file" onChange={e => handelFileChange(e)} />
+                <input className="crcoPrch" type="file" onChange={e => handelFileChange(e)} />
                 <br />
-                <Button className="crcoPrup" onClick={handleSubmit} disabled = {loading}>
-                    {loading && <Spinner animation="border" variant="info" /> }
+                <Button className="crcoPrup" onClick={handleSubmit} disabled={loading}>
+                    {loading && <Spinner animation="border" variant="info" />}
                     Upload
                 </Button>
-                
-
             </div>
         );
     };
@@ -123,28 +120,25 @@ export default function CreateCourse() {
             <div>
                 <form onSubmit={e => _handleSubmit(e)}>
                     <input className="crcochbut" type="file" onChange={e => _handleImageChange(e)} />
-                    <Button className="crcoUpbut" theme='success' type="submit" onClick={e => _handleSubmit(e)}>
+                    <Button className="crcoUpbut" theme="success" type="submit" onClick={e => _handleSubmit(e)}>
                         Upload Image
                     </Button>
                 </form>
-                <div style={{ textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
+                <div style={{ marginLeft: '15cm', textAlign: 'center', height: '100px', width: '100px', border: '5px solid gray' }}>
                     {imagePreviewUrl ? (
-                        <img className='crcoimgpr' style={{ width: '100%', height: '100%' }} src={imagePreviewUrl} />
+                        <img className="crcoimgpr" style={{ width: '100%', height: '100%' }} src={imagePreviewUrl} />
                     ) : (
-                        <div >Please select an Image for Preview</div>
+                        <div>Please select an Image for Preview</div>
                     )}
                 </div>
             </div>
         );
     };
-   
-    
-
 
     function Section({ sectionId }) {
         const [section, createSection] = useState(true);
         const [sectionName, setSectionName] = useState('');
-        const [loading,setLoading] = useState(false)
+        const [loading, setLoading] = useState(false);
 
         console.log('$$$$$$$$$$$$ Secid : ', sectionId);
 
@@ -175,7 +169,7 @@ export default function CreateCourse() {
 
         function saveLecture(i) {
             const values = [...fields];
-            setLoading(true)
+            setLoading(true);
             const formData = new FormData();
             formData.append('image', values[i].lectureFile);
             formData.append('vedioName', `${values[i].lectureName}`);
@@ -186,7 +180,7 @@ export default function CreateCourse() {
                 data: formData
             })
                 .then(res => {
-                    setLoading(false)
+                    setLoading(false);
                     Swal.fire({
                         icon: 'success',
                         text: `${res.data.message}`
@@ -228,7 +222,7 @@ export default function CreateCourse() {
                                         onChange={e => handleFileChange(idx, e)}
                                     />
                                     <Button theme="success" className="CrCoSaveLectureBut" type="button" onClick={() => saveLecture(idx)}>
-                                        {loading && <Spinner animation="border" variant="info" /> }
+                                        {loading && <Spinner animation="border" variant="info" />}
                                         Save Lecture
                                     </Button>
                                 </div>
@@ -344,44 +338,42 @@ export default function CreateCourse() {
             <Card className="createcard" style={{ maxWidth: '1500px' }}>
                 <CardBody>
                     <div className="step2">
-                        Add a thumbnail and preview
-                        <div className="thumbnailUpload">
-                            <h4>Thumbnail</h4>
-                            <ImageUpload />
+                        <div className="thumbnail">
+                            <h3 className="titlethumbnail">Add a thumbnail and preview</h3>
+                            <div className="thumbnailUpload">
+                                <h4>Thumbnail</h4>
+                                <ImageUpload />
+                            </div>
                         </div>
                         <div className="previewUpload">
-                            <h4>Preview</h4>
+                            <h4 className="previewtext">Preview</h4>
 
                             <PreviewVedioUpload />
                         </div>
-                        <Form>
-                            <FormGroup></FormGroup>
-                        </Form>
                     </div>
                 </CardBody>
             </Card>
         </div>
     );
-    
-    const PriceUpload = () =>{
-        
-        const [price,setPrice] = useState(0)
-        const [coupon,setCoupon] = useState('')
-        function submitHandler()
-        {
+
+    const PriceUpload = () => {
+        const [price, setPrice] = useState(0);
+        const [coupon, setCoupon] = useState('');
+        function submitHandler() {
             axios({
                 method: 'post',
                 url: '/author/priceUpload',
                 price,
                 coupon,
-                courseId : history.location.state.id
+                courseId: history.location.state.id
             })
                 .then(res => {
                     Swal.fire({
                         icon: 'success',
                         text: `${res.data.message}`
                     });
-                }).catch(error => {
+                })
+                .catch(error => {
                     if (error.response.data.message === 'Unauthorised.') {
                         history.push('/author/login');
                     } else {
@@ -392,37 +384,33 @@ export default function CreateCourse() {
                     }
                 });
         }
-        return(
+        return (
             <Card className="createcard" style={{ maxWidth: '1500px' }}>
                 <CardBody>
                     <div className="priceRange">
-                        
-                            <label className="labelstep2" htmlFor="name">
-                                What price would you like to set for your course?
-                            </label>
-                            
-                                <FormInput onChange={e => setPrice(e.target.value)} type="text"></FormInput>
-                           
-                        
-                            <label className="labelstep2" htmlFor="name">
-                                Would you like to add any coupons?:(Yes/No)
-                            </label>
-                            
-                                <FormInput type="text" onChange = {e => setCoupon(e.target.value)}></FormInput>
-                            
-                       
-                            <Button className="crcoUpbut" theme='success' type="submit" onClick={submitHandler}>
-                                Upload
-                            </Button>    
+                        <label className="labelstep2" htmlFor="name">
+                            What price would you like to set for your course?
+                        </label>
+
+                        <FormInput onChange={e => setPrice(e.target.value)} type="text"></FormInput>
+
+                        <label className="labelstep2" htmlFor="name">
+                            Would you like to add any coupons?:(Yes/No)
+                        </label>
+
+                        <FormInput type="text" onChange={e => setCoupon(e.target.value)}></FormInput>
+
+                        <Button className="crcoUpbut" theme="success" type="submit" onClick={submitHandler}>
+                            Upload
+                        </Button>
                     </div>
                 </CardBody>
             </Card>
-
-        )
-    }
+        );
+    };
     const step3Content = (
         <div>
-            <PriceUpload/>
+            <PriceUpload />
         </div>
     );
 
@@ -438,10 +426,7 @@ export default function CreateCourse() {
         </div>
     );
 
-    
-
     function onFormSubmit() {
-        
         history.push('/course/create');
     }
 

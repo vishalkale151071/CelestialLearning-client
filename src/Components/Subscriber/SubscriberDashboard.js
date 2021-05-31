@@ -79,6 +79,7 @@ export default function SubscriberDashboard({ history }) {
             
                 <div className="all ">
                     <h1 className="welcome">Welcome {name}</h1>
+
                    
                     {status}
 

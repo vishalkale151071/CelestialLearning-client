@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import AuthorHeader from '../Author/AuthorHeader';
+
+import AdminHeader from '../Admin/AdminHeader';
 import '../styles/UserDashboard.css';
 import AdminCarousel from './AdminCarousel';
 

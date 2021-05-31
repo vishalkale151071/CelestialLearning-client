@@ -24,7 +24,11 @@ export default function UploadCourse() {
             <Card className="uploadcard" style={{ maxWidth: '1500px' }}>
                 <CardBody>
                     <CardTitle className="institle">Instructions</CardTitle>
-                    <h2>Instructions will be entered here</h2>
+
+                    <p><h5>1. Choose a suitable name for your course according to the content of the course.</h5></p>
+                    <p><h5>2. Categorize your course accordingly.</h5></p>
+                    <p><h5>3. Write a descriptions such that it will give breif idea to the viewers.</h5></p>
+                    
                 </CardBody>
             </Card>
         </div>

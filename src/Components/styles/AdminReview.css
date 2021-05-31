@@ -1,0 +1,17 @@
+.adminreview{
+    align-content: center;
+    color: black;
+    box-shadow: 5px 5px 15px 1px black;
+    margin: auto;
+    margin-top: 10%;
+    min-width: 40%;
+}
+
+.adminbutton{
+    margin-top: 15px;
+    margin-left: 40%;
+}
+
+.admindropdown{
+    margin-bottom: 15px;
+}

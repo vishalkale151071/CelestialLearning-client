@@ -63,6 +63,8 @@ const AuthorCourseCarousel = () => {
                             <h4 className="p-mb-1">{courses.courseName}</h4>
                         </div>
                         <h6 className="p-mt-0 p-mb-3">Rs. {courses.price}</h6>
+                        <div className="CCBut">
+
                         <div className="car-buttons p-mt-5">
                             <Button
                                 icon="pi pi-shopping-cart"
@@ -71,6 +73,7 @@ const AuthorCourseCarousel = () => {
                             />
                             <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
                             <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
+                        </div>
                         </div>
                     </div>
                 </div>

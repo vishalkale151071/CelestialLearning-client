@@ -4,13 +4,14 @@
     margin: .3rem;
     text-align: center;
     padding: 2rem 0;
-
+    min-height: 9cm;
+    max-height: 9cm;
 
 }
 
 .product-item-content{
     min-width: 95%;
-    max-height: 9cm;
+    max-height: 8cm;
 }
 
 .carousel-demo .product-item .product-image {
@@ -30,9 +31,9 @@
 }
 
 .CCimg{
-  
     max-width: 7cm;
-    max-height: 7cm;
+    min-height: 3.5cm;
+    max-height: 5cm;
 }
 
 .p-mb-1{
@@ -41,6 +42,19 @@
 
 .CCtitle{
     text-overflow: ellipsis;
+    min-height: 1.7cm;
+    max-height: 1.7cm;
+}
+
+.CCPrice{
+    min-height: 1cm;
+    max-height: 1cm;
+}
+
+.CCBut{
+    margin-top: -0.6cm;
+    min-height: 1cm;
+    max-height: 1cm;
 }
 
 .card:hover{
@@ -50,3 +64,4 @@
 .product-item:hover{
     background-color: rgb(242, 242, 242);
 }
+
