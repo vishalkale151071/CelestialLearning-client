@@ -10,7 +10,7 @@ export default function AdminDashboard({ history }) {
 
     return (
         <div>
-            <AuthorHeader history={history} />
+            <AdminHeader history={history} />
             <div className="all">
                 <h1>Welcome</h1>
                 <AdminCarousel/>
