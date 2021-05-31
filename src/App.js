@@ -36,6 +36,11 @@ import CategoryCourses from './Components/Utils/CategoryCourses';
 import Recharts from './Components/Utils/Recharts';
 import AuthorLiveSession from './Components/Author/AuthorLiveSession';
 import { Zoom } from './Components/LiveSession/Zoom';
+import CourseFeedback from './Components/Course/CourseFeedback';
+import AdminLogin from './Components/Admin/AdminLogin';
+import AdminDashboard from './Components/Admin/AdminDashboard';
+import AdminReview from './Components/Admin/AdminReview';
+import AuthorOTP from './Components/Author/AuthorOTP';
 
 function App() {
     return (
@@ -45,6 +50,10 @@ function App() {
                 <Router>
                     <Switch>
                         <Route path="/" exact component={Home} />
+
+                        <Route path="/admin/login" exact component={AdminLogin} />
+                        <Route path="/admin/dashboard" exact component={AdminDashboard} />
+                        <Route path="/admin/review/:id" exact component={AdminReview} />
 
                         <Route path="/subscriber/login" exact component={SubscriberLogin} />
                         <Route path="/subscriber/signup/" exact component={SubscriberSignup} />
@@ -56,6 +65,7 @@ function App() {
                         <Route path="/subscriber/forgetverify/:token" exact component={SubscriberForgetVerify} />
                         <Route path="/subscriber/forgetpasswordupdate" exact component={SubscriberNewPassword} />
                         <Route path="/subscriber/verify1/:token" exact component={SubscriberEmailVerify} />
+                        <Route path="/subscriber/recharts" exact component={Recharts} />
 
                         <Route path="/author/login" exact component={AuthorLogin} />
                         <Route path="/author/signup" exact component={AuthorSignup} />
@@ -64,20 +74,23 @@ function App() {
                         <Route path="/author/settings/" exact component={AuthorSettings} />
                         <Route path="/author/forgetpassword/" exact component={AuthorForgetPassword} />
                         <Route path="/author/verify/:token" exact component={AuthorVerify} />
+                        <Route path="/author/otpverify/:id" exact component={AuthorOTP} />
                         <Route path="/author/forgetverify/:token" exact component={AuthorForgetVerify} />
                         <Route path="/author/forgetpasswordupdate" exact component={AuthorNewPassword} />
                         <Route path="/author/verify1/:token" exact component={AuthorEmailVerify} />
                         <Route path = "/author/liveSession" exact component = {AuthorLiveSession}/>
                         <Route path="/author/uploadcourse" exact component={UploadCourse} />
+                        <Route path="/author/recharts" exact component={Recharts} />
                         
                         <Route path="/course/create" exact component={CreateCourse} />
                         <Route path="/course/:courseTitle" exact component={CourseHome} />
                         <Route path="/course/view/:title" exact component={CourseView} />
+                        <Route path="/course/feedback/:title" exact component={CourseFeedback} />
                         <Route path="/courses/:category" exact component={CategoryCourses} />
                         <Route path="/create-test" exact component= { CreateTest } />
                         <Route path="/test-preview/:courseName/:sectionName" exact component={ TestPreview } />
                        
-                        <Route path="/author/recharts" exact component={Recharts} />
+                        
 
                     </Switch>
                 </Router>

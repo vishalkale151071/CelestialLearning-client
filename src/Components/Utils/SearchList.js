@@ -43,7 +43,7 @@ export default function SearchList() {
                         bordered
                         dataSource={data}
                         renderItem={item => (
-                            <List.Item>
+                            <List.Item >
                                 <List.Item.Meta title={<a onClick={() => Go(item)}>{item}</a>} />
                             </List.Item>
                         )}

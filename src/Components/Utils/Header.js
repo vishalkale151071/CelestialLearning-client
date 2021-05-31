@@ -50,7 +50,11 @@ export const Header = () => {
     return (
         <Navbar className="nav" expand="md">
             <NavbarBrand>
-                <img src={logo} width="60" heigh="40" />
+                <img src={logo} width="60" heigh="40" /> 
+                
+            </NavbarBrand>
+            <NavbarBrand>
+                
             </NavbarBrand>
             <NavbarToggler />
 
