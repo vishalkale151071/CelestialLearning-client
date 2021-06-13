@@ -77,7 +77,6 @@ const SubscriberCourseCarousel = () => {
                                 onClick = {() => submitFeedback(courses.courseName)} 
                                 className="p-button-success p-button-rounded p-mr-2" 
                             />
-                            <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
                         </div>
                     </div>

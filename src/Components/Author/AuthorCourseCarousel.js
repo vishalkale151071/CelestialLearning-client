@@ -66,11 +66,7 @@ const AuthorCourseCarousel = () => {
                         <div className="CCBut">
 
                         <div className="car-buttons p-mt-5">
-                            <Button
-                                icon="pi pi-shopping-cart"
-                                onClick={() => submit(courses.courseName)}
-                                className="p-button p-button-rounded p-mr-2"
-                            />
+                            
                             <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
                             <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>

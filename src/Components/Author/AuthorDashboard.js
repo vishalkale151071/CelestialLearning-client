@@ -30,7 +30,7 @@ export default function AuthorDashboard({ history }) {
         <div>
             <AuthorHeader history={history} />
             <div className="all">
-                <h1>Welcome {name}!</h1>
+                <h1 className="welcome">Welcome {name}!</h1>
                 
                 <AuthorCourseCarousel />
                 <AuthorLiveCarousel/>

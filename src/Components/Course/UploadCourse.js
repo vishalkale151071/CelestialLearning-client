@@ -25,10 +25,15 @@ export default function UploadCourse() {
                 <CardBody>
                     <CardTitle className="institle">Instructions</CardTitle>
 
-                    <p><h5>1. Choose a suitable name for your course according to the content of the course.</h5></p>
-                    <p><h5>2. Categorize your course accordingly.</h5></p>
-                    <p><h5>3. Write a descriptions such that it will give breif idea to the viewers.</h5></p>
-                    
+                    <p><h5 style={{ color: 'red' }}>1. Choose a suitable name for your course according to the content of the course.</h5></p>
+                    <p><h5 style={{ color: 'red' }}>2. Categorize your course accordingly.</h5></p>
+                    <p><h5 style={{ color: 'red' }}>3. Write few catching descriptions such that it will give brief idea to your audience.</h5></p>
+                    <p><h5 style={{ color: 'red' }}>4. You can select "WEB" or "ANDROID" platform according to the policy.</h5></p>
+                    <p><h5 style={{ color: 'red' }}>5. Upload your videos in .mp4 format only.</h5></p>
+                    <p><h5 style={{ color: 'red' }}>6. Just follow the steps and you will create your awaited course.</h5></p>
+                    <p><h5 style={{ color: 'red' }}>7. Don't worry if you cannot complete the course at a single stretch. The incomplete course will be saved to your dashboard.</h5></p>
+
+
                 </CardBody>
             </Card>
         </div>

@@ -1,0 +1,72 @@
+.PerC1 {
+    position: absolute;
+    margin: 1cm;
+    margin-left: 2cm;
+    max-width: 18cm;
+    min-width: 18cm;
+    max-height: 10cm;
+    min-height: 10cm;
+    background-color: whitesmoke;
+}
+
+.PerC2 {
+    position: absolute;
+    margin: 1cm;
+    margin-left: 2cm;
+    margin-top: 12cm;
+    max-width: 18cm;
+    min-width: 18cm;
+    max-height: 10cm;
+    min-height: 10cm;
+    background-color: whitesmoke;
+
+}
+
+.PerC3 {
+    position: absolute;
+    margin: 1cm;
+    margin-left: 25cm;
+    max-width: 18cm;
+    min-width: 18cm;
+    max-height: 10cm;
+    min-height: 10cm;
+    background-color: whitesmoke;
+
+}
+
+.PerC4 {
+    position:inherit;
+    margin: 1cm;
+    margin-top: 12cm;
+    margin-left: 25cm;
+    max-width: 18cm;
+    min-width: 18cm;
+    max-height: 10cm;
+    min-height: 10cm;
+    background-color: whitesmoke;
+
+}
+
+.PerC5 {
+    position: absolute;
+    margin-left: 2cm;
+    max-width: 18cm;
+    min-width: 18cm;
+    max-height: 10cm;
+    min-height: 14cm;
+    background-color: whitesmoke;
+
+}
+
+.PerC6 {
+    position:absolute;
+    margin-left: 25cm;
+    max-width: 18cm;
+    min-width: 18cm;
+    max-height: 10cm;
+    min-height: 14cm;
+    background-color: whitesmoke;
+
+}
+
+
